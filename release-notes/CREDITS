@@ -17,7 +17,9 @@ Authors:
 
 Contributors:
 
-# 3.0.0-rc4 (not yet released)
+# 3.0.0-rc5 (not yet released)
+
+# 3.0.0-rc4 (10-May-2025)
 
 WrongWrong (@k163377)
 * #952: Change the `hasRequiredMarker` implementation to the 3.x specification
