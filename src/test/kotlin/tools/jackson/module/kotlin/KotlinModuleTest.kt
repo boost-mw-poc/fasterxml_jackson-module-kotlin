@@ -1,12 +1,19 @@
 package tools.jackson.module.kotlin
 
-import tools.jackson.module.kotlin.KotlinFeature.*
-import tools.jackson.databind.json.JsonMapper
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tools.jackson.databind.json.JsonMapper
+import tools.jackson.module.kotlin.KotlinFeature.KotlinPropertyNameAsImplicitName
+import tools.jackson.module.kotlin.KotlinFeature.NewStrictNullChecks
+import tools.jackson.module.kotlin.KotlinFeature.NullIsSameAsDefault
+import tools.jackson.module.kotlin.KotlinFeature.NullToEmptyCollection
+import tools.jackson.module.kotlin.KotlinFeature.NullToEmptyMap
+import tools.jackson.module.kotlin.KotlinFeature.SingletonSupport
+import tools.jackson.module.kotlin.KotlinFeature.StrictNullChecks
+import tools.jackson.module.kotlin.KotlinFeature.UseJavaDurationConversion
 import kotlin.test.assertNotNull
 
 class KotlinModuleTest {

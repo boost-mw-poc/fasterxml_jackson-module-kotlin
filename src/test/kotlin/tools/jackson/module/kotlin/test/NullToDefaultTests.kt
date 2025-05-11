@@ -1,14 +1,15 @@
 package tools.jackson.module.kotlin.test
 
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import tools.jackson.databind.DeserializationFeature
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.module.kotlin.KotlinFeature.NullIsSameAsDefault
 import tools.jackson.module.kotlin.MissingKotlinParameterException
 import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import tools.jackson.databind.DeserializationFeature
 
 class TestNullToDefault {
 	private fun createMapper(allowDefaultingByNull: Boolean) = JsonMapper.builder()

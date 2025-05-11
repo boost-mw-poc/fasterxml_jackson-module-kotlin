@@ -2,11 +2,10 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter
 import com.fasterxml.jackson.annotation.JsonAnySetter
-import tools.jackson.databind.ObjectMapper
-import tools.jackson.module.kotlin.KotlinModule
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.json.JsonMapper
+import tools.jackson.module.kotlin.KotlinModule
+import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
 class GitHub832 {

@@ -1,6 +1,5 @@
 package tools.jackson.module.kotlin.test.github
 
-import kotlin.test.assertEquals
 import com.fasterxml.jackson.annotation.JsonMerge
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.JsonNode
@@ -8,8 +7,8 @@ import tools.jackson.databind.MapperFeature
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.databind.node.JsonNodeFactory
 import tools.jackson.databind.node.ObjectNode
-
 import tools.jackson.module.kotlin.jacksonMapperBuilder
+import kotlin.test.assertEquals
 
 class TestGithub211 {
     val mapperWithFinalFieldsAsMutators = jacksonMapperBuilder()

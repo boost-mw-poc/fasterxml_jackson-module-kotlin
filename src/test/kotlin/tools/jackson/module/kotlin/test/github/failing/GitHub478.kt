@@ -1,11 +1,11 @@
 package tools.jackson.module.kotlin.test.github.failing
 
 import com.fasterxml.jackson.annotation.JsonInclude
+import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.jsonMapper
 import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.test.expectFailure
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class GitHub478Test {

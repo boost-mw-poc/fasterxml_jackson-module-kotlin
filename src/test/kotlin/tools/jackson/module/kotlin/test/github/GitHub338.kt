@@ -2,13 +2,13 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonRootName
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationFeature
 import tools.jackson.dataformat.xml.XmlMapper
 import tools.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper
 import tools.jackson.dataformat.xml.annotation.JacksonXmlProperty
-import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.kotlinModule
+import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
 class GitHub338 {

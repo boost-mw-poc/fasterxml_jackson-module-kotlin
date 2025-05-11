@@ -1,14 +1,14 @@
 package tools.jackson.module.kotlin.test
 
-import tools.jackson.module.kotlin.MissingKotlinParameterException
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.module.kotlin.KotlinFeature
+import tools.jackson.module.kotlin.MissingKotlinParameterException
 import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertNull
 
 class StrictNullChecksTestOld {

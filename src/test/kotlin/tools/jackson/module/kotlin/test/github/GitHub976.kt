@@ -1,9 +1,9 @@
 package tools.jackson.module.kotlin.test.github
 
+import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.exc.InvalidNullException
 import tools.jackson.module.kotlin.KotlinFeature
 import tools.jackson.module.kotlin.jacksonObjectMapper
-import org.junit.jupiter.api.assertThrows
 import kotlin.test.Test
 
 class GitHub976 {

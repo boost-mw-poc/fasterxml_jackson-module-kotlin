@@ -1,13 +1,13 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass
 
-import tools.jackson.module.kotlin.defaultMapper
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tools.jackson.module.kotlin.defaultMapper
+import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.readValue
 import java.lang.reflect.InvocationTargetException
 import kotlin.test.assertNotEquals
 

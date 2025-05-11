@@ -1,10 +1,9 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.module.kotlin.jsonMapper
 import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "_type")

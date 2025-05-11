@@ -1,15 +1,15 @@
 package tools.jackson.module.kotlin.test
 
-import tools.jackson.databind.json.JsonMapper
-import tools.jackson.module.kotlin.KotlinFeature.NewStrictNullChecks
-import tools.jackson.module.kotlin.kotlinModule
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.exc.InvalidNullException
+import tools.jackson.databind.json.JsonMapper
+import tools.jackson.module.kotlin.KotlinFeature.NewStrictNullChecks
+import tools.jackson.module.kotlin.kotlinModule
+import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertNull
 
 class StrictNullChecksTest {

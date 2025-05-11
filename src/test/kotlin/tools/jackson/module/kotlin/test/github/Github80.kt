@@ -1,8 +1,8 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import tools.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.jacksonObjectMapper
 import kotlin.test.assertEquals
 
 class TestGithub80 {

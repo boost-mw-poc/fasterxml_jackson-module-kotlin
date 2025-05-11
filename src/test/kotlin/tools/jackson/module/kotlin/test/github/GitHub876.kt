@@ -2,11 +2,11 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonSetter
 import com.fasterxml.jackson.annotation.Nulls
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.withConfigOverride
 import kotlin.test.assertEquals
 

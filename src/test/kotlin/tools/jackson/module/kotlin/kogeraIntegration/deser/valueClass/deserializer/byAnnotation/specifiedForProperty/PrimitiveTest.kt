@@ -1,12 +1,12 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.deserializer.byAnnotation.specifiedForProperty
 
-import tools.jackson.databind.annotation.JsonDeserialize
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import tools.jackson.databind.annotation.JsonDeserialize
+import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
+import tools.jackson.module.kotlin.readValue
 
 class PrimitiveTest {
     companion object {

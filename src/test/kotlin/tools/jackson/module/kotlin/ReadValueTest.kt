@@ -1,10 +1,10 @@
 package tools.jackson.module.kotlin
 
-import tools.jackson.databind.DatabindException
-import tools.jackson.databind.node.NullNode
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tools.jackson.databind.DatabindException
+import tools.jackson.databind.node.NullNode
 import java.io.StringReader
 
 class ReadValueTest {

@@ -1,8 +1,8 @@
 package tools.jackson.module.kotlin.test.github
 
+import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Test
 
 class TestGithub104 {
     abstract class SuperClass(val name: String)

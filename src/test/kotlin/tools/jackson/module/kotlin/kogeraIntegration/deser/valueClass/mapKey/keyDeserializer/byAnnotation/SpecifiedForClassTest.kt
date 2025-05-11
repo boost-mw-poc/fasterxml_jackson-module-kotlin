@@ -1,12 +1,12 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.mapKey.keyDeserializer.byAnnotation
 
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationContext
+import tools.jackson.databind.annotation.JsonDeserialize
 import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
-import tools.jackson.databind.annotation.JsonDeserialize
 import tools.jackson.databind.KeyDeserializer as JacksonKeyDeserializer
 
 class SpecifiedForClassTest {

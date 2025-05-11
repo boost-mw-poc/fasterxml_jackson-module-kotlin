@@ -1,12 +1,12 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.parameterSize.primitive
 
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.assertReflectEquals
 import tools.jackson.module.kotlin.callPrimaryConstructor
 import tools.jackson.module.kotlin.defaultMapper
-import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.readValue
 
 /**
  * Up to argument size 32 there is one mask argument for the default argument,

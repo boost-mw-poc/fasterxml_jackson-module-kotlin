@@ -1,8 +1,8 @@
 package tools.jackson.module.kotlin.test.github
 
+import org.junit.jupiter.api.Test
 import tools.jackson.dataformat.xml.XmlMapper
 import tools.jackson.module.kotlin.kotlinModule
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class Github396 {

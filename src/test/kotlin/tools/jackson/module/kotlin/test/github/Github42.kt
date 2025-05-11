@@ -1,12 +1,12 @@
 package tools.jackson.module.kotlin.test.github
 
-import tools.jackson.databind.DeserializationFeature
-import tools.jackson.databind.DatabindException
-import tools.jackson.module.kotlin.jacksonMapperBuilder
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tools.jackson.databind.DatabindException
+import tools.jackson.databind.DeserializationFeature
+import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.readValue
 
 class TestGithub42_FailOnNullForPrimitives {
 

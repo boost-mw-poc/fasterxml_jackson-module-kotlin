@@ -1,6 +1,9 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
+import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
 import tools.jackson.core.JsonGenerator
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.databind.ObjectWriter
@@ -11,9 +14,6 @@ import tools.jackson.databind.ser.std.StdSerializer
 import tools.jackson.module.kotlin.KotlinModule
 import tools.jackson.module.kotlin.jacksonMapperBuilder
 import tools.jackson.module.kotlin.testPrettyWriter
-import org.junit.jupiter.api.Assertions.assertNotEquals
-import org.junit.jupiter.api.Nested
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class Github464 {

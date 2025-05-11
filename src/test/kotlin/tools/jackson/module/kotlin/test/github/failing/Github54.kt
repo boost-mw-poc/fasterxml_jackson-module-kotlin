@@ -2,11 +2,11 @@ package tools.jackson.module.kotlin.test.github.failing
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.deser.UnresolvedForwardReference
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.test.expectFailure
-import org.junit.jupiter.api.Test
 
 class TestGithub54 {
     @Test

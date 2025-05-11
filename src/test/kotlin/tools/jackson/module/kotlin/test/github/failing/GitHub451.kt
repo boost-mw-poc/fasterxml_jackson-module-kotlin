@@ -1,10 +1,9 @@
 package tools.jackson.module.kotlin.test.github.failing
 
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.test.expectFailure
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.opentest4j.AssertionFailedError
+import tools.jackson.module.kotlin.jacksonObjectMapper
 import kotlin.test.assertEquals
 
 class GitHub451 {

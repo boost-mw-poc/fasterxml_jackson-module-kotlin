@@ -1,6 +1,9 @@
 package tools.jackson.module.kotlin.test
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.databind.SerializationFeature
 import tools.jackson.databind.json.JsonMapper
@@ -14,9 +17,6 @@ import tools.jackson.module.kotlin.minusAssign
 import tools.jackson.module.kotlin.plusAssign
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.treeToValue
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
-import org.junit.jupiter.api.Test
 
 private class TestExtensionMethods {
     val mapper: ObjectMapper = jacksonMapperBuilder().disable(SerializationFeature.INDENT_OUTPUT)

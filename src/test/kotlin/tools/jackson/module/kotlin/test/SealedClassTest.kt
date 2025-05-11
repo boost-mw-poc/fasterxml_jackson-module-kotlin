@@ -3,11 +3,11 @@ package tools.jackson.module.kotlin.test
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonValue
+import org.junit.jupiter.api.Test
 import tools.jackson.core.type.TypeReference
 import tools.jackson.databind.exc.MismatchedInputException
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.test.SealedClassTest.SuperClass.B
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 

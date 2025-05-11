@@ -3,12 +3,14 @@ package tools.jackson.module.kotlin.test
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
-import tools.jackson.databind.PropertyNamingStrategies
-import tools.jackson.module.kotlin.*
-import tools.jackson.databind.MapperFeature
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationFeature
+import tools.jackson.databind.MapperFeature
+import tools.jackson.databind.PropertyNamingStrategies
 import tools.jackson.databind.cfg.DateTimeFeature
+import tools.jackson.module.kotlin.isKotlinClass
+import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.readValue
 import java.io.StringWriter
 import java.util.*
 import kotlin.properties.Delegates

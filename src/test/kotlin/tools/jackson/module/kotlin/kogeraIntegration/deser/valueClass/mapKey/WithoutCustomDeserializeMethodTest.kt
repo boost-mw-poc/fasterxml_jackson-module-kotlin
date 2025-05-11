@@ -1,10 +1,5 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.mapKey
 
-import tools.jackson.module.kotlin.defaultMapper
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
@@ -14,7 +9,12 @@ import tools.jackson.databind.DatabindException
 import tools.jackson.databind.DeserializationContext
 import tools.jackson.databind.exc.InvalidDefinitionException
 import tools.jackson.databind.module.SimpleModule
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
+import tools.jackson.module.kotlin.readValue
 import java.lang.reflect.InvocationTargetException
 import tools.jackson.databind.KeyDeserializer as JacksonKeyDeserializer
 

@@ -1,11 +1,11 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.annotation.JsonSerialize
 import tools.jackson.databind.ser.std.ToStringSerializer
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class TestGithub269 {

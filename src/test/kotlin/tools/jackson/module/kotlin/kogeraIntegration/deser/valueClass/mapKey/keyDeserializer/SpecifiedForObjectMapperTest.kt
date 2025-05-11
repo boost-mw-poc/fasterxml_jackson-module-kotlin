@@ -1,14 +1,14 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.mapKey.keyDeserializer
 
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.module.SimpleModule
 import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
+import tools.jackson.module.kotlin.readValue
 
 class SpecifiedForObjectMapperTest {
     companion object {

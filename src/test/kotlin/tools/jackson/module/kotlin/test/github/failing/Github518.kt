@@ -1,5 +1,6 @@
 package tools.jackson.module.kotlin.test.github.failing
 
+import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.KotlinFeature.SingletonSupport
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.jsonMapper
@@ -7,8 +8,6 @@ import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.test.expectFailure
 import kotlin.test.assertSame
-import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.KotlinFeature
 
 /**
  * An empty object should be deserialized as *the* Unit instance for a nullable Unit reference Type.

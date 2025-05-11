@@ -1,12 +1,12 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.parameterSize.nullableObject
 
-import tools.jackson.module.kotlin.assertReflectEquals
-import tools.jackson.module.kotlin.defaultMapper
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tools.jackson.module.kotlin.assertReflectEquals
+import tools.jackson.module.kotlin.defaultMapper
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
+import tools.jackson.module.kotlin.readValue
 import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 
 /**

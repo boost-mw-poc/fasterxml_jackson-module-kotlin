@@ -1,12 +1,12 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.defaultArgument
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
+import tools.jackson.module.kotlin.readValue
 
 class NullableObjectTest {
     companion object {

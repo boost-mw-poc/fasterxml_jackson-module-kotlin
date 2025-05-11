@@ -1,10 +1,10 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonValue
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
 
 class TestGithub207 {
     open class Wrapper(@JsonValue val value: String) {
