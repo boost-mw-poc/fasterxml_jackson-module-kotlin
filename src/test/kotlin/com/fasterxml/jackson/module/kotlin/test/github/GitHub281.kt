@@ -3,6 +3,7 @@ package com.fasterxml.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.testPrettyWriter
@@ -47,7 +48,7 @@ class GitHub281 {
 
     @Test
     fun `test reading involving type, id and object`() {
-        val output = jacksonObjectMapper().readValue<List<NumberValue>>(json)
+        val output = defaultMapper.readValue<List<NumberValue>>(json)
 
         assertEquals(2, output.size)
         val (a, b) = output
