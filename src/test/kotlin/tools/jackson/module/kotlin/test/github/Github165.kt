@@ -3,7 +3,7 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.annotation.JsonSetter
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -34,7 +34,7 @@ class TestGithub165 {
 
     @Test
     fun testJsonSetterCalledKotlin() {
-        val obj = jacksonObjectMapper().readValue<Github165KotlinTest>("""{"name":"Fred","year":"1942"}""")
+        val obj = defaultMapper.readValue<Github165KotlinTest>("""{"name":"Fred","year":"1942"}""")
         assertEquals("1942", obj.showYear)
         assertEquals("Fred", obj.showName)
         assertTrue(obj.yearSetterCalled)
@@ -43,8 +43,7 @@ class TestGithub165 {
 
     @Test
     fun testJsonSetterCalledJava() {
-        val obj = jacksonObjectMapper()
-            .readValue<tools.jackson.module.kotlin.test.github.Github165JavaTest>("""{"name":"Fred","year":"1942"}""")
+        val obj = defaultMapper.readValue<Github165JavaTest>("""{"name":"Fred","year":"1942"}""")
         assertEquals("1942", obj.showYear)
         assertEquals("Fred", obj.showName)
         assertTrue(obj.yearSetterCalled)

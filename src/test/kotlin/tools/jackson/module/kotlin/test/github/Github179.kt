@@ -3,31 +3,29 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
 // verifying work around for this issue, no bug present
 
 class TestGithub179 {
-    val objectMapper = jacksonObjectMapper()
-
     @Test
     fun listOfStrings() {
-        val strings = objectMapper.readValue<Strings>("""[ "first", "second" ]""")
+        val strings = defaultMapper.readValue<Strings>("""[ "first", "second" ]""")
         assertEquals(strings.values, listOf("first", "second"))
     }
 
     @Test
     fun embeddedListOfStrings() {
-        val stringsContainer = objectMapper.readValue<StringsContainer>(
+        val stringsContainer = defaultMapper.readValue<StringsContainer>(
                 """{ "strings" : [ "first", "second" ] }""")
         assertEquals(stringsContainer.strings.values, listOf("first", "second"))
     }
 
     @Test
     fun embeddedListOfEnums() {
-        val myEnumsContainer = objectMapper.readValue<MyEnumsContainer>(
+        val myEnumsContainer = defaultMapper.readValue<MyEnumsContainer>(
                 """{ "myEnums" : [ "first", "second" ] }""")
         assertEquals(myEnumsContainer.myEnums.values, listOf(MyEnum.FIRST, MyEnum.SECOND))
     }

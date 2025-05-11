@@ -1,7 +1,7 @@
 package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertSame
 
@@ -11,6 +11,6 @@ import kotlin.test.assertSame
 class TestGithub196 {
     @Test
     fun testUnitSingletonDeserialization() {
-        assertSame(jacksonObjectMapper().readValue("{}"), Unit)
+        assertSame(defaultMapper.readValue("{}"), Unit)
     }
 }

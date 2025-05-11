@@ -3,12 +3,10 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import kotlin.test.assertEquals
 
 class TestGithub52 {
-    private val mapper = jacksonObjectMapper()
-
     @Test
     fun testBooleanPropertyInConstructor() {
         data class BooleanPropertyInConstructor(
@@ -16,7 +14,7 @@ class TestGithub52 {
                 val bar: Boolean = true
         )
 
-        assertEquals("""{"is_bar":true}""", mapper.writeValueAsString(BooleanPropertyInConstructor()))
+        assertEquals("""{"is_bar":true}""", defaultMapper.writeValueAsString(BooleanPropertyInConstructor()))
     }
 
     @Test
@@ -26,7 +24,7 @@ class TestGithub52 {
                 val isBar2: Boolean = true
         )
 
-        assertEquals("""{"is_bar2":true}""", mapper.writeValueAsString(IsPrefixedBooleanPropertyInConstructor()))
+        assertEquals("""{"is_bar2":true}""", defaultMapper.writeValueAsString(IsPrefixedBooleanPropertyInConstructor()))
     }
 
     @Test
@@ -36,7 +34,7 @@ class TestGithub52 {
                 val lol: String = "sdf"
         )
 
-        assertEquals("""{"is_lol":"sdf"}""", mapper.writeValueAsString(IsPrefixedStringPropertyInConstructor()))
+        assertEquals("""{"is_lol":"sdf"}""", defaultMapper.writeValueAsString(IsPrefixedStringPropertyInConstructor()))
     }
 
     @Test
@@ -48,7 +46,7 @@ class TestGithub52 {
             val foo: Boolean = true
         }
 
-        assertEquals("""{"is_foo":true}""", mapper.writeValueAsString(BooleanPropertyInBody()))
+        assertEquals("""{"is_foo":true}""", defaultMapper.writeValueAsString(BooleanPropertyInBody()))
     }
 
     @Test
@@ -60,6 +58,6 @@ class TestGithub52 {
             val isFoo2: Boolean = true
         }
 
-        assertEquals("""{"is_foo2":true}""", mapper.writeValueAsString(IsPrefixedBooleanPropertyInBody()))
+        assertEquals("""{"is_foo2":true}""", defaultMapper.writeValueAsString(IsPrefixedBooleanPropertyInBody()))
     }
 }

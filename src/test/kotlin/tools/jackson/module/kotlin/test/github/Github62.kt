@@ -1,7 +1,7 @@
 package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import kotlin.test.assertEquals
 
 class TestGithub62 {
@@ -9,7 +9,7 @@ class TestGithub62 {
     fun testAnonymousClassSerialization() {
         val externalValue = "ggg"
 
-        val result = jacksonObjectMapper().writeValueAsString(object {
+        val result = defaultMapper.writeValueAsString(object {
             val value = externalValue
         })
 

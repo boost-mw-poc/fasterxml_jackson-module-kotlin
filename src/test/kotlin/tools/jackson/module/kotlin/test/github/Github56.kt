@@ -3,8 +3,7 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonUnwrapped
 import org.junit.jupiter.api.Test
-import tools.jackson.databind.ObjectMapper
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
@@ -37,8 +36,6 @@ private class TestGithub56 {
             val crops: Map<String, String>? = null
     )
 
-    val mapper: ObjectMapper = jacksonObjectMapper()
-
     private val gallery = TestGallery(
             id = "id",
             headline = "headline",
@@ -55,13 +52,13 @@ private class TestGithub56 {
 
     @Test
     fun serializes() {
-        val result = mapper.writeValueAsString(TestGalleryWidget_BAD("widgetReferenceId", gallery))
+        val result = defaultMapper.writeValueAsString(TestGalleryWidget_BAD("widgetReferenceId", gallery))
         assertEquals(validJson, result)
     }
 
     @Test
     fun deserializesSuccessful() {
-        val obj = mapper.readValue<TestGalleryWidget_BAD>(validJson)
+        val obj = defaultMapper.readValue<TestGalleryWidget_BAD>(validJson)
         assertEquals("widgetReferenceId", obj.widgetReferenceId)
         assertEquals(gallery, obj.gallery)
 
@@ -69,6 +66,6 @@ private class TestGithub56 {
 
     @Test
     fun deserializesCorrectly() {
-        mapper.readValue<TestGalleryWidget_GOOD>(validJson)
+        defaultMapper.readValue<TestGalleryWidget_GOOD>(validJson)
     }
 }

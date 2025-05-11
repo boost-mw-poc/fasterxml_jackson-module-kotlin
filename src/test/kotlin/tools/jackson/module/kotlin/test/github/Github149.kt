@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.MapperFeature
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.jacksonMapperBuilder
-import tools.jackson.module.kotlin.jacksonObjectMapper
 
 @Suppress("UNUSED_VARIABLE")
 class TestGithub149 {
@@ -80,12 +80,11 @@ class TestGithub149 {
 
     @Test
     fun testGithub129(){
-        val mapper = jacksonObjectMapper()
         val c = Car(id = 100)
         val color = Color(id = 100, code = "#FFFFF").apply { car = c }
         c.colors.add(color)
-        val s = mapper.writeValueAsString(c)
-        val value = mapper.readValue(s, Car::class.java)
+        val s = defaultMapper.writeValueAsString(c)
+        val value = defaultMapper.readValue(s, Car::class.java)
 //        print(value)
     }
 }

@@ -6,14 +6,12 @@ import com.fasterxml.jackson.annotation.JsonValue
 import org.junit.jupiter.api.Test
 import tools.jackson.core.type.TypeReference
 import tools.jackson.databind.exc.MismatchedInputException
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.test.SealedClassTest.SuperClass.B
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class SealedClassTest {
-    private val mapper = jacksonObjectMapper()
-
     /**
      * Json of a Serialized B-Object.
      */
@@ -24,13 +22,13 @@ class SealedClassTest {
      */
     @Test
     fun sealedClassWithoutSubTypes() {
-        val result = mapper.readValue(jsonB, SuperClass::class.java)
+        val result = defaultMapper.readValue(jsonB, SuperClass::class.java)
         assertTrue { result is B }
     }
 
     @Test
     fun sealedClassWithoutSubTypesList() {
-        val result = mapper.readValue(
+        val result = defaultMapper.readValue(
             """[$jsonB, $jsonB]""",
             object : TypeReference<List<SuperClass>>() {}
         )
@@ -49,7 +47,7 @@ class SealedClassTest {
     @Test
     fun sealedClassWithoutTypeDiscriminator() {
         val serializedSingle = """{"request":"single"}"""
-        val single = mapper.readValue(serializedSingle, SealedRequest::class.java)
+        val single = defaultMapper.readValue(serializedSingle, SealedRequest::class.java)
         assertTrue(single is SealedRequest.SingleRequest)
         assertEquals("single", single.request)
     }
@@ -61,7 +59,7 @@ class SealedClassTest {
     fun sealedClassWithoutTypeDiscriminatorList() {
         val serializedBatch = """[{"request":"first"},{"request":"second"}]"""
         expectFailure<MismatchedInputException>("Deserializing a list using deduction is fixed!") {
-            val batch = mapper.readValue(serializedBatch, SealedRequest::class.java)
+            val batch = defaultMapper.readValue(serializedBatch, SealedRequest::class.java)
             assertTrue(batch is SealedRequest.BatchRequest)
             assertEquals(2, batch.requests.size)
             assertEquals("first", batch.requests[0].request)

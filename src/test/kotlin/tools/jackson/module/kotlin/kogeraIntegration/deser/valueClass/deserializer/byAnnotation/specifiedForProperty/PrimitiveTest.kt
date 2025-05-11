@@ -4,15 +4,11 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.annotation.JsonDeserialize
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
 import tools.jackson.module.kotlin.readValue
 
 class PrimitiveTest {
-    companion object {
-        val mapper = jacksonObjectMapper()
-    }
-
     data class NonNull(
         @get:JsonDeserialize(using = Primitive.Deserializer::class)
         val getterAnn: Primitive,
@@ -22,7 +18,7 @@ class PrimitiveTest {
 
     @Test
     fun nonNull() {
-        val result = mapper.readValue<NonNull>(
+        val result = defaultMapper.readValue<NonNull>(
             """
                 {
                   "getterAnn" : 1,
@@ -44,7 +40,7 @@ class PrimitiveTest {
     inner class NullableTest {
         @Test
         fun nonNullInput() {
-            val result = mapper.readValue<Nullable>(
+            val result = defaultMapper.readValue<Nullable>(
                 """
                 {
                   "getterAnn" : 1,
@@ -57,7 +53,7 @@ class PrimitiveTest {
 
         @Test
         fun nullInput() {
-            val result = mapper.readValue<Nullable>(
+            val result = defaultMapper.readValue<Nullable>(
                 """
                 {
                   "getterAnn" : null,

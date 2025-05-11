@@ -2,7 +2,7 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
 class TestGithub155 {
@@ -14,9 +14,8 @@ class TestGithub155 {
 
     @Test
     fun testGithub155() {
-        jacksonObjectMapper().readValue<Foo>("""
+        defaultMapper.readValue<Foo>("""
             {"name":"fred","age":12,"country":"Libertad","city":"Northville"}
         """.trimIndent())
-
     }
 }

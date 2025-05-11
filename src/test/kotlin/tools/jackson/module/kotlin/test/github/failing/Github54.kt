@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.deser.UnresolvedForwardReference
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.test.expectFailure
 
 class TestGithub54 {
     @Test
     fun testDeserWithIdentityInfo() {
-        val mapper = jacksonObjectMapper()
-
         val entity1 = Entity1("test_entity1")
         val entity2 = Entity2("test_entity2", entity1 = entity1)
         val rootEntity1 = Entity1("root_entity1", entity2 = entity2)
@@ -20,9 +18,9 @@ class TestGithub54 {
         entity1.parent = rootEntity1
         entity1.entity2 = entity2
 
-        val json = mapper.writeValueAsString(entity1)
+        val json = defaultMapper.writeValueAsString(entity1)
         expectFailure<UnresolvedForwardReference>("GitHub #54 has been fixed!") {
-            mapper.readValue<Entity1>(json)
+            defaultMapper.readValue<Entity1>(json)
         }
 
     }

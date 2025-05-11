@@ -2,7 +2,7 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 
@@ -29,9 +29,8 @@ class GitHub625 {
 
     @Test
     fun test() {
-        val mapper = jacksonObjectMapper()
         val dto = Dto()
-        assertEquals("{}", mapper.writeValueAsString(dto))
+        assertEquals("{}", defaultMapper.writeValueAsString(dto))
     }
 
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
@@ -47,8 +46,7 @@ class GitHub625 {
 
     @Test
     fun failing() {
-        val writer = jacksonObjectMapper()
-        val json = writer.writeValueAsString(FailingDto())
+        val json = defaultMapper.writeValueAsString(FailingDto())
 
         assertNotEquals("{}", json)
     }

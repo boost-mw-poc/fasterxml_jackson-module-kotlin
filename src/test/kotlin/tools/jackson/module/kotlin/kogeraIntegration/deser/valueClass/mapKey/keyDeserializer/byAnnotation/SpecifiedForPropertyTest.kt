@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationContext
 import tools.jackson.databind.annotation.JsonDeserialize
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.databind.KeyDeserializer as JacksonKeyDeserializer
 
@@ -20,8 +20,7 @@ class SpecifiedForPropertyTest {
 
     @Test
     fun paramDeserTest() {
-        val mapper = jacksonObjectMapper()
-        val result = mapper.readValue<Wrapper>("""{"v":{"1":null}}""")
+        val result = defaultMapper.readValue<Wrapper>("""{"v":{"1":null}}""")
 
         assertEquals(Wrapper(mapOf(Value(101) to null)), result)
     }

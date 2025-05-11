@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.MapperFeature
 import tools.jackson.module.kotlin.jacksonMapperBuilder
-import tools.jackson.module.kotlin.jacksonObjectMapper
 import java.util.UUID
 import kotlin.test.assertEquals
 
@@ -19,7 +18,6 @@ class TestGithub194 {
 
     @Test
     fun testIdentityInfo() {
-        val mapper = jacksonObjectMapper()
         val value = mapperWithFinalFieldsAsMutators.readValue(json, WithIdentity::class.java)
         assertEquals(id, value.id)
         assertEquals(id.toString(), value.idString)
@@ -37,7 +35,6 @@ class TestGithub194 {
 
     @Test
     fun testIdentityInfo_WithDefaultId() {
-        val mapper = jacksonObjectMapper()
         val value = mapperWithFinalFieldsAsMutators.readValue(json, WithIdentityAndDefaultId::class.java)
         assertEquals(id, value.id)
         assertEquals(id.toString(), value.idString)

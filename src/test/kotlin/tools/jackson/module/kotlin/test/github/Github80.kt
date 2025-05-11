@@ -2,31 +2,27 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import kotlin.test.assertEquals
 
 class TestGithub80 {
     @Test
     fun testIsBool() {
-        val mapper = jacksonObjectMapper()
-
         val example = IsBoolExample(true)
-        val json = mapper.writeValueAsString(example)
+        val json = defaultMapper.writeValueAsString(example)
         assertEquals("{\"isTrueOrFalse\":true}", json)
 
-        val deserialized = mapper.readValue(json, IsBoolExample::class.java)
+        val deserialized = defaultMapper.readValue(json, IsBoolExample::class.java)
         assertEquals(example.isTrueOrFalse, deserialized.isTrueOrFalse)
     }
 
     @Test
     fun testAnnotatedIsBool() {
-        val mapper = jacksonObjectMapper()
-
         val example = IsBoolAnnotatedExample(true)
-        val json = mapper.writeValueAsString(example)
+        val json = defaultMapper.writeValueAsString(example)
         assertEquals("{\"isTrueOrFalse\":true}", json)
 
-        val deserialized = mapper.readValue(json, IsBoolAnnotatedExample::class.java)
+        val deserialized = defaultMapper.readValue(json, IsBoolAnnotatedExample::class.java)
         assertEquals(example.isTrue, deserialized.isTrue)
     }
 

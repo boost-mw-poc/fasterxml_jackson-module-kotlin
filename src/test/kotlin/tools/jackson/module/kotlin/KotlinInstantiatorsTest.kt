@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test
 import tools.jackson.databind.deser.std.StdValueInstantiator
 
 class KotlinInstantiatorsTest {
-    private val mapper = jacksonObjectMapper()
-    private val deserConfig = mapper.deserializationConfig()
+    private val deserConfig = defaultMapper.deserializationConfig()
 
     private val kotlinInstantiators = KotlinInstantiators(
         ReflectionCache(10),
@@ -20,7 +19,7 @@ class KotlinInstantiatorsTest {
 
     @Test
     fun `Provides default instantiator for Java class`() {
-        val javaType = mapper.constructType(String::class.java)
+        val javaType = defaultMapper.constructType(String::class.java)
         val defaultInstantiator = StdValueInstantiator(deserConfig, javaType)
         val classIntrospector = deserConfig.classIntrospectorInstance()
         val instantiator = kotlinInstantiators.modifyValueInstantiator(
@@ -37,7 +36,7 @@ class KotlinInstantiatorsTest {
     fun `Provides KotlinValueInstantiator for Kotlin class`() {
         class TestClass
 
-        val javaType = mapper.constructType(TestClass::class.java)
+        val javaType = defaultMapper.constructType(TestClass::class.java)
         val classIntrospector = deserConfig.classIntrospectorInstance()
         val instantiator = kotlinInstantiators.modifyValueInstantiator(
             deserConfig,
@@ -57,11 +56,11 @@ class KotlinInstantiatorsTest {
 
         val subClassInstantiator = object : StdValueInstantiator(
             deserConfig,
-            mapper.constructType(DefaultClass::class.java)
+            defaultMapper.constructType(DefaultClass::class.java)
         ) {}
 
         assertThrows(IllegalStateException::class.java) {
-            val javaType = mapper.constructType(TestClass::class.java)
+            val javaType = defaultMapper.constructType(TestClass::class.java)
             val classIntrospector = deserConfig.classIntrospectorInstance()
             kotlinInstantiators.modifyValueInstantiator(
                 deserConfig,

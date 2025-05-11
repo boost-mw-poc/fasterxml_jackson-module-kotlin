@@ -6,14 +6,12 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.module.kotlin.defaultMapper
-import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import java.lang.reflect.InvocationTargetException
 import kotlin.test.assertNotEquals
 
 class WithoutCustomDeserializeMethodTest {
     companion object {
-        val mapper = jacksonObjectMapper()
         val throwable = IllegalArgumentException("test")
     }
 
@@ -68,8 +66,8 @@ class WithoutCustomDeserializeMethodTest {
             NullableObject("baz"),
             NullableObject("qux")
         )
-        val src = mapper.writeValueAsString(expected)
-        val result = mapper.readValue<Dst>(src)
+        val src = defaultMapper.writeValueAsString(expected)
+        val result = defaultMapper.readValue<Dst>(src)
 
         assertEquals(expected, result)
     }
@@ -84,8 +82,8 @@ class WithoutCustomDeserializeMethodTest {
             NullableObject(null),
             null
         )
-        val src = mapper.writeValueAsString(expected)
-        val result = mapper.readValue<Dst>(src)
+        val src = defaultMapper.writeValueAsString(expected)
+        val result = defaultMapper.readValue<Dst>(src)
 
         assertEquals(expected, result)
     }

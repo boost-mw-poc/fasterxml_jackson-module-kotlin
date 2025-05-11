@@ -3,7 +3,7 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonSetter
 import com.fasterxml.jackson.annotation.Nulls
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
@@ -12,8 +12,7 @@ class Github526 {
 
     @Test
     fun test() {
-        val mapper = jacksonObjectMapper()
-        val d = mapper.readValue<D>("""{"v":null}""")
+        val d = defaultMapper.readValue<D>("""{"v":null}""")
 
         assertEquals(-1, d.v)
     }

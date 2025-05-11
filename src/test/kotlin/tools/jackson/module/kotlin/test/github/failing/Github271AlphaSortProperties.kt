@@ -2,7 +2,7 @@ package tools.jackson.module.kotlin.test.github.failing
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.test.expectFailure
 import kotlin.test.assertEquals
 
@@ -14,9 +14,7 @@ class TestGithub271 {
 
     @Test
     fun testAlphabeticFields() {
-        val mapper = jacksonObjectMapper()
-
-        val json = mapper.writeValueAsString(Foo("a", "c"))
+        val json = defaultMapper.writeValueAsString(Foo("a", "c"))
         expectFailure<AssertionError>("GitHub #271 has been fixed!") {
             assertEquals("""{"a":"a","b":"b","c":"c"}""", json)
         }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
 class TestGithub91 {
@@ -21,9 +21,8 @@ class TestGithub91 {
 
     @Test
     fun testJsonParsing() {
-        val mapper = jacksonObjectMapper()
-        val dataClass1 = mapper.readValue<DataClass1>(jsonData)
+        val dataClass1 = defaultMapper.readValue<DataClass1>(jsonData)
         assertEquals(DataClass1("my name", DataClass2("some value")), dataClass1)
-        assertEquals("{\"name\":\"my name\",\"content\":\"some value\"}", mapper.writeValueAsString(dataClass1))
+        assertEquals("{\"name\":\"my name\",\"content\":\"some value\"}", defaultMapper.writeValueAsString(dataClass1))
     }
 }

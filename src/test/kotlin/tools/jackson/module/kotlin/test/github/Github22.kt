@@ -2,7 +2,7 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonValue
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
@@ -23,10 +23,10 @@ class TestGithub22 {
         val expectedJson = "\"test\""
         val expectedObj = StringValue("test")
 
-        val actualJson = jacksonObjectMapper().writeValueAsString(expectedObj)
+        val actualJson = defaultMapper.writeValueAsString(expectedObj)
         assertEquals(expectedJson, actualJson)
 
-        val actualObj = jacksonObjectMapper().readValue<StringValue>("\"test\"")
+        val actualObj = defaultMapper.readValue<StringValue>("\"test\"")
         assertEquals(expectedObj.other, actualObj.other)
 
     }
@@ -37,10 +37,10 @@ class TestGithub22 {
         val expectedJson = "\"test\""
         val expectedObj = StringValue2("test")
 
-        val actualJson = jacksonObjectMapper().writeValueAsString(expectedObj)
+        val actualJson = defaultMapper.writeValueAsString(expectedObj)
         assertEquals(expectedJson, actualJson)
 
-        val actualObj = jacksonObjectMapper().readValue<StringValue2>("\"test\"")
+        val actualObj = defaultMapper.readValue<StringValue2>("\"test\"")
         assertEquals(expectedObj, actualObj)
 
     }

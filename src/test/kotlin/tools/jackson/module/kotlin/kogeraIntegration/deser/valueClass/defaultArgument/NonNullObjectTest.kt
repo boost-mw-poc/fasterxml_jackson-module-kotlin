@@ -3,15 +3,11 @@ package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.defaultAr
 import com.fasterxml.jackson.annotation.JsonCreator
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import tools.jackson.module.kotlin.readValue
 
 class NonNullObjectTest {
-    companion object {
-        val mapper = jacksonObjectMapper()
-    }
-
     data class ByConstructor(
         val nn: NonNullObject = NonNullObject("foo"),
         val nNn: NonNullObject? = NonNullObject("bar"),
@@ -20,7 +16,7 @@ class NonNullObjectTest {
 
     @Test
     fun byConstructorTest() {
-        assertEquals(ByConstructor(), mapper.readValue<ByConstructor>("{}"))
+        assertEquals(ByConstructor(), defaultMapper.readValue<ByConstructor>("{}"))
     }
 
     data class ByFactory(val nn: NonNullObject, val nNn: NonNullObject?, val nN: NonNullObject?) {
@@ -37,6 +33,6 @@ class NonNullObjectTest {
 
     @Test
     fun byFactoryTest() {
-        assertEquals(ByFactory.creator(), mapper.readValue<ByFactory>("{}"))
+        assertEquals(ByFactory.creator(), defaultMapper.readValue<ByFactory>("{}"))
     }
 }

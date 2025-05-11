@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.ObjectMapper
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
 class TestCasesFromSlack1 {
@@ -32,8 +32,7 @@ class TestCasesFromSlack1 {
            {"host":{"id":"host123","name":"A Czar"},"activity":"Kotlin Programming","invited":[{"id":"Guest1","name":"Mr Kotlin","rsvp": "going"}]}
         """)
 
-        // fails with: java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
-        jacksonObjectMapper().readValue<Event>("""
+        defaultMapper.readValue<Event>("""
            {"host":{"id":"host123","name":"A Czar"},"activity":"Kotlin Programming","invited":[{"id":"Guest1","name":"Mr Kotlin","rsvp": "going"}]}
         """)
     }
@@ -59,7 +58,7 @@ class TestCasesFromSlack2 {
     }
 
     @Test fun testCzarSpringThing2() {
-        jacksonObjectMapper().readValue<Event>("""
+        defaultMapper.readValue<Event>("""
            {"host":{"id":"host123","name":"A Czar"},"activity":"Kotlin Programming","invited":[{"id":"Guest1","name":"Mr Kotlin","rsvp": "going"}]}
         """)
     }

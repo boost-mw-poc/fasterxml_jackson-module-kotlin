@@ -2,9 +2,8 @@ package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.ObjectMapper
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import java.util.function.IntSupplier
-
 
 class TestGithub167 {
     val samObject = IntSupplier { 42 }
@@ -14,12 +13,12 @@ class TestGithub167 {
 
     @Test
     fun withKotlinExtension() {
-        jacksonObjectMapper().writeValueAsString(samObject)
+        defaultMapper.writeValueAsString(samObject)
     }
 
     @Test
     fun withKotlinExtension_Synthetic() {
-        jacksonObjectMapper().writeValueAsString(samObjectSynthetic)
+        defaultMapper.writeValueAsString(samObjectSynthetic)
     }
 
 

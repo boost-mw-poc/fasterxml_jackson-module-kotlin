@@ -10,7 +10,7 @@ import tools.jackson.databind.DeserializationContext
 import tools.jackson.databind.annotation.JsonDeserialize
 import tools.jackson.databind.deser.std.StdDeserializer
 import tools.jackson.module.kotlin.WrapsNullableValueClassDeserializer
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 
@@ -38,7 +38,7 @@ class NullableObjectEdgeCases {
 
     @Test
     fun nullValueIsUsedPreferentially() {
-        val result = jacksonObjectMapper().readValue<NullValue>("""{"nn":null,"n":null}""")
+        val result = defaultMapper.readValue<NullValue>("""{"nn":null,"n":null}""")
         assertEquals(NullValue(NullValueDeserializer.nv, NullValueDeserializer.nv), result)
     }
 
@@ -62,7 +62,7 @@ class NullableObjectEdgeCases {
     @Test
     fun `Nulls_SKIP works`() {
         assertThrows<KotlinReflectionInternalError>("#761(KT-57357) fixed") {
-            val result = jacksonObjectMapper().readValue<NullsSkip>("""{"nn":null,"n":null}""")
+            val result = defaultMapper.readValue<NullsSkip>("""{"nn":null,"n":null}""")
             assertEquals(NullValue(VC("skip"), VC("skip")), result)
         }
     }

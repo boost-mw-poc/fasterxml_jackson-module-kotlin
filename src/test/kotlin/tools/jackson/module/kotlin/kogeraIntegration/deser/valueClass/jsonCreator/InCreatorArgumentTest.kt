@@ -3,7 +3,7 @@ package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.jsonCreat
 import com.fasterxml.jackson.annotation.JsonCreator
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
@@ -45,7 +45,6 @@ class InCreatorArgumentTest {
 
     @Test
     fun test() {
-        val mapper = jacksonObjectMapper()
         val base = Dst(
             Primitive(1),
             Primitive(2),
@@ -54,7 +53,7 @@ class InCreatorArgumentTest {
             NullableObject("noNn"),
             NullableObject("noN")
         )
-        val result = mapper.readValue<Dst>(mapper.writeValueAsString(base))
+        val result = defaultMapper.readValue<Dst>(defaultMapper.writeValueAsString(base))
 
         assertEquals(
             base.copy(

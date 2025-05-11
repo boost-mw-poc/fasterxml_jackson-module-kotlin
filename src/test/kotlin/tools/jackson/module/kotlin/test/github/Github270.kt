@@ -1,7 +1,7 @@
 package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import kotlin.test.assertEquals
 
 class TestGithub270 {
@@ -13,7 +13,7 @@ class TestGithub270 {
 
     @Test
     fun testPublicFieldOverlappingFunction() {
-        val json = jacksonObjectMapper().writeValueAsString(Wrapper("Hello"))
+        val json = defaultMapper.writeValueAsString(Wrapper("Hello"))
         assertEquals("""{"upper":"HELLO"}""", json)
     }
 }

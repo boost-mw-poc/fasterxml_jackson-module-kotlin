@@ -2,6 +2,7 @@ package tools.jackson.module.kotlin.test.github.failing
 
 import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.KotlinFeature.SingletonSupport
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.jsonMapper
 import tools.jackson.module.kotlin.kotlinModule
@@ -20,7 +21,7 @@ class TestGithub518 {
      */
     @Test
     fun deserializeEmptyObjectToSingletonUnit() {
-        assertSame(jacksonObjectMapper().readValue<Unit>("{}"), Unit)
+        assertSame(defaultMapper.readValue<Unit>("{}"), Unit)
     }
 
     /**

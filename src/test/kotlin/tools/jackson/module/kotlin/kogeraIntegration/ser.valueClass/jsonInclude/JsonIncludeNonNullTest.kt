@@ -1,7 +1,7 @@
 package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.jsonInclude
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -16,9 +16,8 @@ class JsonIncludeNonNullTest {
 
     @Test
     fun success() {
-        val mapper = jacksonObjectMapper()
         val dto = Dto()
-        assertEquals("{}", mapper.writeValueAsString(dto))
+        assertEquals("{}", defaultMapper.writeValueAsString(dto))
     }
 
     // It is under consideration whether it should be serialized because it is non-null in Kotlin,
@@ -32,9 +31,8 @@ class JsonIncludeNonNullTest {
 
     @Test
     fun fails() {
-        val mapper = jacksonObjectMapper()
         val dto = DtoFails()
-        val result = mapper.writeValueAsString(dto)
+        val result = defaultMapper.writeValueAsString(dto)
         assertNotEquals("""{"map":{}}""", result)
         assertEquals("""{"noNn":null,"noN2":null,"map":{"noNn":null}}""", result)
     }

@@ -1,7 +1,7 @@
 package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
@@ -12,8 +12,7 @@ class TestGithub131 {
 
     @Test
     fun testFailureCase() {
-        val mapper = jacksonObjectMapper()
-        val x = mapper.readValue<DerivedClass>("""{"name":"abc"}""")
+        val x = defaultMapper.readValue<DerivedClass>("""{"name":"abc"}""")
         assertEquals(DerivedClass("abc").name, x.name)
     }
 }

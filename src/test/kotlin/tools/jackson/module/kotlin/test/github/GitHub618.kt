@@ -5,7 +5,7 @@ import tools.jackson.core.JsonGenerator
 import tools.jackson.databind.SerializationContext
 import tools.jackson.databind.annotation.JsonSerialize
 import tools.jackson.databind.ser.std.StdSerializer
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import kotlin.test.assertEquals
 
 class GitHub618 {
@@ -23,8 +23,7 @@ class GitHub618 {
 
     @Test
     fun test() {
-        val mapper = jacksonObjectMapper()
         // expected: {"v":null}, but NullPointerException thrown
-        assertEquals("""{"v":null}""", mapper.writeValueAsString(D(null)))
+        assertEquals("""{"v":null}""", defaultMapper.writeValueAsString(D(null)))
     }
 }

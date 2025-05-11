@@ -2,7 +2,7 @@ package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
@@ -17,7 +17,7 @@ class TestGithub50 {
     @Test
     fun testGithub50UnwrappedError() {
         val json = """{"firstName":"John","lastName":"Smith","position":"Manager"}"""
-        val obj: Employee = jacksonObjectMapper().readValue(json)
+        val obj: Employee = defaultMapper.readValue(json)
         assertEquals(Name("John", "Smith"), obj.name)
         assertEquals("Manager", obj.position)
     }

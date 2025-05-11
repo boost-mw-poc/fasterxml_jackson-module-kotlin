@@ -2,7 +2,7 @@ package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.annotation.JsonDeserialize
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
@@ -20,13 +20,11 @@ class TestGithub158 {
 
     @Test
     fun testEnumSerDeser() {
-        val mapper = jacksonObjectMapper()
-
         val original = SampleContainer(SampleImpl.One)
 
-        val json = mapper.writeValueAsString(original)
+        val json = defaultMapper.writeValueAsString(original)
 //        println(json)
-        val obj = mapper.readValue<SampleContainer>(json)
+        val obj = defaultMapper.readValue<SampleContainer>(json)
         assertEquals(original, obj)
     }
 }

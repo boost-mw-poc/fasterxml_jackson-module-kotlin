@@ -3,7 +3,7 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertNull
 
@@ -24,7 +24,7 @@ class TestGithub180 {
 
     @Test
     fun testMissingProperty() {
-        val obj = jacksonObjectMapper().readValue<TestClass>("""{}""")
+        val obj = defaultMapper.readValue<TestClass>("""{}""")
         assertNull(obj.instantName)
         assertNull(obj.someInt)
     }

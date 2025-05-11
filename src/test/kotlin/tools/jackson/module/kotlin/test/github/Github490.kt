@@ -5,12 +5,11 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.JsonNode
 import tools.jackson.databind.node.NullNode
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
 class TestGithub490 {
-    val mapper = jacksonObjectMapper()
-    val value: DataClassWithAllNullableParams = mapper.readValue(
+    val value: DataClassWithAllNullableParams = defaultMapper.readValue(
         "{" +
                 "\"jsonNodeValueWithNullAsDefaultProvidedNull\":null, " +
                 "\"jsonNodeValueProvidedNull\":null}"

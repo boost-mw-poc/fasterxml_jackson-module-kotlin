@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.DatabindException
 import tools.jackson.databind.exc.MismatchedInputException
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
 private class TestGithub32 {
     @Test fun `valid mandatory data class constructor param`() {
-        jacksonObjectMapper().readValue<Person>("""
+        defaultMapper.readValue<Person>("""
         {
             "firstName": "James",
             "lastName": "Bond"
@@ -22,7 +22,7 @@ private class TestGithub32 {
         val thrown = assertThrows<MismatchedInputException>(
             "MissingKotlinParameterException with missing `firstName` parameter"
         ) {
-            jacksonObjectMapper().readValue<Person>("""
+            defaultMapper.readValue<Person>("""
             {
                 "lastName": "Bond"
             }
@@ -36,7 +36,7 @@ private class TestGithub32 {
 
     @Test fun `null mandatory data class constructor param`() {
         val thrown = assertThrows<MismatchedInputException> {
-            jacksonObjectMapper().readValue<Person>("""
+            defaultMapper.readValue<Person>("""
             {
                 "firstName": null,
                 "lastName": "Bond"
@@ -51,7 +51,7 @@ private class TestGithub32 {
 
     @Test fun `missing mandatory constructor param - nested in class with default constructor`() {
         val thrown = assertThrows<MismatchedInputException> {
-            jacksonObjectMapper().readValue<WrapperWithDefaultContructor>("""
+            defaultMapper.readValue<WrapperWithDefaultContructor>("""
             {
                 "person": {
                     "lastName": "Bond"
@@ -67,7 +67,7 @@ private class TestGithub32 {
 
     @Test fun `missing mandatory constructor param - nested in class with single arg constructor`() {
         val thrown = assertThrows<MismatchedInputException> {
-            jacksonObjectMapper().readValue<WrapperWithArgsContructor>("""
+            defaultMapper.readValue<WrapperWithArgsContructor>("""
             {
                 "person": {
                     "lastName": "Bond"
@@ -83,7 +83,7 @@ private class TestGithub32 {
 
     @Test fun `missing mandatory constructor param - nested in class with List arg constructor`() {
         val thrown = assertThrows<MismatchedInputException> {
-            jacksonObjectMapper().readValue<Crowd>("""
+            defaultMapper.readValue<Crowd>("""
             {
                 "people": [
                     {

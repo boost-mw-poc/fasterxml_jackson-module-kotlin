@@ -1,7 +1,7 @@
 package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Test
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
 class TestGithub104 {
@@ -13,10 +13,8 @@ class TestGithub104 {
 
     @Test
     fun testIt() {
-        val objectMapper = jacksonObjectMapper()
-
         val jsonValue = """{"name":"TestName"}"""
 
-        objectMapper.readValue<SubClass>(jsonValue)
+        defaultMapper.readValue<SubClass>(jsonValue)
     }
 }

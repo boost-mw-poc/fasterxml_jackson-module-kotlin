@@ -5,10 +5,10 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.module.kotlin.MissingKotlinParameterException
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
-import kotlin.test.assertNotNull
 
 class TestGithub168 {
     @Suppress("UNUSED_PARAMETER")
@@ -18,22 +18,21 @@ class TestGithub168 {
 
     @Test
     fun testIfRequiredIsReallyRequiredWhenNullUsed() {
-        val obj = jacksonObjectMapper().readValue<TestClass>("""{"foo":null,"baz":"whatever"}""")
+        val obj = defaultMapper.readValue<TestClass>("""{"foo":null,"baz":"whatever"}""")
         assertEquals("whatever", obj.baz)
     }
 
     @Test
     fun testIfRequiredIsReallyRequiredWhenAbsent() {
         assertThrows<MissingKotlinParameterException> {
-            val obj = jacksonObjectMapper().readValue<TestClass>("""{"baz":"whatever"}""")
+            val obj = defaultMapper.readValue<TestClass>("""{"baz":"whatever"}""")
             assertEquals("whatever", obj.baz)
         }
     }
 
     @Test
     fun testIfRequiredIsReallyRequiredWhenValuePresent() {
-        val obj = jacksonObjectMapper().readValue<TestClass>("""{"foo":"yay!","baz":"whatever"}""")
-        assertNotNull(obj)
+        val obj = defaultMapper.readValue<TestClass>("""{"foo":"yay!","baz":"whatever"}""")
         assertEquals("whatever", obj.baz)
     }
 }

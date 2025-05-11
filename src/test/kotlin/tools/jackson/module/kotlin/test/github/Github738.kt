@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.Nulls
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.exc.MismatchedInputException
-import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
 class Github738 {
@@ -13,8 +13,7 @@ class Github738 {
 
     @Test
     fun test() {
-        val mapper = jacksonObjectMapper()
         // nulls = FAIL is reflected if it is primitive and missing
-        assertThrows(MismatchedInputException::class.java) { mapper.readValue<D>("{}") }
+        assertThrows(MismatchedInputException::class.java) { defaultMapper.readValue<D>("{}") }
     }
 }
