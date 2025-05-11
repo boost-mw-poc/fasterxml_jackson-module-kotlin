@@ -14,6 +14,7 @@ import tools.jackson.module.kotlin.jacksonMapperBuilder
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.TwoUnitPrimitive
 import tools.jackson.module.kotlin.readValue
 import java.lang.reflect.InvocationTargetException
 import tools.jackson.databind.KeyDeserializer as JacksonKeyDeserializer
@@ -42,12 +43,19 @@ class WithoutCustomDeserializeMethodTest {
             val result = defaultMapper.readValue<Map<NullableObject, String?>>("""{"bar":null}""")
             assertEquals(mapOf(NullableObject("bar") to null), result)
         }
+
+        @Test
+        fun twoUnitPrimitive() {
+            val result = defaultMapper.readValue<Map<TwoUnitPrimitive, String?>>("""{"1":null}""")
+            assertEquals(mapOf(TwoUnitPrimitive(1) to null), result)
+        }
     }
 
     data class Dst(
         val p: Map<Primitive, String?>,
         val nn: Map<NonNullObject, String?>,
-        val n: Map<NullableObject, String?>
+        val n: Map<NullableObject, String?>,
+        val tup: Map<TwoUnitPrimitive, String?>
     )
 
     @Test
@@ -56,14 +64,16 @@ class WithoutCustomDeserializeMethodTest {
             {
               "p":{"1":null},
               "nn":{"foo":null},
-              "n":{"bar":null}
+              "n":{"bar":null},
+              "tup":{"2":null}
             }
         """.trimIndent()
         val result = defaultMapper.readValue<Dst>(src)
         val expected = Dst(
             mapOf(Primitive(1) to null),
             mapOf(NonNullObject("foo") to null),
-            mapOf(NullableObject("bar") to null)
+            mapOf(NullableObject("bar") to null),
+            mapOf(TwoUnitPrimitive(2) to null)
         )
 
         assertEquals(expected, result)
@@ -86,8 +96,9 @@ class WithoutCustomDeserializeMethodTest {
 
     data class Wrapped(val first: String, val second: String) {
         class KeyDeserializer : JacksonKeyDeserializer() {
-            override fun deserializeKey(key: String, ctxt: DeserializationContext) =
-                key.split("-").let { Wrapped(it[0], it[1]) }
+            override fun deserializeKey(key: String, ctxt: DeserializationContext) = key
+                .split("-")
+                .let { Wrapped(it[0], it[1]) }
         }
     }
 
@@ -105,7 +116,9 @@ class WithoutCustomDeserializeMethodTest {
         val mapper = jacksonMapperBuilder()
             .addModule(
                 object : SimpleModule() {
-                    init { addKeyDeserializer(Wrapped::class.java, Wrapped.KeyDeserializer()) }
+                    init {
+                        addKeyDeserializer(Wrapped::class.java, Wrapped.KeyDeserializer())
+                    }
                 }
             )
             .build()

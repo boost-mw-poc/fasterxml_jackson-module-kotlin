@@ -8,6 +8,7 @@ import tools.jackson.module.kotlin.jacksonMapperBuilder
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
+import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.TwoUnitPrimitive
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertNotEquals
 
@@ -18,6 +19,7 @@ class SpecifiedForObjectMapperTest {
                 this.addDeserializer(Primitive::class.java, Primitive.Deserializer())
                 this.addDeserializer(NonNullObject::class.java, NonNullObject.Deserializer())
                 this.addDeserializer(NullableObject::class.java, NullableObject.DeserializerWrapsNullable())
+                this.addDeserializer(TwoUnitPrimitive::class.java, TwoUnitPrimitive.Deserializer())
             }
             this.addModule(module)
         }.build()
@@ -50,8 +52,14 @@ class SpecifiedForObjectMapperTest {
             @Test
             fun nullString() {
                 val result = mapper.readValue<NullableObject?>("null")
-                assertNotEquals(NullableObject("null-value-deser"), result, "kogera #209 has been fixed.")
+                assertNotEquals(NullableObject("null-value-deser"), result, "#209 has been fixed.")
             }
+        }
+
+        @Test
+        fun twoUnitPrimitive() {
+            val result = mapper.readValue<TwoUnitPrimitive>("1")
+            assertEquals(TwoUnitPrimitive(101), result)
         }
     }
 
@@ -61,7 +69,9 @@ class SpecifiedForObjectMapperTest {
         val nnoNn: NonNullObject,
         val nnoN: NonNullObject?,
         val noNn: NullableObject,
-        val noN: NullableObject?
+        val noN: NullableObject?,
+        val tupNn: TwoUnitPrimitive,
+        val tupN: TwoUnitPrimitive?
     )
 
     @Test
@@ -72,7 +82,9 @@ class SpecifiedForObjectMapperTest {
             NonNullObject("foo"),
             NonNullObject("bar"),
             NullableObject("baz"),
-            NullableObject("qux")
+            NullableObject("qux"),
+            TwoUnitPrimitive(3),
+            TwoUnitPrimitive(4)
         )
         val src = mapper.writeValueAsString(base)
         val result = mapper.readValue<Dst>(src)
@@ -83,7 +95,9 @@ class SpecifiedForObjectMapperTest {
             NonNullObject("foo-deser"),
             NonNullObject("bar-deser"),
             NullableObject("baz-deser"),
-            NullableObject("qux-deser")
+            NullableObject("qux-deser"),
+            TwoUnitPrimitive(103),
+            TwoUnitPrimitive(104)
         )
         assertEquals(expected, result)
     }
@@ -96,6 +110,8 @@ class SpecifiedForObjectMapperTest {
             NonNullObject("foo"),
             null,
             NullableObject(null),
+            null,
+            TwoUnitPrimitive(3),
             null
         )
         val src = mapper.writeValueAsString(base)
@@ -107,6 +123,8 @@ class SpecifiedForObjectMapperTest {
             NonNullObject("foo-deser"),
             null,
             NullableObject("null-value-deser"),
+            null,
+            TwoUnitPrimitive(103),
             null
         )
         assertEquals(expected, result)
