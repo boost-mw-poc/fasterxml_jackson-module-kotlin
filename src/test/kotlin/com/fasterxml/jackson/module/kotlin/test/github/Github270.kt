@@ -1,6 +1,6 @@
 package com.fasterxml.jackson.module.kotlin.test.github
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -13,7 +13,7 @@ class TestGithub270 {
 
     @Test
     fun testPublicFieldOverlappingFunction() {
-        val json = jacksonObjectMapper().writeValueAsString(Wrapper("Hello"))
+        val json = defaultMapper.writeValueAsString(Wrapper("Hello"))
         assertEquals("""{"upper":"HELLO"}""", json)
     }
 }

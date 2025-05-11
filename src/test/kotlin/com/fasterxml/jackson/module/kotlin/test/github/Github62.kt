@@ -1,6 +1,6 @@
 package com.fasterxml.jackson.module.kotlin.test.github
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -9,7 +9,7 @@ class TestGithub62 {
     fun testAnonymousClassSerialization() {
         val externalValue = "ggg"
 
-        val result = jacksonObjectMapper().writeValueAsString(object {
+        val result = defaultMapper.writeValueAsString(object {
             val value = externalValue
         })
 

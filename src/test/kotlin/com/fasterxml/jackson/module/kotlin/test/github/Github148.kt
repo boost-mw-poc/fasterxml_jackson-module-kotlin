@@ -1,6 +1,6 @@
 package com.fasterxml.jackson.module.kotlin.test.github
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -35,16 +35,14 @@ class TestGithub148 {
 
     @Nested
     inner class DemoApplicationTests {
-        val objectMapper = jacksonObjectMapper()
-
         @Test
         fun correntBean() {
-            assertEquals("{\"name\":\"corrent\",\"type\":\"TYPEA\"}", objectMapper.writeValueAsString(CorrentBean("corrent", CorrectType.TYPEA)))
+            assertEquals("{\"name\":\"corrent\",\"type\":\"TYPEA\"}", defaultMapper.writeValueAsString(CorrentBean("corrent", CorrectType.TYPEA)))
         }
 
         @Test
         fun incorrentBean() {
-            assertEquals("{\"name\":\"incorrent\",\"type\":\"TYPEA\"}", objectMapper.writeValueAsString(IncorrentBean("incorrent", IncorrectType.TYPEA)))
+            assertEquals("{\"name\":\"incorrent\",\"type\":\"TYPEA\"}", defaultMapper.writeValueAsString(IncorrentBean("incorrent", IncorrectType.TYPEA)))
         }
     }
 }

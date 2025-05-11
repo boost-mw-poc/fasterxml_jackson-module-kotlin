@@ -1,7 +1,6 @@
 package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass
 
 import com.fasterxml.jackson.module.kotlin.defaultMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -13,7 +12,6 @@ import kotlin.test.assertNotEquals
 
 class WithoutCustomDeserializeMethodTest {
     companion object {
-        val mapper = jacksonObjectMapper()
         val throwable = IllegalArgumentException("test")
     }
 
@@ -68,8 +66,8 @@ class WithoutCustomDeserializeMethodTest {
             NullableObject("baz"),
             NullableObject("qux")
         )
-        val src = mapper.writeValueAsString(expected)
-        val result = mapper.readValue<Dst>(src)
+        val src = defaultMapper.writeValueAsString(expected)
+        val result = defaultMapper.readValue<Dst>(src)
 
         assertEquals(expected, result)
     }
@@ -84,8 +82,8 @@ class WithoutCustomDeserializeMethodTest {
             NullableObject(null),
             null
         )
-        val src = mapper.writeValueAsString(expected)
-        val result = mapper.readValue<Dst>(src)
+        val src = defaultMapper.writeValueAsString(expected)
+        val result = defaultMapper.readValue<Dst>(src)
 
         assertEquals(expected, result)
     }

@@ -1,6 +1,6 @@
 package com.fasterxml.jackson.module.kotlin.test.github
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -9,14 +9,14 @@ class TestGithub88 {
 
     @Test
     fun shouldDeserializeSuccessfullyKotlinCloneableObject() {
-        val result = jacksonObjectMapper().writeValueAsString(CloneableKotlinObj("123"))
+        val result = defaultMapper.writeValueAsString(CloneableKotlinObj("123"))
 
         assertEquals("{\"id\":\"123\"}", result)
     }
 
     @Test
     fun shouldDeserializeSuccessfullyJavaCloneableObject() {
-        val result = jacksonObjectMapper().writeValueAsString(CloneableJavaObj("123"))
+        val result = defaultMapper.writeValueAsString(CloneableJavaObj("123"))
 
         assertEquals("{\"id\":\"123\"}", result)
     }

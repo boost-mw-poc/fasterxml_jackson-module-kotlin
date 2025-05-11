@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -20,13 +20,11 @@ class TestGithub158 {
 
     @Test
     fun testEnumSerDeser() {
-        val mapper = jacksonObjectMapper()
-
         val original = SampleContainer(SampleImpl.One)
 
-        val json = mapper.writeValueAsString(original)
+        val json = defaultMapper.writeValueAsString(original)
 //        println(json)
-        val obj = mapper.readValue<SampleContainer>(json)
+        val obj = defaultMapper.readValue<SampleContainer>(json)
         assertEquals(original, obj)
     }
 }

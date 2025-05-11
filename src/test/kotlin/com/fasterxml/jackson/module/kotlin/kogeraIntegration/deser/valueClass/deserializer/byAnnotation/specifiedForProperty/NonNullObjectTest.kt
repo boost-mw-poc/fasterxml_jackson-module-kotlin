@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.deserializer.byAnnotation.specifiedForProperty
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -9,10 +9,6 @@ import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
 class NonNullObjectTest {
-    companion object {
-        val mapper = jacksonObjectMapper()
-    }
-
     data class NonNull(
         @get:JsonDeserialize(using = NonNullObject.Deserializer::class)
         val getterAnn: NonNullObject,
@@ -22,7 +18,7 @@ class NonNullObjectTest {
 
     @Test
     fun nonNull() {
-        val result = mapper.readValue<NonNull>(
+        val result = defaultMapper.readValue<NonNull>(
             """
                 {
                   "getterAnn" : "foo",
@@ -44,7 +40,7 @@ class NonNullObjectTest {
     inner class NullableTest {
         @Test
         fun nonNullInput() {
-            val result = mapper.readValue<Nullable>(
+            val result = defaultMapper.readValue<Nullable>(
                 """
                 {
                   "getterAnn" : "foo",
@@ -57,7 +53,7 @@ class NonNullObjectTest {
 
         @Test
         fun nullInput() {
-            val result = mapper.readValue<Nullable>(
+            val result = defaultMapper.readValue<Nullable>(
                 """
                 {
                   "getterAnn" : null,

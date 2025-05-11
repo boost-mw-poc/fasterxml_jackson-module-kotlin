@@ -3,7 +3,7 @@ package com.fasterxml.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -25,7 +25,7 @@ class TestGithub308 {
 
     @Test
     fun createTestDto() {
-        val dto: TestDto = jacksonObjectMapper().readValue("""{"id":12345}""")
+        val dto: TestDto = defaultMapper.readValue("""{"id":12345}""")
 
         assertNotNull(dto)
         assertNull(dto.id)
