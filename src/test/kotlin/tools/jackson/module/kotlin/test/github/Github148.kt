@@ -1,5 +1,6 @@
 package tools.jackson.module.kotlin.test.github
 
+import org.junit.jupiter.api.Nested
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -32,7 +33,8 @@ class TestGithub148 {
         val type: IncorrectType
     )
 
-    class DemoApplicationTests {
+    @Nested
+    inner class DemoApplicationTests {
         val objectMapper = jacksonObjectMapper()
 
         @Test

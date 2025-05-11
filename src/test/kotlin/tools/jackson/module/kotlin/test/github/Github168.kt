@@ -18,7 +18,7 @@ class TestGithub168 {
 
     @Test
     fun testIfRequiredIsReallyRequiredWhenNullUsed() {
-        val obj = MAPPER.readValue<TestClass>("""{"foo":null,"baz":"whatever"}""")
+        val obj = jacksonObjectMapper().readValue<TestClass>("""{"foo":null,"baz":"whatever"}""")
         assertEquals("whatever", obj.baz)
     }
 
@@ -32,7 +32,7 @@ class TestGithub168 {
 
     @Test
     fun testIfRequiredIsReallyRequiredWhenValuePresent() {
-        val obj = MAPPER.readValue<TestClass>("""{"foo":"yay!","baz":"whatever"}""")
+        val obj = jacksonObjectMapper().readValue<TestClass>("""{"foo":"yay!","baz":"whatever"}""")
         assertNotNull(obj)
         assertEquals("whatever", obj.baz)
     }
