@@ -30,7 +30,7 @@ class TestCasesFromSlack1 {
            {"host":{"id":"host123","name":"A Czar"},"activity":"Kotlin Programming","invited":[{"id":"Guest1","name":"Mr Kotlin","rsvp": "going"}]}
         """)
 
-        jacksonObjectMapper().readValue<Event>("""
+        defaultMapper.readValue<Event>("""
            {"host":{"id":"host123","name":"A Czar"},"activity":"Kotlin Programming","invited":[{"id":"Guest1","name":"Mr Kotlin","rsvp": "going"}]}
         """)
     }
@@ -56,7 +56,7 @@ class TestCasesFromSlack2 {
     }
 
     @Test fun testCzarSpringThing2() {
-        jacksonObjectMapper().readValue<Event>("""
+        defaultMapper.readValue<Event>("""
            {"host":{"id":"host123","name":"A Czar"},"activity":"Kotlin Programming","invited":[{"id":"Guest1","name":"Mr Kotlin","rsvp": "going"}]}
         """)
     }

@@ -6,21 +6,21 @@ import kotlin.test.assertEquals
 
 class TestGithub15 {
     @Test fun testEnumConstructorWithParm() {
-        val one = jacksonObjectMapper().readValue("\"ONE\"", TestEnum::class.java)
+        val one = defaultMapper.readValue("\"ONE\"", TestEnum::class.java)
         assertEquals(TestEnum.ONE, one)
-        val two = jacksonObjectMapper().readValue("\"TWO\"", TestEnum::class.java)
+        val two = defaultMapper.readValue("\"TWO\"", TestEnum::class.java)
         assertEquals(TestEnum.TWO, two)
     }
 
     @Test fun testNormEnumWithoutParam() {
-        val one = jacksonObjectMapper().readValue("\"ONE\"", TestOther::class.java)
+        val one = defaultMapper.readValue("\"ONE\"", TestOther::class.java)
         assertEquals(TestOther.ONE, one)
-        val two = jacksonObjectMapper().readValue("\"TWO\"", TestOther::class.java)
+        val two = defaultMapper.readValue("\"TWO\"", TestOther::class.java)
         assertEquals(TestOther.TWO, two)
     }
 
     @Test fun testClassWithEnumsNeedingConstruction() {
-        val obj: UsingEnum = jacksonObjectMapper().readValue("""{"x":"ONE","y":"TWO"}""")
+        val obj: UsingEnum = defaultMapper.readValue("""{"x":"ONE","y":"TWO"}""")
         assertEquals(TestEnum.ONE, obj.x)
         assertEquals(TestOther.TWO, obj.y)
     }

@@ -1,17 +1,13 @@
 package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.defaultArgument
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class PrimitiveTest {
-    companion object {
-        val mapper = jacksonObjectMapper()
-    }
-
     data class ByConstructor(
         val nn: Primitive = Primitive(1),
         val nNn: Primitive? = Primitive(2),
@@ -20,7 +16,7 @@ class PrimitiveTest {
 
     @Test
     fun byConstructorTest() {
-        assertEquals(ByConstructor(), mapper.readValue<ByConstructor>("{}"))
+        assertEquals(ByConstructor(), defaultMapper.readValue<ByConstructor>("{}"))
     }
 
     data class ByFactory(val nn: Primitive, val nNn: Primitive?, val nN: Primitive?) {
@@ -37,6 +33,6 @@ class PrimitiveTest {
 
     @Test
     fun byFactoryTest() {
-        assertEquals(ByFactory.creator(), mapper.readValue<ByFactory>("{}"))
+        assertEquals(ByFactory.creator(), defaultMapper.readValue<ByFactory>("{}"))
     }
 }
