@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonBackReference
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 
@@ -76,12 +77,11 @@ class TestGithub149 {
 
     @Test
     fun testGithub129(){
-        val mapper = jacksonObjectMapper()
         val c = Car(id = 100)
         val color = Color(id = 100, code = "#FFFFF").apply { car = c }
         c.colors.add(color)
-        val s = mapper.writeValueAsString(c)
-        val value = mapper.readValue(s, Car::class.java)
+        val s = defaultMapper.writeValueAsString(c)
+        val value = defaultMapper.readValue(s, Car::class.java)
 //        print(value)
     }
 }

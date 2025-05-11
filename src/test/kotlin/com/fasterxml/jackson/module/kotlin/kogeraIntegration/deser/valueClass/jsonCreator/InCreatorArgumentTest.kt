@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.jsonCreator
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
@@ -45,7 +45,6 @@ class InCreatorArgumentTest {
 
     @Test
     fun test() {
-        val mapper = jacksonObjectMapper()
         val base = Dst(
             Primitive(1),
             Primitive(2),
@@ -54,7 +53,7 @@ class InCreatorArgumentTest {
             NullableObject("noNn"),
             NullableObject("noN")
         )
-        val result = mapper.readValue<Dst>(mapper.writeValueAsString(base))
+        val result = defaultMapper.readValue<Dst>(defaultMapper.writeValueAsString(base))
 
         assertEquals(
             base.copy(

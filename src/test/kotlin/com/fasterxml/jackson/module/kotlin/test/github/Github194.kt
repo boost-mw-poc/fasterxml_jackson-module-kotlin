@@ -2,7 +2,7 @@ package com.fasterxml.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo
 import com.fasterxml.jackson.annotation.ObjectIdGenerators
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import org.junit.jupiter.api.Test
 import java.util.UUID
 import kotlin.test.assertEquals
@@ -13,8 +13,7 @@ class TestGithub194 {
 
     @Test
     fun testIdentityInfo() {
-        val mapper = jacksonObjectMapper()
-        val value = mapper.readValue(json, WithIdentity::class.java)
+        val value = defaultMapper.readValue(json, WithIdentity::class.java)
         assertEquals(id, value.id)
         assertEquals(id.toString(), value.idString)
         assertEquals("Foo", value.name)
@@ -31,8 +30,7 @@ class TestGithub194 {
 
     @Test
     fun testIdentityInfo_WithDefaultId() {
-        val mapper = jacksonObjectMapper()
-        val value = mapper.readValue(json, WithIdentityAndDefaultId::class.java)
+        val value = defaultMapper.readValue(json, WithIdentityAndDefaultId::class.java)
         assertEquals(id, value.id)
         assertEquals(id.toString(), value.idString)
         assertEquals("Foo", value.name)

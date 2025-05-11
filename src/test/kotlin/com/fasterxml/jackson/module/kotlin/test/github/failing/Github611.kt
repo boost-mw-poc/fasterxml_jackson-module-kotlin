@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.module.kotlin.test.github.failing
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -22,8 +22,7 @@ class TestGithub611 {
 
     @Test
     fun testJsonParsing() {
-        val mapper = jacksonObjectMapper()
-        val dataClassInstance = mapper.readValue<TestClass>(jsonData)
+        val dataClassInstance = defaultMapper.readValue<TestClass>(jsonData)
         assertEquals(50000.toUShort(), dataClassInstance.id)
     }
 }

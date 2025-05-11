@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.jsonCreator
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -21,8 +21,7 @@ class HandledByJacksonTest {
 
     @Test
     fun primitiveNullableCreatorTest() {
-        val mapper = jacksonObjectMapper()
-        val r: PrimitiveMultiParamCreator = mapper.readValue("""{"first":1,"second":2}""")
+        val r: PrimitiveMultiParamCreator = defaultMapper.readValue("""{"first":1,"second":2}""")
         assertEquals(PrimitiveMultiParamCreator(3), r)
     }
 
@@ -39,8 +38,7 @@ class HandledByJacksonTest {
 
     @Test
     fun nullableObjectNullableCreatorTest() {
-        val mapper = jacksonObjectMapper()
-        val r: NullableObjectMultiParamCreator = mapper.readValue("""{"first":1,"second":2}""")
+        val r: NullableObjectMultiParamCreator = defaultMapper.readValue("""{"first":1,"second":2}""")
         assertEquals(NullableObjectMultiParamCreator(3), r)
     }
 }

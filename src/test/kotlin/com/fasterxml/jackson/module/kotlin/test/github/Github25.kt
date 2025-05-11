@@ -25,14 +25,14 @@ class TestGithub25 {
     }
 
     @Test fun testSerWithDelegates() {
-        val json = jacksonObjectMapper().writeValueAsString(SomethingWithDelegates(linkedMapOf("otherData1" to "1", "otherData2" to "2", "otherData3" to "3"))
+        val json = defaultMapper.writeValueAsString(SomethingWithDelegates(linkedMapOf("otherData1" to "1", "otherData2" to "2", "otherData3" to "3"))
                 .withOtherData("exists"))
         assertEquals("""{"data":{"otherData1":"1","otherData2":"2","otherData3":"3"},"changeable":"starting value","name":"fred","somethingNotNull":"exists"}""", json)
     }
 
     @Test fun testDeserWithDelegates() {
         val json = """{"changeable":"new value","data":{"otherData1":"1","otherData2":"2","otherData3":"3"},"somethingNotNull":"exists"}"""
-        val obj: SomethingWithDelegates = jacksonObjectMapper().readValue(json)
+        val obj: SomethingWithDelegates = defaultMapper.readValue(json)
         assertEquals("fred", obj.name) // not set by the Json, isn't in the constructor and is read only delegate
         assertEquals("ignored", obj.ignoreMe)
         assertEquals("new value", obj.changeable)

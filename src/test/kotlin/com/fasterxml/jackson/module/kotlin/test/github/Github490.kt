@@ -2,15 +2,14 @@ package com.fasterxml.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.NullNode
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class TestGithub490 {
-    val mapper = jacksonObjectMapper()
-    val value: DataClassWithAllNullableParams = mapper.readValue(
+    val value: DataClassWithAllNullableParams = defaultMapper.readValue(
         "{" +
                 "\"jsonNodeValueWithNullAsDefaultProvidedNull\":null, " +
                 "\"jsonNodeValueProvidedNull\":null}"

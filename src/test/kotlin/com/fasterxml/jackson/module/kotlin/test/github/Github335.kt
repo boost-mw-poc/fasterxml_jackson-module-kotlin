@@ -5,14 +5,12 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As
 import com.fasterxml.jackson.annotation.JsonTypeInfo.Id
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class Github335Test {
-    val mapper = jacksonObjectMapper()
-
     interface Payload
     data class UniquePayload(val data: String) : Payload
 
@@ -26,8 +24,8 @@ class Github335Test {
     @Test
     fun serializeAndDeserializeTypeable() {
         val oldEntity = MyEntity(null, null)
-        val json = mapper.writeValueAsString(oldEntity)
-        val newEntity = mapper.readValue<MyEntity>(json)
+        val json = defaultMapper.writeValueAsString(oldEntity)
+        val newEntity = defaultMapper.readValue<MyEntity>(json)
 
         assertEquals(oldEntity, newEntity)
     }

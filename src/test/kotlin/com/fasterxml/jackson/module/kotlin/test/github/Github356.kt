@@ -1,19 +1,17 @@
 package com.fasterxml.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class TestGithub356 {
-    private val mapper = jacksonObjectMapper()
-
     @Test
     fun deserializeInlineClass() {
         assertEquals(
             ClassWithInlineMember(InlineClass("bar")),
-            mapper.readValue("""{"inlineClassProperty":"bar"}""")
+            defaultMapper.readValue("""{"inlineClassProperty":"bar"}""")
         )
     }
 
@@ -21,7 +19,7 @@ class TestGithub356 {
     fun serializeInlineClass() {
         assertEquals(
             """{"inlineClassProperty":"bar"}""",
-            mapper.writeValueAsString(ClassWithInlineMember(InlineClass("bar")))
+            defaultMapper.writeValueAsString(ClassWithInlineMember(InlineClass("bar")))
         )
     }
 
@@ -29,7 +27,7 @@ class TestGithub356 {
     fun deserializeValueClass() {
         assertEquals(
             ClassWithValueMember(ValueClass("bar")),
-            mapper.readValue("""{"valueClassProperty":"bar"}""")
+            defaultMapper.readValue("""{"valueClassProperty":"bar"}""")
         )
     }
 
@@ -37,7 +35,7 @@ class TestGithub356 {
     fun serializeValueClass() {
         assertEquals(
             """{"valueClassProperty":"bar"}""",
-            mapper.writeValueAsString(ClassWithValueMember(ValueClass("bar")))
+            defaultMapper.writeValueAsString(ClassWithValueMember(ValueClass("bar")))
         )
     }
 }
