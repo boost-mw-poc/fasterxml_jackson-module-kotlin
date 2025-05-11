@@ -23,6 +23,9 @@ WrongWrong (@k163377)
 
 # 2.19.1 (not yet released)
 
+WrongWrong (@k163377)
+* #986: Optimize imports
+
 # 2.19.0 (24-Apr-2025)
 
 WrongWrong (@k163377)

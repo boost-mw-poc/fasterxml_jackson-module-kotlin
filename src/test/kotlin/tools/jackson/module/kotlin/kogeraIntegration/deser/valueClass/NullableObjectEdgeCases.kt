@@ -9,10 +9,10 @@ import tools.jackson.databind.deser.std.StdDeserializer
 import tools.jackson.module.kotlin.WrapsNullableValueClassDeserializer
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 
 class NullableObjectEdgeCases {
     @JvmInline

@@ -5,9 +5,9 @@ import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
-import org.junit.jupiter.api.Test
 
 /**
  * Up to argument size 32 there is one mask argument for the default argument,

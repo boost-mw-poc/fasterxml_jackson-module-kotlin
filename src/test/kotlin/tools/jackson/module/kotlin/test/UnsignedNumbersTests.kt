@@ -4,10 +4,10 @@ import tools.jackson.core.exc.InputCoercionException
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Test
-import java.math.BigInteger
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import java.math.BigInteger
 
 internal class UnsignedNumbersTests {
 
