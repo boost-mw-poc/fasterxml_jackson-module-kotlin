@@ -2,8 +2,8 @@ package com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.ser
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.testPrettyWriter
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.NullableObject
+import com.fasterxml.jackson.module.kotlin.testPrettyWriter
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
