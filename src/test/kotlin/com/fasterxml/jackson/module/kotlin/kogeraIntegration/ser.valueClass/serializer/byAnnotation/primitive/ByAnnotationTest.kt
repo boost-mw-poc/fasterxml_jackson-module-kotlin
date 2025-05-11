@@ -3,8 +3,8 @@ package com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.ser
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.module.kotlin.KotlinModule
-import com.fasterxml.jackson.module.kotlin.testPrettyWriter
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.Primitive
+import com.fasterxml.jackson.module.kotlin.testPrettyWriter
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals

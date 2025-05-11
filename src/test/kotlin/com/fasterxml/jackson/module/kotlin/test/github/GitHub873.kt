@@ -2,7 +2,6 @@ package com.fasterxml.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.module.kotlin.defaultMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import kotlin.test.Test
 

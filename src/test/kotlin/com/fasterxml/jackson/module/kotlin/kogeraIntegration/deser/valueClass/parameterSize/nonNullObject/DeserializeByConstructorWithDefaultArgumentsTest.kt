@@ -2,12 +2,12 @@ package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.p
 
 import com.fasterxml.jackson.module.kotlin.assertReflectEquals
 import com.fasterxml.jackson.module.kotlin.defaultMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
-import org.junit.jupiter.api.Test
 
 /**
  * Up to argument size 32 there is one mask argument for the default argument,
