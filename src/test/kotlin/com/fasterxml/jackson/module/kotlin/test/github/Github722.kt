@@ -6,10 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.InjectableValues
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import kotlin.math.exp
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
 
 class Github722 {
     data class FailingDto @JsonCreator constructor(
@@ -39,11 +37,13 @@ class Github722 {
     @Test
     fun failing() {
         // The kotlin mapper uses the Kotlin default value instead of the Inject value.
-        val kotlinMapper = jacksonObjectMapper()
-        val result = kotlinMapper.readerFor(FailingDto::class.java)
+        val reader = jacksonObjectMapper()
+            .readerFor(FailingDto::class.java)
             .with(InjectableValues.Std(injectValues))
-            .readValue<FailingDto>("{}")
+        val result = reader.readValue<FailingDto>("{}")
 
+        // fixed
+        // assertNotEquals(result, expected, "GitHubXXX fixed.")
         assertEquals(expected, result)
     }
 
@@ -56,10 +56,10 @@ class Github722 {
 
     @Test
     fun withoutDefaultValue() {
-        val kotlinMapper = jacksonObjectMapper()
-        val result = kotlinMapper.readerFor(WithoutDefaultValue::class.java)
+        val reader = jacksonObjectMapper()
+            .readerFor(WithoutDefaultValue::class.java)
             .with(InjectableValues.Std(injectValues))
-            .readValue<WithoutDefaultValue>("{}")
+        val result = reader.readValue<WithoutDefaultValue>("{}")
 
         // If there is no default value, the problem does not occur.
         assertEquals(WithoutDefaultValue(1, 2), result)
