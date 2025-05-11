@@ -3,8 +3,8 @@ package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.p
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.module.kotlin.assertReflectEquals
 import com.fasterxml.jackson.module.kotlin.defaultMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
