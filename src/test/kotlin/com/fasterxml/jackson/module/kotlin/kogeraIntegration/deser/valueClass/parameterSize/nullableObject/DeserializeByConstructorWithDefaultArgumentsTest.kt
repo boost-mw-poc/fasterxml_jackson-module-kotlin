@@ -6,8 +6,6 @@ import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Nu
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 
 /**
  * Up to argument size 32 there is one mask argument for the default argument,
@@ -53,12 +51,7 @@ class DeserializeByConstructorWithDefaultArgumentsTest {
 
     @Test
     fun test32() {
-        assertThrows<KotlinReflectionInternalError> {
-            assertEquals(Dst32(), defaultMapper.readValue<Dst32>("{}"))
-            // TODO: #762 is resolved after Kotlin 2.0, so the reason why throw is done is to make CI with Kotlin 2.0 succeed.
-            //   After upgrading to Kotlin 2.0, remove exception-related descriptions.
-            if (KotlinVersion.CURRENT.major >= 2) throw KotlinReflectionInternalError("")
-        }
+        assertEquals(Dst32(), defaultMapper.readValue<Dst32>("{}"))
     }
 
     data class Dst33(
@@ -171,12 +164,7 @@ class DeserializeByConstructorWithDefaultArgumentsTest {
 
     @Test
     fun test64() {
-        assertThrows<KotlinReflectionInternalError> {
-            assertEquals(Dst64(), defaultMapper.readValue<Dst64>("{}"))
-            // TODO: #762 is resolved after Kotlin 2.0, so the reason why throw is done is to make CI with Kotlin 2.0 succeed.
-            //   After upgrading to Kotlin 2.0, remove exception-related descriptions.
-            if (KotlinVersion.CURRENT.major >= 2) throw KotlinReflectionInternalError("")
-        }
+        assertEquals(Dst64(), defaultMapper.readValue<Dst64>("{}"))
     }
 
     data class Dst65(
