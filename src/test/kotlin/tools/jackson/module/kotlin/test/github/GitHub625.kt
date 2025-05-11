@@ -1,9 +1,8 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.testPrettyWriter
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.jacksonObjectMapper
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
 

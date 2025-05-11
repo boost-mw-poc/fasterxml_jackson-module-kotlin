@@ -1,10 +1,10 @@
 package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass.jsonCreator
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.readValue
 
 // Test for Creator that can be handled by the Jackson mechanism.
 class HandledByJacksonTest {

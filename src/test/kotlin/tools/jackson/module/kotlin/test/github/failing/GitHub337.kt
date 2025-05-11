@@ -3,10 +3,10 @@ package tools.jackson.module.kotlin.test.github.failing
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Disabled
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.MapperFeature.SORT_PROPERTIES_ALPHABETICALLY
 import tools.jackson.module.kotlin.jsonMapper
 import tools.jackson.module.kotlin.testPrettyWriter
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 /**

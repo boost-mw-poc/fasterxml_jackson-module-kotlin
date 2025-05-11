@@ -1,16 +1,16 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.junit.jupiter.api.Test
 import tools.jackson.core.JsonParser
 import tools.jackson.databind.DeserializationContext
-import tools.jackson.databind.ValueDeserializer
 import tools.jackson.databind.ObjectReader
+import tools.jackson.databind.ValueDeserializer
 import tools.jackson.databind.module.SimpleModule
 import tools.jackson.dataformat.csv.CsvMapper
+import tools.jackson.dataformat.csv.CsvReadFeature
 import tools.jackson.dataformat.csv.CsvSchema
 import tools.jackson.module.kotlin.kotlinModule
-import org.junit.jupiter.api.Test
-import tools.jackson.dataformat.csv.CsvReadFeature
 import kotlin.test.assertEquals
 
 class GitHub800 {

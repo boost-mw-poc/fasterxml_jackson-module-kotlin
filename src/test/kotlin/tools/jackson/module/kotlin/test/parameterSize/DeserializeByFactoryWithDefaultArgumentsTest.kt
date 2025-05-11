@@ -1,10 +1,10 @@
 package tools.jackson.module.kotlin.test.parameterSize
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.assertReflectEquals
 import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 /**

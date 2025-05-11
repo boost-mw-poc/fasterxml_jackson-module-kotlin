@@ -1,5 +1,7 @@
 package tools.jackson.module.kotlin.test
 
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
 import tools.jackson.core.JsonGenerator
 import tools.jackson.core.JsonParser
 import tools.jackson.databind.DeserializationContext
@@ -11,8 +13,6 @@ import tools.jackson.module.kotlin.addDeserializer
 import tools.jackson.module.kotlin.addSerializer
 import tools.jackson.module.kotlin.jacksonMapperBuilder
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
 import java.math.BigDecimal
 import java.math.RoundingMode
 

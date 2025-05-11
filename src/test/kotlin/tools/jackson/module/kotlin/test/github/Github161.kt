@@ -1,9 +1,9 @@
 package tools.jackson.module.kotlin.test.github
 
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationFeature
 import tools.jackson.databind.exc.MismatchedInputException
 import tools.jackson.module.kotlin.jacksonMapperBuilder
-import org.junit.jupiter.api.Test
 import kotlin.test.fail
 
 class TestGithub161 {

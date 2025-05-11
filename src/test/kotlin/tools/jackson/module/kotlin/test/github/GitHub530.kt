@@ -1,10 +1,9 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonValue
+import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.jacksonMapperBuilder
 import tools.jackson.module.kotlin.testPrettyWriter
-import kotlin.test.assertEquals
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class GitHub530 {

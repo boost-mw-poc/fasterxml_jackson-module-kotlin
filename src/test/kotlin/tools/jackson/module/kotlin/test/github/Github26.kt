@@ -1,11 +1,10 @@
 package tools.jackson.module.kotlin.test.github
 
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationFeature
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
 data class ClassWithPrimitivesWithDefaults(val i: Int = 5, val x: Int)

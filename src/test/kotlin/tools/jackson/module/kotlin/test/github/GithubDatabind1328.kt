@@ -3,9 +3,9 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonTypeName
+import org.junit.jupiter.api.Test
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class TestGithubDatabind1328 {

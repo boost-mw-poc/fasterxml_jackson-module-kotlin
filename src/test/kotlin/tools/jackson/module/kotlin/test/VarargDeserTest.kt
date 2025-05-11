@@ -1,11 +1,11 @@
 package tools.jackson.module.kotlin.test
 
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
- import org.junit.jupiter.api.Assertions.assertEquals
- import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.readValue
 
 // from https://github.com/ProjectMapK/jackson-module-kogera/blob/7872116052c9a4744c6d4e84ddd5cab6bb525024/src/test/kotlin/io/github/projectmapk/jackson/module/kogera/zIntegration/deser/VarargTest.kt
 class VarargDeserTest {

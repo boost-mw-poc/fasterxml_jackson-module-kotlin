@@ -1,12 +1,12 @@
 package tools.jackson.module.kotlin.test.github
 
-import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.databind.DatabindException
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tools.jackson.databind.DatabindException
 import tools.jackson.databind.exc.MismatchedInputException
+import tools.jackson.module.kotlin.jacksonObjectMapper
+import tools.jackson.module.kotlin.readValue
 
 private class TestGithub32 {
     @Test fun `valid mandatory data class constructor param`() {

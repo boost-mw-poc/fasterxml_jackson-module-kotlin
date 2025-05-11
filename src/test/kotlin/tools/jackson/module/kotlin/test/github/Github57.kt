@@ -1,10 +1,11 @@
 package tools.jackson.module.kotlin.test.github
 
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationContext
 import tools.jackson.databind.KeyDeserializer
 import tools.jackson.databind.module.SimpleModule
-import tools.jackson.module.kotlin.*
-import org.junit.jupiter.api.Test
+import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.readValue
 
 class TestGithub57 {
     data class Github57Data(val map: Map<Pair<String, String>, String>)

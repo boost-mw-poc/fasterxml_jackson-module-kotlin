@@ -3,10 +3,10 @@ package tools.jackson.module.kotlin.test.github
 import com.fasterxml.jackson.annotation.JacksonInject
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.InjectableValues
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.module.kotlin.jacksonObjectMapper
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class Github722 {

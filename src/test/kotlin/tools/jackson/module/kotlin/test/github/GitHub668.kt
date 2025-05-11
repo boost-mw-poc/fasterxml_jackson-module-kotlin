@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import tools.jackson.databind.BeanDescription
 import tools.jackson.databind.ObjectMapper
 import tools.jackson.module.kotlin.defaultMapper
-import tools.jackson.module.kotlin.jacksonObjectMapper
 
 class GitHub668 {
     private inline fun <reified T : Any> ObjectMapper.introspectDeserialization(): BeanDescription =

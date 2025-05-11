@@ -2,6 +2,9 @@ package tools.jackson.module.kotlin.kogeraIntegration.deser.valueClass
 
 import com.fasterxml.jackson.annotation.JsonSetter
 import com.fasterxml.jackson.annotation.Nulls
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import tools.jackson.core.JsonParser
 import tools.jackson.databind.DeserializationContext
 import tools.jackson.databind.annotation.JsonDeserialize
@@ -9,9 +12,6 @@ import tools.jackson.databind.deser.std.StdDeserializer
 import tools.jackson.module.kotlin.WrapsNullableValueClassDeserializer
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 import kotlin.reflect.jvm.internal.KotlinReflectionInternalError
 
 class NullableObjectEdgeCases {

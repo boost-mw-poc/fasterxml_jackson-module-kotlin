@@ -1,9 +1,9 @@
 package tools.jackson.module.kotlin.test.github
 
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.MapperFeature
 import tools.jackson.module.kotlin.jacksonMapperBuilder
 import tools.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class TestGithub47 {

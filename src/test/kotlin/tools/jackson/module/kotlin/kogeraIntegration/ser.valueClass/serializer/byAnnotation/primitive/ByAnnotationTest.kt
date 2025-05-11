@@ -2,8 +2,8 @@ package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.
 
 import tools.jackson.databind.annotation.JsonSerialize
 import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.testPrettyWriter
 import tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.Primitive
+import tools.jackson.module.kotlin.testPrettyWriter
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals

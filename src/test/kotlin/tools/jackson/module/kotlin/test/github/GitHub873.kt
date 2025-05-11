@@ -1,8 +1,8 @@
 package tools.jackson.module.kotlin.test.github
 
+import com.fasterxml.jackson.annotation.JsonValue
 import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
-import com.fasterxml.jackson.annotation.JsonValue
 import kotlin.test.Test
 
 class GitHub873 {

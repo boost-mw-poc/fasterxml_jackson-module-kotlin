@@ -1,9 +1,9 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JacksonInject
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.InjectableValues
 import tools.jackson.module.kotlin.jacksonObjectMapper
-import org.junit.jupiter.api.Test
 import java.util.UUID
 import kotlin.test.assertEquals
 

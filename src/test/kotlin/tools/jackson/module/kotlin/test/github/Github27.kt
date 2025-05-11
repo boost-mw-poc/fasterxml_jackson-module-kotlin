@@ -1,15 +1,14 @@
 package tools.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import tools.jackson.databind.SerializationFeature
-import tools.jackson.module.kotlin.jacksonMapperBuilder
-import tools.jackson.module.kotlin.readValue
-import tools.jackson.module.kotlin.test.expectFailure
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import tools.jackson.databind.DeserializationFeature
+import tools.jackson.databind.SerializationFeature
 import tools.jackson.module.kotlin.KotlinFeature
+import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.readValue
+import tools.jackson.module.kotlin.test.expectFailure
 import kotlin.test.assertTrue
 import kotlin.test.fail
 

@@ -2,14 +2,14 @@ package tools.jackson.module.kotlin.test.github.failing
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonRootName
+import org.junit.jupiter.api.Test
 import tools.jackson.databind.exc.InvalidDefinitionException
 import tools.jackson.dataformat.xml.XmlMapper
 import tools.jackson.dataformat.xml.annotation.JacksonXmlProperty
 import tools.jackson.dataformat.xml.annotation.JacksonXmlText
+import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
 import tools.jackson.module.kotlin.test.expectFailure
-import tools.jackson.module.kotlin.kotlinModule
-import org.junit.jupiter.api.Test
 
 class TestGithub138 {
     @JsonRootName("sms")
