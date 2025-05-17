@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
+import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullablePrimitive
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.TwoUnitPrimitive
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test
 private fun Primitive.modify(): Primitive = Primitive(v + 100)
 private fun NonNullObject.modify(): NonNullObject = NonNullObject("$v-creator")
 private fun NullableObject.modify(): NullableObject = NullableObject(v!! + "-creator")
+private fun NullablePrimitive.modify(): NullablePrimitive = NullablePrimitive(v!! + 100)
 private fun TwoUnitPrimitive.modify(): TwoUnitPrimitive = TwoUnitPrimitive(v + 100)
 
 class InCreatorArgumentTest {
@@ -23,6 +25,8 @@ class InCreatorArgumentTest {
         val nnoN: NonNullObject?,
         val noNn: NullableObject,
         val noN: NullableObject?,
+        val npNn: NullablePrimitive,
+        val npN: NullablePrimitive?,
         val tupNn: TwoUnitPrimitive,
         val tupN: TwoUnitPrimitive?
     ) {
@@ -36,6 +40,8 @@ class InCreatorArgumentTest {
                 nnoN: NonNullObject?,
                 noNn: NullableObject,
                 noN: NullableObject?,
+                npNn: NullablePrimitive,
+                npN: NullablePrimitive?,
                 tupNn: TwoUnitPrimitive,
                 tupN: TwoUnitPrimitive?
             ) = Dst(
@@ -45,6 +51,8 @@ class InCreatorArgumentTest {
                 nnoN?.modify(),
                 noNn.modify(),
                 noN?.modify(),
+                npNn.modify(),
+                npN?.modify(),
                 tupNn.modify(),
                 tupN?.modify()
             )
@@ -60,8 +68,10 @@ class InCreatorArgumentTest {
             NonNullObject("nnoN"),
             NullableObject("noNn"),
             NullableObject("noN"),
-            TwoUnitPrimitive(3),
-            TwoUnitPrimitive(4)
+            NullablePrimitive(3),
+            NullablePrimitive(4),
+            TwoUnitPrimitive(5),
+            TwoUnitPrimitive(6)
         )
         val result = defaultMapper.readValue<Dst>(defaultMapper.writeValueAsString(base))
 
@@ -73,6 +83,8 @@ class InCreatorArgumentTest {
                 nnoN = base.nnoN?.modify(),
                 noNn = base.noNn.modify(),
                 noN = base.noN?.modify(),
+                npNn = base.npNn.modify(),
+                npN = base.npN?.modify(),
                 tupNn = base.tupNn.modify(),
                 tupN = base.tupN?.modify()
             ),
