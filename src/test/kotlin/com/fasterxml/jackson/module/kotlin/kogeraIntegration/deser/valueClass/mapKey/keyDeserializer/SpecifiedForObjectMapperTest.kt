@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NonNullObject
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
+import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullablePrimitive
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.Primitive
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.TwoUnitPrimitive
 import com.fasterxml.jackson.module.kotlin.readValue
@@ -18,6 +19,7 @@ class SpecifiedForObjectMapperTest {
                 this.addKeyDeserializer(Primitive::class.java, Primitive.KeyDeserializer())
                 this.addKeyDeserializer(NonNullObject::class.java, NonNullObject.KeyDeserializer())
                 this.addKeyDeserializer(NullableObject::class.java, NullableObject.KeyDeserializer())
+                this.addKeyDeserializer(NullablePrimitive::class.java, NullablePrimitive.KeyDeserializer())
                 this.addKeyDeserializer(TwoUnitPrimitive::class.java, TwoUnitPrimitive.KeyDeserializer())
             }
             this.registerModule(module)
@@ -45,6 +47,12 @@ class SpecifiedForObjectMapperTest {
         }
 
         @Test
+        fun nullablePrimitive() {
+            val result = mapper.readValue<Map<NullablePrimitive, String?>>("""{"2":null}""")
+            assertEquals(mapOf(NullablePrimitive(102) to null), result)
+        }
+
+        @Test
         fun twoUnitPrimitive() {
             val result = mapper.readValue<Map<TwoUnitPrimitive, String?>>("""{"1":null}""")
             assertEquals(mapOf(TwoUnitPrimitive(101) to null), result)
@@ -55,6 +63,7 @@ class SpecifiedForObjectMapperTest {
         val p: Map<Primitive, String?>,
         val nn: Map<NonNullObject, String?>,
         val n: Map<NullableObject, String?>,
+        val np: Map<NullablePrimitive, String?>,
         val tup: Map<TwoUnitPrimitive, String?>
     )
 
@@ -65,6 +74,7 @@ class SpecifiedForObjectMapperTest {
               "p":{"1":null},
               "nn":{"foo":null},
               "n":{"bar":null},
+              "np":{"2":null},
               "tup":{"1":null}
             }
         """.trimIndent()
@@ -73,6 +83,7 @@ class SpecifiedForObjectMapperTest {
             mapOf(Primitive(101) to null),
             mapOf(NonNullObject("foo-deser") to null),
             mapOf(NullableObject("bar-deser") to null),
+            mapOf(NullablePrimitive(102) to null),
             mapOf(TwoUnitPrimitive(101) to null)
         )
 
