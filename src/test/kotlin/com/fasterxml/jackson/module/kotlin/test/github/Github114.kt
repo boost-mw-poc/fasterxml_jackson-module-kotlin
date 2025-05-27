@@ -2,11 +2,9 @@ package com.fasterxml.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
-import kotlin.reflect.jvm.javaMethod
-import kotlin.reflect.jvm.kotlinFunction
 import kotlin.test.assertEquals
 
 class TestGithub114 {
@@ -25,20 +23,17 @@ class TestGithub114 {
 
     @Test
     fun testCompanionObjectCreatorWithDefaultParameters() {
-        val mapper = jacksonObjectMapper()
-
-        val foo = mapper.readValue<Foo>("""{"baz": "bazValue"}""")
+        val foo = defaultMapper.readValue<Foo>("""{"baz": "bazValue"}""")
         println(foo)
 
-        val fooWithStaticCreator = mapper.readValue<FooWithStaticCreator>("""{"baz": "bazValue"}""")
+        val fooWithStaticCreator = defaultMapper.readValue<FooWithStaticCreator>("""{"baz": "bazValue"}""")
         println(fooWithStaticCreator) // Expect FooWithStaticCreator(bar=default, baz=bazValue), result == MismatchedInputException: Missing required creator property 'bar' (index 0)
         assertEquals(FooWithStaticCreator(FooWithStaticCreator.someValue, "bazValue"), fooWithStaticCreator)
     }
 
     @Test
     fun otherTestVariation() {
-        val mapper = jacksonObjectMapper()
-        val testObj = mapper.readValue<Obj>("""{"id":1}""")
+        val testObj = defaultMapper.readValue<Obj>("""{"id":1}""")
 
         assertEquals("yes", testObj.prop)
     }

@@ -26,29 +26,51 @@ class JacksonInjectTest {
         @get:JacksonInject("noNNn")
         val noNNn: NullableObject?,
         @get:JacksonInject("noNN")
-        val noNN: NullableObject?
+        val noNN: NullableObject?,
+        @get:JacksonInject("npNnNn")
+        val npNnNn: NullablePrimitive,
+        @get:JacksonInject("npNnN")
+        val npNnN: NullablePrimitive,
+        @get:JacksonInject("npNNn")
+        val npNNn: NullablePrimitive?,
+        @get:JacksonInject("npNN")
+        val npNN: NullablePrimitive?,
+        @get:JacksonInject("tupNn")
+        val tupNn: TwoUnitPrimitive,
+        @get:JacksonInject("tupN")
+        val tupN: TwoUnitPrimitive?
     )
 
     @Test
     fun test() {
-        val injectables = InjectableValues.Std(
-            mapOf(
-                "pNn" to Primitive(0),
-                "pN" to Primitive(1),
-                "nnoNn" to NonNullObject("nnoNn"),
-                "nnoN" to NonNullObject("nnoN"),
-                "noNnNn" to NullableObject("noNnNn"),
-                "noNnN" to NullableObject(null),
-                "noNNn" to NullableObject("noNNn"),
-                "noNN" to NullableObject(null)
-            )
+        val injectables = mapOf(
+            "pNn" to Primitive(0),
+            "pN" to Primitive(1),
+            "nnoNn" to NonNullObject("nnoNn"),
+            "nnoN" to NonNullObject("nnoN"),
+            "noNnNn" to NullableObject("noNnNn"),
+            "noNnN" to NullableObject(null),
+            "noNNn" to NullableObject("noNNn"),
+            "noNN" to NullableObject(null),
+            "npNnNn" to NullablePrimitive(0),
+            "npNnN" to NullablePrimitive(null),
+            "npNNn" to NullablePrimitive(1),
+            "npNN" to NullablePrimitive(null),
+            "tupNn" to TwoUnitPrimitive(3),
+            "tupN" to TwoUnitPrimitive(4)
         )
 
         val reader = jacksonObjectMapper()
             .readerFor(Dto::class.java)
-            .with(injectables)
+            .with(InjectableValues.Std(injectables))
 
-        println(reader.readValue<Dto>("{}"))
+        val result = reader.readValue<Dto>("{}")
+        val expected = ::Dto.let { ctor ->
+            val args = ctor.parameters.associateWith { injectables[it.name] }
+            ctor.callBy(args)
+        }
+
+        assertEquals(expected, result)
     }
 
     data class DataBind4218FailingDto(

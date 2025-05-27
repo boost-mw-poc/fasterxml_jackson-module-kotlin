@@ -1,7 +1,6 @@
 package com.fasterxml.jackson.module.kotlin.test.github.failing
 
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.test.expectFailure
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.opentest4j.AssertionFailedError
@@ -18,14 +17,12 @@ class GitHub451 {
         fun getGraultGraply(): String = bazQux
     }
 
-    val mapper = jacksonObjectMapper()
-
     @Test
     fun serializeTest() {
         val expected = """{"foo-bar":"a","baz-qux":"b","quux-corge":"a","grault-graply":"b"}"""
 
         val src = Target("a", "b")
-        val json = mapper.writeValueAsString(src)
+        val json = defaultMapper.writeValueAsString(src)
         assertThrows<AssertionFailedError>("GitHub #451 has been fixed!") {
             assertEquals(expected, json)
         }

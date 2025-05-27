@@ -3,7 +3,7 @@ package com.fasterxml.jackson.module.kotlin.test.github.failing
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 import com.fasterxml.jackson.annotation.JsonTypeName
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.test.expectFailure
 import org.junit.jupiter.api.Test
@@ -16,8 +16,7 @@ import kotlin.test.assertNull
 class GithubDatabind1329 {
     @Test
     fun testPolymorphicWithEnum() {
-        val mapper = jacksonObjectMapper()
-        val invite = mapper.readValue<Invite>(
+        val invite = defaultMapper.readValue<Invite>(
                 """|{
                    |  "kind": "CONTACT",
                    |  "kindForMapper": "CONTACT",

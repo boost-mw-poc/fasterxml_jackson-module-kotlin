@@ -1,18 +1,14 @@
 package com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.defaultArgument
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.kogeraIntegration.deser.valueClass.NullableObject
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class NullableObjectTest {
-    companion object {
-        val mapper = jacksonObjectMapper()
-    }
-
     data class ByConstructor(
         val nnNn: NullableObject = NullableObject("foo"),
         val nnN: NullableObject = NullableObject(null),
@@ -24,7 +20,7 @@ class NullableObjectTest {
     fun byConstructorTestFailing() {
         // #761(KT-57357) fixed
         assertThrows(Error::class.java) {
-            assertEquals(ByConstructor(), mapper.readValue<ByConstructor>("{}"))
+            assertEquals(ByConstructor(), defaultMapper.readValue<ByConstructor>("{}"))
         }
     }
 
@@ -50,7 +46,7 @@ class NullableObjectTest {
     fun byFactoryTest() {
         // #761(KT-57357) fixed
         assertThrows(Error::class.java) {
-            assertEquals(ByFactory.creator(), mapper.readValue<ByFactory>("{}"))
+            assertEquals(ByFactory.creator(), defaultMapper.readValue<ByFactory>("{}"))
         }
     }
 }

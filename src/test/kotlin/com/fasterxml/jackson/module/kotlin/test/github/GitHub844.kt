@@ -1,9 +1,8 @@
 package com.fasterxml.jackson.module.kotlin.test.github
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -22,8 +21,7 @@ class GitHub844 {
         }
         """
 
-        val jacksonObjectMapper = ObjectMapper().registerKotlinModule()
-        val message = jacksonObjectMapper.readValue<BaseClass>(json)
+        val message = defaultMapper.readValue<BaseClass>(json)
 
         assertEquals(ChildClass("Test"), message)
     }

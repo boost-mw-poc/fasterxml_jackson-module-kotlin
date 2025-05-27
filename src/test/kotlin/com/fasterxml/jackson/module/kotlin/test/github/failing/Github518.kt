@@ -1,13 +1,13 @@
 package com.fasterxml.jackson.module.kotlin.test.github.failing
 
 import com.fasterxml.jackson.module.kotlin.KotlinFeature.SingletonSupport
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import com.fasterxml.jackson.module.kotlin.jsonMapper
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.test.expectFailure
-import kotlin.test.assertSame
 import org.junit.jupiter.api.Test
+import kotlin.test.assertSame
 
 /**
  * An empty object should be deserialized as *the* Unit instance for a nullable Unit reference Type.
@@ -20,7 +20,7 @@ class TestGithub518 {
      */
     @Test
     fun deserializeEmptyObjectToSingletonUnit() {
-        assertSame(jacksonObjectMapper().readValue<Unit>("{}"), Unit)
+        assertSame(defaultMapper.readValue<Unit>("{}"), Unit)
     }
 
     /**
@@ -30,7 +30,7 @@ class TestGithub518 {
     @Test
     fun deserializeEmptyObjectToSingletonUnitFails() {
         expectFailure<AssertionError>("GitHub #518 has been fixed!") {
-            assertSame(jacksonObjectMapper().readValue<Unit?>("{}"), Unit)
+            assertSame(defaultMapper.readValue<Unit?>("{}"), Unit)
         }
     }
 

@@ -1,7 +1,7 @@
 package com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.jsonInclude
 
 import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.defaultMapper
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -17,13 +17,14 @@ class JsonIncludeCustomTest {
     data class NullFilterDto(
         val pN: Primitive? = null,
         val nnoN: NonNullObject? = null,
-        val noN1: NullableObject? = null
+        val noN1: NullableObject? = null,
+        val npN: NullablePrimitive? = null,
+        val tupN: TwoUnitPrimitive? = null
     )
 
     @Test
     fun nullFilterTest() {
-        val mapper = jacksonObjectMapper()
         val dto = NullFilterDto()
-        assertEquals("{}", mapper.writeValueAsString(dto))
+        assertEquals("{}", defaultMapper.writeValueAsString(dto))
     }
 }
