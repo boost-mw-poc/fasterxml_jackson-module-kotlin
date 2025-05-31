@@ -1,12 +1,11 @@
-package com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullableObject.byAnnotation
+package com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullablePrimitive
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.NullableObject
+import com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.NullablePrimitive
 import com.fasterxml.jackson.module.kotlin.testPrettyWriter
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
 
 class NullValueTest {
     companion object {
@@ -14,17 +13,17 @@ class NullValueTest {
     }
 
     data class NonNullSrc(
-        @get:JsonSerialize(using = NullableObject.Serializer::class)
-        val getterAnn: NullableObject,
-        @field:JsonSerialize(using = NullableObject.Serializer::class)
-        val fieldAnn: NullableObject
+        @get:JsonSerialize(using = NullablePrimitive.Serializer::class)
+        val getterAnn: NullablePrimitive,
+        @field:JsonSerialize(using = NullablePrimitive.Serializer::class)
+        val fieldAnn: NullablePrimitive
     )
 
     @Test
     fun failing() {
-        val src = NonNullSrc(NullableObject(null), NullableObject(null))
+        val src = NonNullSrc(NullablePrimitive(null), NullablePrimitive(null))
 
-        assertNotEquals(
+        Assertions.assertNotEquals(
             """
                 {
                   "getterAnn" : "NULL",
@@ -36,17 +35,17 @@ class NullValueTest {
     }
 
     data class NullableSrc(
-        @get:JsonSerialize(using = NullableObject.Serializer::class)
-        val getterAnn: NullableObject?,
-        @field:JsonSerialize(using = NullableObject.Serializer::class)
-        val fieldAnn: NullableObject?
+        @get:JsonSerialize(using = NullablePrimitive.Serializer::class)
+        val getterAnn: NullablePrimitive?,
+        @field:JsonSerialize(using = NullablePrimitive.Serializer::class)
+        val fieldAnn: NullablePrimitive?
     )
 
     @Test
     fun nullableWithoutNull() {
-        val src = NullableSrc(NullableObject(null), NullableObject(null))
+        val src = NullableSrc(NullablePrimitive(null), NullablePrimitive(null))
 
-        assertEquals(
+        Assertions.assertEquals(
             """
                 {
                   "getterAnn" : "NULL",
@@ -61,7 +60,7 @@ class NullValueTest {
     fun nullableWithNull() {
         val src = NullableSrc(null, null)
 
-        assertEquals(
+        Assertions.assertEquals(
             """
                 {
                   "getterAnn" : null,
