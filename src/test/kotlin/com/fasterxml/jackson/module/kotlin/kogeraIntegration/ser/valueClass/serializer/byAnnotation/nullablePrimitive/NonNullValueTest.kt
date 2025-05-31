@@ -1,4 +1,4 @@
-package com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullablePrimitive.byAnnotation
+package com.fasterxml.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullablePrimitive
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
@@ -7,7 +7,7 @@ import com.fasterxml.jackson.module.kotlin.testPrettyWriter
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
-class NullValueTest {
+class NonNullValueTest {
     companion object {
         val writer = jacksonObjectMapper().testPrettyWriter()
     }
@@ -20,14 +20,14 @@ class NullValueTest {
     )
 
     @Test
-    fun failing() {
-        val src = NonNullSrc(NullablePrimitive(null), NullablePrimitive(null))
+    fun nonNull() {
+        val src = NonNullSrc(NullablePrimitive(42), NullablePrimitive(99))
 
-        Assertions.assertNotEquals(
+        Assertions.assertEquals(
             """
                 {
-                  "getterAnn" : "NULL",
-                  "fieldAnn" : "NULL"
+                  "getterAnn" : 142,
+                  "fieldAnn" : 199
                 }
             """.trimIndent(),
             writer.writeValueAsString(src)
@@ -43,13 +43,13 @@ class NullValueTest {
 
     @Test
     fun nullableWithoutNull() {
-        val src = NullableSrc(NullablePrimitive(null), NullablePrimitive(null))
+        val src = NullableSrc(NullablePrimitive(42), NullablePrimitive(99))
 
         Assertions.assertEquals(
             """
                 {
-                  "getterAnn" : "NULL",
-                  "fieldAnn" : "NULL"
+                  "getterAnn" : 142,
+                  "fieldAnn" : 199
                 }
             """.trimIndent(),
             writer.writeValueAsString(src)
