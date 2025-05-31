@@ -1,0 +1,160 @@
+package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer
+
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Nested
+import org.junit.jupiter.api.Test
+import tools.jackson.databind.module.SimpleModule
+import tools.jackson.module.kotlin.jacksonMapperBuilder
+import tools.jackson.module.kotlin.testPrettyWriter
+
+class SpecifiedForObjectMapperTest {
+    companion object {
+        val mapper = jacksonMapperBuilder().apply {
+            val module = SimpleModule().apply {
+                this.addSerializer(Primitive::class.java, Primitive.Serializer())
+                this.addSerializer(NonNullObject::class.java, NonNullObject.Serializer())
+                this.addSerializer(NullableObject::class.java, NullableObject.Serializer())
+                this.addSerializer(NullablePrimitive::class.java, NullablePrimitive.Serializer())
+                this.addSerializer(TwoUnitPrimitive::class.java, TwoUnitPrimitive.Serializer())
+            }
+            addModule(module)
+        }.build()
+        val writer = mapper.testPrettyWriter()
+    }
+
+    @Nested
+    inner class DirectSerialize {
+        @Test
+        fun primitive() {
+            val result = writer.writeValueAsString(Primitive(1))
+            Assertions.assertEquals("101", result)
+        }
+
+        @Test
+        fun nonNullObject() {
+            val result = writer.writeValueAsString(NonNullObject("foo"))
+            Assertions.assertEquals("\"foo-ser\"", result)
+        }
+
+        @Suppress("ClassName")
+        @Nested
+        inner class NullableObject_ {
+            @Test
+            fun value() {
+                val result = writer.writeValueAsString(NullableObject("foo"))
+                Assertions.assertEquals("\"foo-ser\"", result)
+            }
+
+            @Test
+            fun nullValue() {
+                val result = writer.writeValueAsString(NullableObject(null))
+                Assertions.assertEquals("\"NULL\"", result)
+            }
+        }
+
+        @Suppress("ClassName")
+        @Nested
+        inner class NullablePrimitive_ {
+            @Test
+            fun value() {
+                val result = writer.writeValueAsString(NullablePrimitive(1))
+                Assertions.assertEquals("101", result)
+            }
+
+            @Test
+            fun nullValue() {
+                val result = writer.writeValueAsString(NullablePrimitive(null))
+                Assertions.assertEquals("\"NULL\"", result)
+            }
+        }
+
+        @Test
+        fun twoUnitPrimitive() {
+            val result = writer.writeValueAsString(TwoUnitPrimitive(1))
+            Assertions.assertEquals("101", result)
+        }
+    }
+
+    data class Src(
+        val pNn: Primitive,
+        val pN: Primitive?,
+        val nnoNn: NonNullObject,
+        val nnoN: NonNullObject?,
+        val noNn: NullableObject,
+        val noN: NullableObject?,
+        val npNn: NullablePrimitive,
+        val npN: NullablePrimitive?,
+        val tupNn: TwoUnitPrimitive,
+        val tupN: TwoUnitPrimitive?,
+    )
+
+    @Test
+    fun nonNull() {
+        val src = Src(
+            Primitive(1),
+            Primitive(2),
+            NonNullObject("foo"),
+            NonNullObject("bar"),
+            NullableObject("baz"),
+            NullableObject("qux"),
+            NullablePrimitive(3),
+            NullablePrimitive(4),
+            TwoUnitPrimitive(5),
+            TwoUnitPrimitive(6),
+        )
+        val result = writer.writeValueAsString(src)
+
+        Assertions.assertEquals(
+            """
+                {
+                  "pNn" : 101,
+                  "pN" : 102,
+                  "nnoNn" : "foo-ser",
+                  "nnoN" : "bar-ser",
+                  "noNn" : "baz-ser",
+                  "noN" : "qux-ser",
+                  "npNn" : 103,
+                  "npN" : 104,
+                  "tupNn" : 105,
+                  "tupN" : 106
+                }
+            """.trimIndent(),
+            result,
+        )
+    }
+
+    @Test
+    fun withNull() {
+        val src = Src(
+            Primitive(1),
+            null,
+            NonNullObject("foo"),
+            null,
+            NullableObject(null),
+            null,
+            NullablePrimitive(null),
+            null,
+            TwoUnitPrimitive(5),
+            null,
+        )
+        val result = writer.writeValueAsString(src)
+
+        Assertions.assertEquals(
+            """
+                {
+                  "pNn" : 101,
+                  "pN" : null,
+                  "nnoNn" : "foo-ser",
+                  "nnoN" : null,
+                  "noNn" : "NULL",
+                  "noN" : null,
+                  "npNn" : "NULL",
+                  "npN" : null,
+                  "tupNn" : 105,
+                  "tupN" : null
+                }
+            """.trimIndent(),
+            result,
+        )
+    }
+}

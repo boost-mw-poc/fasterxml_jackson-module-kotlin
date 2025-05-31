@@ -1,4 +1,4 @@
-package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullableObject.byAnnotation
+package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullableObject
 
 import tools.jackson.databind.annotation.JsonSerialize
 import tools.jackson.module.kotlin.jacksonObjectMapper

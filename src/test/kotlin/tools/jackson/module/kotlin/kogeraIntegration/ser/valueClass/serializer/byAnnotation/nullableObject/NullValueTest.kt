@@ -1,8 +1,8 @@
-package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullablePrimitive.byAnnotation
+package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullableObject
 
 import tools.jackson.databind.annotation.JsonSerialize
 import tools.jackson.module.kotlin.jacksonObjectMapper
-import tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.NullablePrimitive
+import tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.NullableObject
 import tools.jackson.module.kotlin.testPrettyWriter
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -14,15 +14,15 @@ class NullValueTest {
     }
 
     data class NonNullSrc(
-        @get:JsonSerialize(using = NullablePrimitive.Serializer::class)
-        val getterAnn: NullablePrimitive,
-        @field:JsonSerialize(using = NullablePrimitive.Serializer::class)
-        val fieldAnn: NullablePrimitive
+        @get:JsonSerialize(using = NullableObject.Serializer::class)
+        val getterAnn: NullableObject,
+        @field:JsonSerialize(using = NullableObject.Serializer::class)
+        val fieldAnn: NullableObject
     )
 
     @Test
     fun failing() {
-        val src = NonNullSrc(NullablePrimitive(null), NullablePrimitive(null))
+        val src = NonNullSrc(NullableObject(null), NullableObject(null))
 
         assertNotEquals(
             """
@@ -36,15 +36,15 @@ class NullValueTest {
     }
 
     data class NullableSrc(
-        @get:JsonSerialize(using = NullablePrimitive.Serializer::class)
-        val getterAnn: NullablePrimitive?,
-        @field:JsonSerialize(using = NullablePrimitive.Serializer::class)
-        val fieldAnn: NullablePrimitive?
+        @get:JsonSerialize(using = NullableObject.Serializer::class)
+        val getterAnn: NullableObject?,
+        @field:JsonSerialize(using = NullableObject.Serializer::class)
+        val fieldAnn: NullableObject?
     )
 
     @Test
     fun nullableWithoutNull() {
-        val src = NullableSrc(NullablePrimitive(null), NullablePrimitive(null))
+        val src = NullableSrc(NullableObject(null), NullableObject(null))
 
         assertEquals(
             """

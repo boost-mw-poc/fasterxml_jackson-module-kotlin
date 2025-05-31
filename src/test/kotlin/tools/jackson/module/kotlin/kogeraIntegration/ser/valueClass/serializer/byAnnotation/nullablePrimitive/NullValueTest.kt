@@ -1,4 +1,4 @@
-package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullablePrimitive.byAnnotation
+package tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.byAnnotation.nullablePrimitive
 
 import tools.jackson.databind.annotation.JsonSerialize
 import tools.jackson.module.kotlin.jacksonObjectMapper
@@ -6,8 +6,9 @@ import tools.jackson.module.kotlin.kogeraIntegration.ser.valueClass.serializer.N
 import tools.jackson.module.kotlin.testPrettyWriter
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
-class NonNullValueTest {
+class NullValueTest {
     companion object {
         val writer = jacksonObjectMapper().testPrettyWriter()
     }
@@ -20,14 +21,14 @@ class NonNullValueTest {
     )
 
     @Test
-    fun nonNull() {
-        val src = NonNullSrc(NullablePrimitive(42), NullablePrimitive(99))
+    fun failing() {
+        val src = NonNullSrc(NullablePrimitive(null), NullablePrimitive(null))
 
-        assertEquals(
+        assertNotEquals(
             """
                 {
-                  "getterAnn" : 142,
-                  "fieldAnn" : 199
+                  "getterAnn" : "NULL",
+                  "fieldAnn" : "NULL"
                 }
             """.trimIndent(),
             writer.writeValueAsString(src)
@@ -43,13 +44,13 @@ class NonNullValueTest {
 
     @Test
     fun nullableWithoutNull() {
-        val src = NullableSrc(NullablePrimitive(42), NullablePrimitive(99))
+        val src = NullableSrc(NullablePrimitive(null), NullablePrimitive(null))
 
         assertEquals(
             """
                 {
-                  "getterAnn" : 142,
-                  "fieldAnn" : 199
+                  "getterAnn" : "NULL",
+                  "fieldAnn" : "NULL"
                 }
             """.trimIndent(),
             writer.writeValueAsString(src)
