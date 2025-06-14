@@ -22,7 +22,9 @@ Co-maintainers:
 #967: Kotlin has been upgraded to 2.0.21.
 - Generate SBOMs [JSTEP-14]
 
-2.19.1 (not yet released)
+2.19.1 (13-Jun-2025)
+
+No changes since 2.19.0
 
 2.19.0 (24-Apr-2025)
 
