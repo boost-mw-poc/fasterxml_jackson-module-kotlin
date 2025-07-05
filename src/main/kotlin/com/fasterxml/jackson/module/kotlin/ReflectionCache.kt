@@ -122,7 +122,7 @@ internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
 
     fun getValueClassBoxConverter(unboxedClass: Class<*>, boxedClass: KClass<*>): ValueClassBoxConverter<*, *> =
         valueClassBoxConverterCache.get(boxedClass) ?: run {
-            val value = ValueClassBoxConverter(unboxedClass, boxedClass)
+            val value = ValueClassBoxConverter.create(unboxedClass, boxedClass.java)
             (valueClassBoxConverterCache.putIfAbsent(boxedClass, value) ?: value)
         }
 

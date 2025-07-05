@@ -96,7 +96,7 @@ internal class ValueClassKeyDeserializer<S, D : Any>(
             @Suppress("UNCHECKED_CAST")
             converter.convert(creator.invoke(null, value) as S)
         } catch (e: InvalidDefinitionException) {
-            throw JsonMappingException.from(ctxt, errorMessage(ctxt.constructType(converter.boxedClass.java)), e)
+            throw JsonMappingException.from(ctxt, errorMessage(ctxt.constructType(converter.boxedClass)), e)
         }
     }
 
