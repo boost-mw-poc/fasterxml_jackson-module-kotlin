@@ -44,17 +44,6 @@ object ULongSerializer : StdSerializer<ULong>(ULong::class.java) {
     }
 }
 
-@Deprecated(
-    message = "This class was published by mistake. It will be removed in `2.22.0` as it is no longer used internally.",
-    level = DeprecationLevel.WARNING
-)
-object ValueClassUnboxSerializer : StdSerializer<Any>(Any::class.java) {
-    override fun serialize(value: Any, gen: JsonGenerator, ctxt: SerializationContext) {
-        val unboxed = value::class.java.getMethod("unbox-impl").invoke(value)
-        ctxt.writeValue(gen, unboxed)
-    }
-}
-
 // Class must be UnboxableValueClass.
 private fun Class<*>.getStaticJsonValueGetter(): Method? = this.declaredMethods.find { method ->
     Modifier.isStatic(method.modifiers) && method.annotations.any { it is JsonValue && it.value }
