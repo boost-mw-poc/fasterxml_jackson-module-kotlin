@@ -17,7 +17,12 @@ Co-maintainers:
 ------------------------------------------------------------------------
 
 2.20.0 (not yet released)
-
+#1018: Improved handling of `value class` has improved performance for both serialization and deserialization.
+  In particular, for serialization, proper caching has improved throughput by a factor of 2 or more in the general cases.
+  Also, replacing function execution by reflection with `MethodHandle` improved throughput by several percent for both serialization and deserialization.
+  In cases where the number of properties of a `value class` in the processing target is large, there is a possibility to obtain a larger improvement.
+  Please note that this modification causes a destructive change in that exceptions thrown during deserialization of
+  `value class` are no longer wrapped in an `InvocationTargetException`.
 #969: Deprecated content has been cleaned up with the version upgrade.
 #967: Kotlin has been upgraded to 2.0.21.
 - Generate SBOMs [JSTEP-14]
