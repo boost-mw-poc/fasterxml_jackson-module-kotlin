@@ -255,6 +255,22 @@
                             <exclude>
                                 com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException#MissingKotlinParameterException(kotlin.reflect.KParameter,java.io.Closeable,java.lang.String)
                             </exclude>
+                            <exclude>
+                                com.fasterxml.jackson.module.kotlin.WrapsNullableValueClassBoxDeserializer
+                            </exclude>
+                            <exclude>com.fasterxml.jackson.module.kotlin.ValueClassUnboxKeySerializer</exclude>
+                            <exclude>com.fasterxml.jackson.module.kotlin.KotlinKeySerializersKt</exclude>
+                            <exclude>com.fasterxml.jackson.module.kotlin.ValueClassSerializer</exclude>
+                            <!-- internal -->
+                            <exclude>
+                                com.fasterxml.jackson.module.kotlin.KotlinKeySerializers#KotlinKeySerializers()
+                            </exclude>
+                            <exclude>
+                                com.fasterxml.jackson.module.kotlin.KotlinSerializers#KotlinSerializers()
+                            </exclude>
+                            <exclude>com.fasterxml.jackson.module.kotlin.ValueClassStaticJsonKeySerializer</exclude>
+                            <exclude>com.fasterxml.jackson.module.kotlin.ValueClassBoxConverter</exclude>
+                            <exclude>com.fasterxml.jackson.module.kotlin.ValueClassKeyDeserializer</exclude>
                         </excludes>
                     </parameter>
                 </configuration>
