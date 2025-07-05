@@ -134,7 +134,7 @@ internal class KotlinKeySerializers(private val cache: ReflectionCache) : Serial
 
         return when {
             rawClass.isUnboxableValueClass() -> {
-                val unboxConverter = cache.getValueClassUnboxConverter(rawClass.kotlin)
+                val unboxConverter = cache.getValueClassUnboxConverter(rawClass)
                 ValueClassStaticJsonKeySerializer.createOrNull(unboxConverter)
                     ?: ValueClassUnboxKeySerializer(unboxConverter)
             }

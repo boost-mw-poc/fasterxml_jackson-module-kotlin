@@ -12,6 +12,7 @@ import java.lang.reflect.Constructor
 import java.lang.reflect.Executable
 import java.lang.reflect.Method
 import java.util.*
+import kotlin.jvm.java
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
@@ -36,9 +37,9 @@ internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
 
     // TODO: Consider whether the cache size should be reduced more,
     //       since the cache is used only twice locally at initialization per property.
-    private val valueClassBoxConverterCache: LRUMap<KClass<*>, ValueClassBoxConverter<*, *>> =
+    private val valueClassBoxConverterCache: LRUMap<Class<*>, ValueClassBoxConverter<*, *>> =
         LRUMap(0, reflectionCacheSize)
-    private val valueClassUnboxConverterCache: LRUMap<KClass<*>, ValueClassUnboxConverter<*, *>> =
+    private val valueClassUnboxConverterCache: LRUMap<Class<*>, ValueClassUnboxConverter<*, *>> =
         LRUMap(0, reflectionCacheSize)
 
     // If the Record type defined in Java is processed,
@@ -122,15 +123,18 @@ internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
         }.orElse(null)
     }
 
-    fun getValueClassBoxConverter(unboxedClass: Class<*>, boxedClass: KClass<*>): ValueClassBoxConverter<*, *> =
+    fun getValueClassBoxConverter(unboxedClass: Class<*>, boxedClass: Class<*>): ValueClassBoxConverter<*, *> =
         valueClassBoxConverterCache.get(boxedClass) ?: run {
-            val value = ValueClassBoxConverter.create(unboxedClass, boxedClass.java)
+            val value = ValueClassBoxConverter.create(unboxedClass, boxedClass)
             (valueClassBoxConverterCache.putIfAbsent(boxedClass, value) ?: value)
         }
 
-    fun getValueClassUnboxConverter(boxedClass: KClass<*>): ValueClassUnboxConverter<*, *> =
+    fun getValueClassBoxConverter(unboxedClass: Class<*>, boxedClass: KClass<*>): ValueClassBoxConverter<*, *> =
+        getValueClassBoxConverter(unboxedClass, boxedClass.java)
+
+    fun getValueClassUnboxConverter(boxedClass: Class<*>): ValueClassUnboxConverter<*, *> =
         valueClassUnboxConverterCache.get(boxedClass) ?: run {
-            val value = ValueClassUnboxConverter.create(boxedClass.java)
+            val value = ValueClassUnboxConverter.create(boxedClass)
             (valueClassUnboxConverterCache.putIfAbsent(boxedClass, value) ?: value)
         }
 

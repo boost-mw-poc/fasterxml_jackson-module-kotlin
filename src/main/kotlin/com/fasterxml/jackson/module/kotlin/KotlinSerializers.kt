@@ -141,7 +141,7 @@ internal class KotlinSerializers(private val cache: ReflectionCache) : Serialize
             ULong::class.java == rawClass -> ULongSerializer
             // The priority of Unboxing needs to be lowered so as not to break the serialization of Unsigned Integers.
             rawClass.isUnboxableValueClass() -> {
-                val unboxConverter = cache.getValueClassUnboxConverter(rawClass.kotlin)
+                val unboxConverter = cache.getValueClassUnboxConverter(rawClass)
                 ValueClassStaticJsonValueSerializer.createOrNull(unboxConverter) ?: unboxConverter.delegatingSerializer
             }
             else -> null
