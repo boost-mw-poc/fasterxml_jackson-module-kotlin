@@ -23,7 +23,7 @@ import kotlin.reflect.jvm.kotlinFunction
 internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
     companion object {
         // Increment is required when properties that use LRUMap are changed.
-        private const val serialVersionUID = 4L
+        private const val serialVersionUID = 5L
     }
 
     private val javaExecutableToKotlin = LRUMap<Executable, KFunction<*>>(reflectionCacheSize, reflectionCacheSize)
@@ -37,6 +37,8 @@ internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
     // TODO: Consider whether the cache size should be reduced more,
     //       since the cache is used only twice locally at initialization per property.
     private val valueClassBoxConverterCache: LRUMap<KClass<*>, ValueClassBoxConverter<*, *>> =
+        LRUMap(0, reflectionCacheSize)
+    private val valueClassUnboxConverterCache: LRUMap<KClass<*>, ValueClassUnboxConverter<*, *>> =
         LRUMap(0, reflectionCacheSize)
 
     // If the Record type defined in Java is processed,
@@ -124,6 +126,12 @@ internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
         valueClassBoxConverterCache.get(boxedClass) ?: run {
             val value = ValueClassBoxConverter.create(unboxedClass, boxedClass.java)
             (valueClassBoxConverterCache.putIfAbsent(boxedClass, value) ?: value)
+        }
+
+    fun getValueClassUnboxConverter(boxedClass: KClass<*>): ValueClassUnboxConverter<*, *> =
+        valueClassUnboxConverterCache.get(boxedClass) ?: run {
+            val value = ValueClassUnboxConverter.create(boxedClass.java)
+            (valueClassUnboxConverterCache.putIfAbsent(boxedClass, value) ?: value)
         }
 
     fun findKotlinParameter(param: AnnotatedParameter): KParameter? = when (val owner = param.owner.member) {
