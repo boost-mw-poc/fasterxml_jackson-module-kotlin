@@ -133,7 +133,7 @@ class KotlinModule private constructor(
 
         context.addDeserializers(KotlinDeserializers(cache, useJavaDurationConversion))
         context.addKeyDeserializers(KotlinKeyDeserializers(cache))
-        context.addSerializers(KotlinSerializers())
+        context.addSerializers(KotlinSerializers(cache))
         context.addKeySerializers(KotlinKeySerializers())
 
         // ranges
