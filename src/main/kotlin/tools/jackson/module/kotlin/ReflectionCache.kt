@@ -12,6 +12,7 @@ import java.lang.reflect.Constructor
 import java.lang.reflect.Executable
 import java.lang.reflect.Method
 import java.util.*
+import kotlin.jvm.java
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
@@ -23,7 +24,7 @@ import kotlin.reflect.jvm.kotlinFunction
 internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
     companion object {
         // Increment is required when properties that use LRUMap are changed.
-        private const val serialVersionUID = 4L
+        private const val serialVersionUID = 5L
     }
 
     private val javaExecutableToKotlin = SimpleLookupCache<Executable, KFunction<*>>(reflectionCacheSize, reflectionCacheSize)
@@ -36,7 +37,9 @@ internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
 
     // TODO: Consider whether the cache size should be reduced more,
     //       since the cache is used only twice locally at initialization per property.
-    private val valueClassBoxConverterCache: SimpleLookupCache<KClass<*>, ValueClassBoxConverter<*, *>> =
+    private val valueClassBoxConverterCache: SimpleLookupCache<Class<*>, ValueClassBoxConverter<*, *>> =
+        SimpleLookupCache(0, reflectionCacheSize)
+    private val valueClassUnboxConverterCache: SimpleLookupCache<Class<*>, ValueClassUnboxConverter<*, *>> =
         SimpleLookupCache(0, reflectionCacheSize)
 
     // If the Record type defined in Java is processed,
@@ -120,10 +123,19 @@ internal class ReflectionCache(reflectionCacheSize: Int) : Serializable {
         }.orElse(null)
     }
 
-    fun getValueClassBoxConverter(unboxedClass: Class<*>, boxedClass: KClass<*>): ValueClassBoxConverter<*, *> =
+    fun getValueClassBoxConverter(unboxedClass: Class<*>, boxedClass: Class<*>): ValueClassBoxConverter<*, *> =
         valueClassBoxConverterCache.get(boxedClass) ?: run {
-            val value = ValueClassBoxConverter(unboxedClass, boxedClass)
+            val value = ValueClassBoxConverter.create(unboxedClass, boxedClass)
             (valueClassBoxConverterCache.putIfAbsent(boxedClass, value) ?: value)
+        }
+
+    fun getValueClassBoxConverter(unboxedClass: Class<*>, boxedClass: KClass<*>): ValueClassBoxConverter<*, *> =
+        getValueClassBoxConverter(unboxedClass, boxedClass.java)
+
+    fun getValueClassUnboxConverter(boxedClass: Class<*>): ValueClassUnboxConverter<*, *> =
+        valueClassUnboxConverterCache.get(boxedClass) ?: run {
+            val value = ValueClassUnboxConverter.create(boxedClass)
+            (valueClassUnboxConverterCache.putIfAbsent(boxedClass, value) ?: value)
         }
 
     fun findKotlinParameter(param: AnnotatedParameter): KParameter? = when (val owner = param.owner.member) {

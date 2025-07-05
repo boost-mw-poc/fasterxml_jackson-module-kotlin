@@ -2,7 +2,11 @@ package tools.jackson.module.kotlin
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import tools.jackson.databind.DatabindException
+import java.lang.invoke.MethodHandle
+import java.lang.invoke.MethodHandles
+import java.lang.invoke.MethodType
 import java.lang.reflect.AnnotatedElement
+import java.lang.reflect.Method
 import java.util.*
 import kotlin.reflect.KClass
 import kotlin.reflect.KType
@@ -46,3 +50,16 @@ internal fun AnnotatedElement.hasCreatorAnnotation(): Boolean = getAnnotation(Js
 // Determine if the unbox result of value class is nullable
 internal fun KClass<*>.wrapsNullable(): Boolean =
     this.memberProperties.first { it.javaField != null }.returnType.isMarkedNullable
+
+internal val ANY_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.java, Any::class.java) }
+internal val ANY_TO_INT_METHOD_TYPE by lazy {MethodType.methodType(Int::class.java, Any::class.java) }
+internal val ANY_TO_LONG_METHOD_TYPE by lazy {MethodType.methodType(Long::class.java, Any::class.java) }
+internal val ANY_TO_STRING_METHOD_TYPE by lazy {MethodType.methodType(String::class.java, Any::class.java) }
+internal val ANY_TO_JAVA_UUID_METHOD_TYPE by lazy {MethodType.methodType(UUID::class.java, Any::class.java) }
+internal val INT_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.java, Int::class.java) }
+internal val LONG_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.java, Long::class.java) }
+internal val STRING_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.java, String::class.java) }
+internal val JAVA_UUID_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.java, UUID::class.java) }
+
+internal fun unreflect(method: Method): MethodHandle = MethodHandles.lookup().unreflect(method)
+internal fun unreflectAsType(method: Method, type: MethodType): MethodHandle = unreflect(method).asType(type)

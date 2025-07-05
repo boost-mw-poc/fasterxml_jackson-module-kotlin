@@ -7,7 +7,10 @@ import tools.jackson.databind.deser.jdk.JDKKeyDeserializer
 import tools.jackson.databind.deser.jdk.JDKKeyDeserializers
 import tools.jackson.databind.exc.InvalidDefinitionException
 import tools.jackson.databind.util.ClassUtil
+import java.lang.invoke.MethodHandle
+import java.lang.invoke.MethodHandles
 import java.lang.reflect.Method
+import java.util.UUID
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.javaMethod
@@ -64,32 +67,98 @@ internal object ULongKeyDeserializer : JDKKeyDeserializer(TYPE_LONG, ULong::clas
 }
 
 // The implementation is designed to be compatible with various creators, just in case.
-internal class ValueClassKeyDeserializer<S, D : Any>(
-    private val creator: Method,
-    private val converter: ValueClassBoxConverter<S, D>
+internal sealed class ValueClassKeyDeserializer<S, D : Any>(
+    converter: ValueClassBoxConverter<S, D>,
+    creatorHandle: MethodHandle,
 ) : KeyDeserializer() {
-    private val unboxedClass: Class<*> = creator.parameterTypes[0]
+    private val boxedClass: Class<D> = converter.boxedClass
 
-    init {
-        ClassUtil.checkAndFixAccess(creator, false)
-    }
+    protected abstract val unboxedClass: Class<*>
+    protected val handle: MethodHandle = MethodHandles.filterReturnValue(creatorHandle, converter.boxHandle)
 
     // Based on databind error
     // https://github.com/FasterXML/jackson-databind/blob/341f8d360a5f10b5e609d6ee0ea023bf597ce98a/src/main/java/com/fasterxml/jackson/databind/deser/DeserializerCache.java#L624
-    private fun errorMessage(boxedType: JavaType): String =
-        "Could not find (Map) Key deserializer for types wrapped in $boxedType"
+    private fun errorMessage(boxedType: JavaType): String = "Could not find (Map) Key deserializer for types " +
+            "wrapped in $boxedType"
 
-    override fun deserializeKey(key: String?, ctxt: DeserializationContext): Any {
+    // Since the input to handle must be strict, invoke should be implemented in each class
+    protected abstract fun invokeExact(value: S): D
+
+    final override fun deserializeKey(key: String?, ctxt: DeserializationContext): Any {
         val unboxedJavaType = ctxt.constructType(unboxedClass)
 
         return try {
             // findKeyDeserializer does not return null, and an exception will be thrown if not found.
             val value = ctxt.findKeyDeserializer(unboxedJavaType, null).deserializeKey(key, ctxt)
             @Suppress("UNCHECKED_CAST")
-            converter.convert(creator.invoke(null, value) as S)
+            invokeExact(value as S)
         } catch (e: InvalidDefinitionException) {
-            throw DatabindException.from(ctxt.parser, errorMessage(ctxt.constructType(converter.boxedClass.java)), e)
+            throw DatabindException.from(ctxt.parser, errorMessage(ctxt.constructType(boxedClass)), e)
         }
+    }
+
+    internal sealed class WrapsSpecified<S, D : Any>(
+        converter: ValueClassBoxConverter<S, D>,
+        creator: Method,
+    ) : ValueClassKeyDeserializer<S, D>(
+        converter,
+        // Currently, only the primary constructor can be the creator of a key, so for specified types,
+        // the return type of the primary constructor and the input type of the box function are exactly the same.
+        // Therefore, performance is improved by omitting the asType call.
+        unreflect(creator),
+    )
+
+    internal class WrapsInt<D : Any>(
+        converter: IntValueClassBoxConverter<D>,
+        creator: Method,
+    ) : WrapsSpecified<Int, D>(converter, creator) {
+        override val unboxedClass: Class<*> get() = Int::class.java
+
+        @Suppress("UNCHECKED_CAST")
+        override fun invokeExact(value: Int): D = handle.invokeExact(value) as D
+    }
+
+    internal class WrapsLong<D : Any>(
+        converter: LongValueClassBoxConverter<D>,
+        creator: Method,
+    ) : WrapsSpecified<Long, D>(converter, creator) {
+        override val unboxedClass: Class<*> get() = Long::class.java
+
+        @Suppress("UNCHECKED_CAST")
+        override fun invokeExact(value: Long): D = handle.invokeExact(value) as D
+    }
+
+    internal class WrapsString<D : Any>(
+        converter: StringValueClassBoxConverter<D>,
+        creator: Method,
+    ) : WrapsSpecified<String?, D>(converter, creator) {
+        override val unboxedClass: Class<*> get() = String::class.java
+
+        @Suppress("UNCHECKED_CAST")
+        override fun invokeExact(value: String?): D = handle.invokeExact(value) as D
+    }
+
+    internal class WrapsJavaUuid<D : Any>(
+        converter: JavaUuidValueClassBoxConverter<D>,
+        creator: Method,
+    ) : WrapsSpecified<UUID?, D>(converter, creator) {
+        override val unboxedClass: Class<*> get() = UUID::class.java
+
+        @Suppress("UNCHECKED_CAST")
+        override fun invokeExact(value: UUID?): D = handle.invokeExact(value) as D
+    }
+
+    internal class WrapsAny<S, D : Any>(
+        converter: GenericValueClassBoxConverter<S, D>,
+        creator: Method,
+    ) : ValueClassKeyDeserializer<S, D>(
+        converter,
+        unreflectAsType(creator, ANY_TO_ANY_METHOD_TYPE),
+    ) {
+        override val unboxedClass: Class<*> = creator.returnType
+
+        @Suppress("UNCHECKED_CAST")
+        override fun invokeExact(value: S): D = handle.invokeExact(value) as D
     }
 
     companion object {
@@ -105,7 +174,13 @@ internal class ValueClassKeyDeserializer<S, D : Any>(
             val creator = boxedClass.primaryConstructor?.javaMethod ?: return null
             val converter = cache.getValueClassBoxConverter(creator.returnType, boxedClass)
 
-            return ValueClassKeyDeserializer(creator, converter)
+            return when (converter) {
+                is IntValueClassBoxConverter -> WrapsInt(converter, creator)
+                is LongValueClassBoxConverter -> WrapsLong(converter, creator)
+                is StringValueClassBoxConverter -> WrapsString(converter, creator)
+                is JavaUuidValueClassBoxConverter -> WrapsJavaUuid(converter, creator)
+                is GenericValueClassBoxConverter -> WrapsAny(converter, creator)
+            }
         }
     }
 }

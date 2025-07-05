@@ -10,6 +10,8 @@ import tools.jackson.databind.SerializationContext
 import tools.jackson.databind.ValueSerializer
 import tools.jackson.databind.ser.Serializers
 import tools.jackson.databind.ser.std.StdSerializer
+import java.lang.invoke.MethodHandle
+import java.lang.invoke.MethodHandles
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.math.BigInteger
@@ -42,11 +44,10 @@ object ULongSerializer : StdSerializer<ULong>(ULong::class.java) {
     }
 }
 
-// Class must be UnboxableValueClass.
-private fun Class<*>.getStaticJsonValueGetter(): Method? = this.declaredMethods.find { method ->
-    Modifier.isStatic(method.modifiers) && method.annotations.any { it is JsonValue && it.value }
-}
-
+@Deprecated(
+    message = "This class was published by mistake. It will be removed in `2.22.0` as it is no longer used internally.",
+    level = DeprecationLevel.WARNING
+)
 object ValueClassUnboxSerializer : StdSerializer<Any>(Any::class.java) {
     override fun serialize(value: Any, gen: JsonGenerator, ctxt: SerializationContext) {
         val unboxed = value::class.java.getMethod("unbox-impl").invoke(value)
@@ -54,32 +55,85 @@ object ValueClassUnboxSerializer : StdSerializer<Any>(Any::class.java) {
     }
 }
 
-internal sealed class ValueClassSerializer<T : Any>(t: Class<T>) : StdSerializer<T>(t) {
-    class StaticJsonValue<T : Any>(
-        t: Class<T>, private val staticJsonValueGetter: Method
-    ) : ValueClassSerializer<T>(t) {
-        private val unboxMethod: Method = t.getMethod("unbox-impl")
+// Class must be UnboxableValueClass.
+private fun Class<*>.getStaticJsonValueGetter(): Method? = this.declaredMethods.find { method ->
+    Modifier.isStatic(method.modifiers) && method.annotations.any { it is JsonValue && it.value }
+}
 
-        override fun serialize(value: T, gen: JsonGenerator, ctxt: SerializationContext) {
-            val unboxed = unboxMethod.invoke(value)
-            // As shown in the processing of the factory function, jsonValueGetter is always a static method.
-            val jsonValue: Any? = staticJsonValueGetter.invoke(null, unboxed)
-            ctxt.writeValue(gen, jsonValue)
-        }
+internal sealed class ValueClassStaticJsonValueSerializer<T : Any>(
+    converter: ValueClassUnboxConverter<T, *>,
+    staticJsonValueHandle: MethodHandle,
+) : StdSerializer<T>(converter.valueClass) {
+    private val handle: MethodHandle = MethodHandles.filterReturnValue(converter.unboxHandle, staticJsonValueHandle)
+
+    final override fun serialize(value: T, gen: JsonGenerator, ctxt: SerializationContext) {
+        val jsonValue: Any? = handle.invokeExact(value)
+        ctxt.writeValue(gen, jsonValue)
     }
+
+    internal class WrapsInt<T : Any>(
+        converter: IntValueClassUnboxConverter<T>,
+        staticJsonValueGetter: Method,
+    ) : ValueClassStaticJsonValueSerializer<T>(
+        converter,
+        unreflectAsType(staticJsonValueGetter, INT_TO_ANY_METHOD_TYPE),
+    )
+
+    internal class WrapsLong<T : Any>(
+        converter: LongValueClassUnboxConverter<T>,
+        staticJsonValueGetter: Method,
+    ) : ValueClassStaticJsonValueSerializer<T>(
+        converter,
+        unreflectAsType(staticJsonValueGetter, LONG_TO_ANY_METHOD_TYPE),
+    )
+
+    internal class WrapsString<T : Any>(
+        converter: StringValueClassUnboxConverter<T>,
+        staticJsonValueGetter: Method,
+    ) : ValueClassStaticJsonValueSerializer<T>(
+        converter,
+        unreflectAsType(staticJsonValueGetter, STRING_TO_ANY_METHOD_TYPE),
+    )
+
+    internal class WrapsJavaUuid<T : Any>(
+        converter: JavaUuidValueClassUnboxConverter<T>,
+        staticJsonValueGetter: Method,
+    ) : ValueClassStaticJsonValueSerializer<T>(
+        converter,
+        unreflectAsType(staticJsonValueGetter, JAVA_UUID_TO_ANY_METHOD_TYPE),
+    )
+
+    internal class WrapsAny<T : Any>(
+        converter: GenericValueClassUnboxConverter<T>,
+        staticJsonValueGetter: Method,
+    ) : ValueClassStaticJsonValueSerializer<T>(
+        converter,
+        unreflectAsType(staticJsonValueGetter, ANY_TO_ANY_METHOD_TYPE),
+    )
 
     companion object {
         // `t` must be UnboxableValueClass.
         // If create a function with a JsonValue in the value class,
         // it will be compiled as a static method (= cannot be processed properly by Jackson),
         // so use a ValueClassSerializer.StaticJsonValue to handle this.
-        fun from(t: Class<*>): StdSerializer<*> = t.getStaticJsonValueGetter()
-            ?.let { StaticJsonValue(t, it) }
-            ?: ValueClassUnboxSerializer
+        fun <T : Any> createOrNull(
+            converter: ValueClassUnboxConverter<T, *>,
+        ): ValueClassStaticJsonValueSerializer<T>? = converter
+            .valueClass
+            .getStaticJsonValueGetter()
+            ?.let {
+                when (converter) {
+                    is IntValueClassUnboxConverter -> WrapsInt(converter, it)
+                    is LongValueClassUnboxConverter -> WrapsLong(converter, it)
+                    is StringValueClassUnboxConverter -> WrapsString(converter, it)
+                    is JavaUuidValueClassUnboxConverter -> WrapsJavaUuid(converter, it)
+                    is GenericValueClassUnboxConverter -> WrapsAny(converter, it)
+                }
+            }
     }
 }
 
-internal class KotlinSerializers : Serializers.Base() {
+internal class KotlinSerializers(private val cache: ReflectionCache) : Serializers.Base() {
     override fun findSerializer(
         config: SerializationConfig?,
         type: JavaType,
@@ -94,7 +148,10 @@ internal class KotlinSerializers : Serializers.Base() {
             UInt::class.java == rawClass -> UIntSerializer
             ULong::class.java == rawClass -> ULongSerializer
             // The priority of Unboxing needs to be lowered so as not to break the serialization of Unsigned Integers.
-            rawClass.isUnboxableValueClass() -> ValueClassSerializer.from(rawClass)
+            rawClass.isUnboxableValueClass() -> {
+                val unboxConverter = cache.getValueClassUnboxConverter(rawClass)
+                ValueClassStaticJsonValueSerializer.createOrNull(unboxConverter) ?: unboxConverter.delegatingSerializer
+            }
             else -> null
         }
     }
