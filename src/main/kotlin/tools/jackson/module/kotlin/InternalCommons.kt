@@ -1,7 +1,7 @@
 package tools.jackson.module.kotlin
 
 import com.fasterxml.jackson.annotation.JsonCreator
-import tools.jackson.databind.DatabindException
+import tools.jackson.core.JacksonException
 import java.lang.invoke.MethodHandle
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType
@@ -18,8 +18,8 @@ internal val defaultConstructorMarker: Class<*> by lazy {
     Class.forName("kotlin.jvm.internal.DefaultConstructorMarker")
 }
 
-internal fun DatabindException.wrapWithPath(refFrom: Any?, refFieldName: String) = DatabindException.wrapWithPath(this, refFrom, refFieldName)
-internal fun DatabindException.wrapWithPath(refFrom: Any?, index: Int) = DatabindException.wrapWithPath(this, refFrom, index)
+internal fun JacksonException.wrapWithPath(refFrom: Any?, refFieldName: String) = JacksonException.wrapWithPath(this, refFrom, refFieldName)
+internal fun JacksonException.wrapWithPath(refFrom: Any?, index: Int) = JacksonException.wrapWithPath(this, refFrom, index)
 
 internal fun Int.toBitSet(): BitSet {
     var i = this
