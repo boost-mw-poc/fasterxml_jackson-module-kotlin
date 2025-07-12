@@ -11,6 +11,7 @@ import tools.jackson.databind.deser.ValueInstantiator
 import tools.jackson.databind.deser.ValueInstantiators
 import tools.jackson.databind.deser.bean.PropertyValueBuffer
 import tools.jackson.databind.deser.std.StdValueInstantiator
+import tools.jackson.databind.exc.InvalidNullException
 import java.lang.reflect.TypeVariable
 import kotlin.reflect.KType
 import kotlin.reflect.KTypeProjection
@@ -103,31 +104,32 @@ internal class KotlinValueInstantiator(
             } else if (strictNullChecks) {
                 val arguments = paramType.arguments
 
-                var paramTypeStr: String? = null
-                var itemType: KType? = null
-
-                if (propType.isCollectionLikeType && arguments.markedNonNullAt(0) && (paramVal as Collection<*>).any { it == null }) {
-                    paramTypeStr = "collection"
-                    itemType = arguments[0].type
+                // To make the behavior the same as deserialization of each element using NullsFailProvider,
+                // first wrapWithPath with paramVal and key.
+                val ex = when {
+                    propType.isCollectionLikeType && arguments.markedNonNullAt(0) -> {
+                        (paramVal as Collection<*>).indexOf(null).takeIf { it >= 0 }?.let {
+                            InvalidNullException.from(ctxt, jsonProp.fullName, jsonProp.type)
+                                .wrapWithPath(paramVal, it)
+                        }
+                    }
+                    propType.isMapLikeType && arguments.markedNonNullAt(1) -> {
+                        (paramVal as Map<*, *>).entries.find { (_, v) -> v == null }?.let { (k, _) ->
+                            InvalidNullException.from(ctxt, jsonProp.fullName, jsonProp.type)
+                                .wrapWithPath(paramVal, k.toString())
+                        }
+                    }
+                    propType.isArrayType && arguments.markedNonNullAt(0) -> {
+                        (paramVal as Array<*>).indexOf(null).takeIf { it >= 0 }?.let {
+                            InvalidNullException.from(ctxt, jsonProp.fullName, jsonProp.type)
+                                .wrapWithPath(paramVal, it)
+                        }
+                    }
+                    else -> null
                 }
 
-                if (propType.isMapLikeType && arguments.markedNonNullAt(1) && (paramVal as Map<*, *>).any { it.value == null }) {
-                    paramTypeStr = "map"
-                    itemType = arguments[1].type
-                }
-
-                if (propType.isArrayType && arguments.markedNonNullAt(0) && (paramVal as Array<*>).any { it == null }) {
-                    paramTypeStr = "array"
-                    itemType = arguments[0].type
-                }
-
-                if (paramTypeStr != null && itemType != null) {
-                    throw MissingKotlinParameterException(
-                        parameter = paramDef,
-                        processor = ctxt.parser,
-                        msg = "Instantiation of $itemType $paramType failed for JSON property ${jsonProp.name} due to null value in a $paramType that does not allow null values"
-                    ).wrapWithPath(this.valueClass, jsonProp.name)
-                }
+                // Then, wrapWithPath with this property.
+                ex?.let { throw it.wrapWithPath(this.valueClass, jsonProp.name) }
             }
 
             bucket[paramDef] = paramVal

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import tools.jackson.databind.exc.InvalidNullException
 import tools.jackson.module.kotlin.KotlinFeature
-import tools.jackson.module.kotlin.MissingKotlinParameterException
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertNull
@@ -32,7 +32,7 @@ class StrictNullChecksTestOld {
 
     @Test
     fun testListOfInt() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<InvalidNullException> {
             val json = """{"samples":[1, null]}"""
             mapper.readValue<ClassWithListOfInt>(json)
         }
@@ -62,7 +62,7 @@ class StrictNullChecksTestOld {
 
     @Test
     fun testArrayOfInt() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<InvalidNullException> {
             val json = """{"samples":[1, null]}"""
             mapper.readValue<ClassWithArrayOfInt>(json)
         }
@@ -92,7 +92,7 @@ class StrictNullChecksTestOld {
 
     @Test
     fun testMapOfStringToIntWithNullValue() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<InvalidNullException> {
             val json = """{ "samples": { "key": null } }"""
             mapper.readValue<ClassWithMapOfStringToInt>(json)
         }
@@ -121,7 +121,7 @@ class StrictNullChecksTestOld {
     @Disabled // this is a hard problem to solve and is currently not addressed
     @Test
     fun testListOfGenericWithNullValue() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<InvalidNullException> {
             val json = """{"samples":[1, null]}"""
             mapper.readValue<TestClass<List<Int>>>(json)
         }
@@ -137,7 +137,7 @@ class StrictNullChecksTestOld {
     @Disabled // this is a hard problem to solve and is currently not addressed
     @Test
     fun testMapOfGenericWithNullValue() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<InvalidNullException> {
             val json = """{ "samples": { "key": null } }"""
             mapper.readValue<TestClass<Map<String, Int>>>(json)
         }
@@ -153,7 +153,7 @@ class StrictNullChecksTestOld {
     @Disabled // this is a hard problem to solve and is currently not addressed
     @Test
     fun testArrayOfGenericWithNullValue() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<InvalidNullException> {
             val json = """{"samples":[1, null]}"""
             mapper.readValue<TestClass<Array<Int>>>(json)
         }

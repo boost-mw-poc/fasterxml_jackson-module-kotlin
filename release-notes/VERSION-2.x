@@ -17,6 +17,9 @@ Co-maintainers:
 ------------------------------------------------------------------------
 
 2.20.0 (not yet released)
+#1020: Exceptions thrown by the old StrictNullChecks are now the similar to the new StrictNullChecks.
+  This means that the old StrictNullChecks will no longer throw MissingKotlinParameterException.
+  See PR for what is thrown and how error messages change.
 #1018: Improved handling of `value class` has improved performance for both serialization and deserialization.
   In particular, for serialization, proper caching has improved throughput by a factor of 2 or more in the general cases.
   Also, replacing function execution by reflection with `MethodHandle` improved throughput by several percent for both serialization and deserialization.
