@@ -5,6 +5,7 @@ import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 
 class MissingKotlinParameterExceptionTest {
+    @Suppress("DEPRECATION_ERROR")
     @Test
     fun jdkSerializabilityTest() {
         val param = ::MissingKotlinParameterException.parameters.first()
