@@ -90,15 +90,18 @@ internal class KotlinValueInstantiator(
                 if (propType.requireEmptyValue()) {
                     paramVal = valueDeserializer!!.getEmptyValue(ctxt)
                 } else {
+                    val pname = jsonProp.name
                     val isMissingAndRequired = isMissing && jsonProp.isRequired
 
                     // Since #310 reported that the calculation cost is high, isGenericTypeVar is determined last.
                     if (isMissingAndRequired || (!paramType.isMarkedNullable && !paramType.isGenericTypeVar())) {
-                        throw MissingKotlinParameterException(
-                            parameter = paramDef,
-                            processor = ctxt.parser,
-                            msg = "Instantiation of ${this.valueTypeDesc} value failed for JSON property ${jsonProp.name} due to missing (therefore NULL) value for creator parameter ${paramDef.name} which is a non-nullable type"
-                        ).wrapWithPath(this.valueClass, jsonProp.name)
+                        throw KotlinInvalidNullException(
+                            paramDef.name,
+                            this.valueClass,
+                            ctxt.parser,
+                            "Instantiation of ${this.valueTypeDesc} value failed for JSON property $pname due to missing (therefore NULL) value for creator parameter ${paramDef.name} which is a non-nullable type",
+                            jsonProp.fullName,
+                        ).wrapWithPath(this.valueClass, pname)
                     }
                 }
             } else if (strictNullChecks) {
