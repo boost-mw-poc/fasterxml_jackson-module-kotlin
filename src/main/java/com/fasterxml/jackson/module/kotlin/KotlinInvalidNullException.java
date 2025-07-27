@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.exc.InvalidNullException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-// Since there was no way to override Java getter in a user-friendly way, it is defined in Java. See KT-6653.
+// Due to a limitation in KT-6653, there is no user-friendly way to override Java getters in Kotlin.
 // The reason for not having detailed information(e.g. KParameter) is to keep the class Serializable.
 /**
  * Specialized {@link JsonMappingException} sub-class used to indicate that a mandatory Kotlin creator parameter was
