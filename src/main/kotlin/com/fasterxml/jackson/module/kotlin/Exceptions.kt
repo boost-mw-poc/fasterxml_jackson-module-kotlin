@@ -11,12 +11,12 @@ import kotlin.reflect.KParameter
  * parameter was missing or null.
  */
 @Deprecated(
-    "It is recommended that MismatchedInputException be referenced when possible," +
-            " as the change is discussed for 2.17 and later." +
+    "It is recommended that InvalidNullException be referenced when possible," +
+            " as the change is discussed for 2.20 and later." +
             " See #617 for details.",
     ReplaceWith(
-        "MismatchedInputException",
-        "com.fasterxml.jackson.databind.exc.MismatchedInputException"
+        "InvalidNullException",
+        "com.fasterxml.jackson.databind.exc.InvalidNullException"
     ),
     DeprecationLevel.WARNING
 )
@@ -24,7 +24,7 @@ import kotlin.reflect.KParameter
 // This is a temporary workaround for #572 and we will eventually remove this class.
 class MissingKotlinParameterException(
     @property:Deprecated(
-        "KParameter is not serializable and will be removed in 2.17 or later. See #572 for details.",
+        "KParameter is not serializable and will be removed in 2.20 or later. See #572 for details.",
         level = DeprecationLevel.WARNING
     )
     @Transient
