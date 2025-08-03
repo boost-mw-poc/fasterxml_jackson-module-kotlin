@@ -10,14 +10,10 @@ import kotlin.reflect.KParameter
  * parameter was missing or null.
  */
 @Deprecated(
-    "It is recommended that InvalidNullException be referenced when possible," +
-            " as the change is discussed for 2.20 and later." +
-            " See #617 for details.",
-    ReplaceWith(
-        "InvalidNullException",
-        "com.fasterxml.jackson.databind.exc.InvalidNullException"
-    ),
-    DeprecationLevel.WARNING
+    "Since 2.20, this exception is no longer thrown and has been replaced by KotlinInvalidNullException. " +
+            "See #617 for details.",
+    ReplaceWith("KotlinInvalidNullException"),
+    DeprecationLevel.ERROR
 )
 // When deserialized by the JDK, the parameter property will be null, ignoring nullability.
 // This is a temporary workaround for #572 and we will eventually remove this class.

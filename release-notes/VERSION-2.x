@@ -17,6 +17,11 @@ Co-maintainers:
 ------------------------------------------------------------------------
 
 2.20.0 (not yet released)
+#1025: When a null is entered for a non-null parameter, the KotlinInvalidNullException is now thrown instead of the
+  deprecated MissingKotlinParameterException.
+  The new exception is a subclass of InvalidNullException.
+  See the comment below for information contained in this exception.
+  https://github.com/FasterXML/jackson-module-kotlin/issues/617#issuecomment-3124423585
 #1020: Exceptions thrown by the old StrictNullChecks are now the similar to the new StrictNullChecks.
   This means that the old StrictNullChecks will no longer throw MissingKotlinParameterException.
   See PR for what is thrown and how error messages change.

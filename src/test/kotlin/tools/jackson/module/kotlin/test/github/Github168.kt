@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.ObjectMapper
-import tools.jackson.module.kotlin.MissingKotlinParameterException
+import tools.jackson.module.kotlin.KotlinInvalidNullException
 import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.jacksonObjectMapper
 import tools.jackson.module.kotlin.readValue
@@ -24,7 +24,7 @@ class TestGithub168 {
 
     @Test
     fun testIfRequiredIsReallyRequiredWhenAbsent() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<KotlinInvalidNullException> {
             val obj = defaultMapper.readValue<TestClass>("""{"baz":"whatever"}""")
             assertEquals("whatever", obj.baz)
         }

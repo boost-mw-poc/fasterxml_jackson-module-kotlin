@@ -18,6 +18,7 @@ Contributors:
 # 2.20.0 (not yet released)
 
 WrongWrong (@k163377)
+* #1025: Deprecate MissingKotlinParameterException and replace with new exception
 * #1020: Fixed old StrictNullChecks to throw exceptions similar to those thrown by new StrictNullChecks
 * #1018: Use MethodHandle in processing related to value class
 * #969: Cleanup of deprecated contents

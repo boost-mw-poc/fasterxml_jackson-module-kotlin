@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.DatabindException
-import tools.jackson.databind.exc.MismatchedInputException
+import tools.jackson.module.kotlin.KotlinInvalidNullException
 import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 
@@ -19,8 +19,8 @@ private class TestGithub32 {
     }
 
     @Test fun `missing mandatory data class constructor param`() {
-        val thrown = assertThrows<MismatchedInputException>(
-            "MissingKotlinParameterException with missing `firstName` parameter"
+        val thrown = assertThrows<KotlinInvalidNullException>(
+            "KotlinInvalidNullException with missing `firstName` parameter"
         ) {
             defaultMapper.readValue<Person>("""
             {
@@ -35,7 +35,7 @@ private class TestGithub32 {
     }
 
     @Test fun `null mandatory data class constructor param`() {
-        val thrown = assertThrows<MismatchedInputException> {
+        val thrown = assertThrows<KotlinInvalidNullException> {
             defaultMapper.readValue<Person>("""
             {
                 "firstName": null,
@@ -50,7 +50,7 @@ private class TestGithub32 {
     }
 
     @Test fun `missing mandatory constructor param - nested in class with default constructor`() {
-        val thrown = assertThrows<MismatchedInputException> {
+        val thrown = assertThrows<KotlinInvalidNullException> {
             defaultMapper.readValue<WrapperWithDefaultContructor>("""
             {
                 "person": {
@@ -66,7 +66,7 @@ private class TestGithub32 {
     }
 
     @Test fun `missing mandatory constructor param - nested in class with single arg constructor`() {
-        val thrown = assertThrows<MismatchedInputException> {
+        val thrown = assertThrows<KotlinInvalidNullException> {
             defaultMapper.readValue<WrapperWithArgsContructor>("""
             {
                 "person": {
@@ -82,7 +82,7 @@ private class TestGithub32 {
     }
 
     @Test fun `missing mandatory constructor param - nested in class with List arg constructor`() {
-        val thrown = assertThrows<MismatchedInputException> {
+        val thrown = assertThrows<KotlinInvalidNullException> {
             defaultMapper.readValue<Crowd>("""
             {
                 "people": [

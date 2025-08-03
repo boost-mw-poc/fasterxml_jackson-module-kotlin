@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.DeserializationFeature
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.module.kotlin.KotlinFeature.NullIsSameAsDefault
-import tools.jackson.module.kotlin.MissingKotlinParameterException
+import tools.jackson.module.kotlin.KotlinInvalidNullException
 import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
 
@@ -153,7 +153,7 @@ class TestNullToDefault {
 
     @Test
     fun shouldThrowExceptionWhenProvidedNullForNotNullFieldWithoutDefault() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<KotlinInvalidNullException> {
             createMapper(true).readValue<TestClass>(
                 """{
 						"text": null
