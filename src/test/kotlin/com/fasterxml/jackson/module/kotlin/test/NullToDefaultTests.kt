@@ -2,7 +2,7 @@ package com.fasterxml.jackson.module.kotlin.test
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinFeature.NullIsSameAsDefault
-import com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException
+import com.fasterxml.jackson.module.kotlin.KotlinInvalidNullException
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.*
@@ -142,7 +142,7 @@ class TestNullToDefault {
 
     @Test
     fun shouldThrowExceptionWhenProvidedNullForNotNullFieldWithoutDefault() {
-        assertThrows<MissingKotlinParameterException> {
+        assertThrows<KotlinInvalidNullException> {
             createMapper(true).readValue<TestClass>(
                 """{
 						"text": null
