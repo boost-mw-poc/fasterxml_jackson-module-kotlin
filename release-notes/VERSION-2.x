@@ -16,7 +16,8 @@ Co-maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
-2.20.0 (not yet released)
+2.20.0-rc1 (04-Aug-2025)
+
 #1025: When a null is entered for a non-null parameter, the KotlinInvalidNullException is now thrown instead of the
   deprecated MissingKotlinParameterException.
   The new exception is a subclass of InvalidNullException.
