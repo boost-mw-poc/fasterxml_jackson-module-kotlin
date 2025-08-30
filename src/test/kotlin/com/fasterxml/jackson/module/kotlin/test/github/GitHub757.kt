@@ -11,7 +11,7 @@ class GitHub757 {
     @Test
     fun test() {
         val kotlinModule = KotlinModule.Builder()
-            .enable(KotlinFeature.NewStrictNullChecks)
+            .enable(KotlinFeature.StrictNullChecks)
             .build()
         val mapper = JsonMapper.builder()
             .addModule(kotlinModule)

@@ -18,14 +18,4 @@ class GitHub976 {
             om.readValue("""{"list": [""] }""".toByteArray(), PrimitiveList::class.java)
         }
     }
-
-    @Test
-    fun newStrictNullChecksRegression() {
-        val om = jacksonObjectMapper {
-            enable(KotlinFeature.NewStrictNullChecks)
-        }
-        assertThrows<InvalidNullException> {
-            om.readValue("""{"list": [""] }""".toByteArray(), PrimitiveList::class.java)
-        }
-    }
 }
