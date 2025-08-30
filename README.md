@@ -13,8 +13,8 @@ and those with secondary constructors or static factories are also supported.
 
 # Status
 
-* release `2.19.0` (for Jackson `2.19.0`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.19)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.19)
-* release `2.18.3` (for Jackson `2.18.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.18)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.18)
+* release `2.19.2` (for Jackson `2.19.2`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.19)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.19)
+* release `2.18.4` (for Jackson `2.18.4`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.18)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.18)
 * release `2.17.3` (for Jackson `2.17.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.17)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.17)
 
 Releases require that you have included Kotlin stdlib and reflect libraries already.
@@ -29,7 +29,7 @@ Maven:
 <dependency>
     <groupId>com.fasterxml.jackson.module</groupId>
     <artifactId>jackson-module-kotlin</artifactId>
-    <version>2.19.0</version>
+    <version>2.19.2</version>
 </dependency>
 ```
 
