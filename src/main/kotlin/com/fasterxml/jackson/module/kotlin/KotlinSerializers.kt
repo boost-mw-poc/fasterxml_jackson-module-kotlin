@@ -48,15 +48,6 @@ object ULongSerializer : StdSerializer<ULong>(ULong::class.java) {
     }
 }
 
-internal object ValueClassUnboxSerializer : StdSerializer<Any>(Any::class.java) {
-    private fun readResolve(): Any = ValueClassUnboxSerializer
-
-    override fun serialize(value: Any, gen: JsonGenerator, provider: SerializerProvider) {
-        val unboxed = value::class.java.getMethod("unbox-impl").invoke(value)
-        provider.defaultSerializeValue(unboxed, gen)
-    }
-}
-
 // Class must be UnboxableValueClass.
 private fun Class<*>.getStaticJsonValueGetter(): Method? = this.declaredMethods.find { method ->
     Modifier.isStatic(method.modifiers) && method.annotations.any { it is JsonValue && it.value }

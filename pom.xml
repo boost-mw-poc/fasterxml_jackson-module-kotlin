@@ -256,6 +256,7 @@
                                 com.fasterxml.jackson.module.kotlin.KotlinModule#getEnabledSingletonSupport()
                             </exclude>
                             <exclude>com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException</exclude>
+                            <exclude>com.fasterxml.jackson.module.kotlin.ValueClassUnboxSerializer</exclude>
                             <!-- internal -->
                             <exclude>
                                 com.fasterxml.jackson.module.kotlin.KotlinInstantiators#KotlinInstantiators(com.fasterxml.jackson.module.kotlin.ReflectionCache,boolean,boolean,boolean,boolean)
