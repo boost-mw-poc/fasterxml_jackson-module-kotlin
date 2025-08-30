@@ -18,6 +18,7 @@ Co-maintainers:
 
 2.21.0 (not yet released)
 
+#1043: Deprecated content has been cleaned up with the version upgrade.
 #1042: The old StrictNullChecks backend has been removed.
   This improves the throughput of deserialization slightly.
 #1041: The deprecated MissingKotlinParameterException has been removed.
