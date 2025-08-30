@@ -11,8 +11,7 @@ class KotlinInstantiatorsTest {
         ReflectionCache(10),
         nullToEmptyCollection = false,
         nullToEmptyMap = false,
-        nullIsSameAsDefault = false,
-        strictNullChecks = false
+        nullIsSameAsDefault = false
     )
 
     @Test

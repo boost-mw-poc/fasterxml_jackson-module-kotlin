@@ -40,13 +40,12 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      *
      * With this disabled, the default, collections which are typed to disallow null members (e.g. `List<String>`)
      * may contain null values after deserialization.
-     * Enabling it protects against this but has significant performance impact.
+     * Enabling this will cause an [InvalidNullException] to be thrown if null is entered.
+     *
+     * Internally, it will be the same as if [JsonSetter] (contentNulls = FAIL) had been granted.
+     *
+     * Benchmarks show that it can check for illegal nulls with throughput nearly identical to the default (see [jackson-module-kotlin#719]).
      */
-    @Deprecated(
-        level = DeprecationLevel.ERROR,
-        message = "This option will be migrated to the new backend in 2.21.",
-        replaceWith = ReplaceWith("NewStrictNullChecks")
-    )
     StrictNullChecks(enabledByDefault = false),
 
     /**
@@ -80,15 +79,15 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      * Internally, it will be the same as if [JsonSetter] (contentNulls = FAIL) had been granted.
      * Benchmarks show that it can check for illegal nulls with throughput nearly identical to the default (see [jackson-module-kotlin#719]).
      *
-     * Note that in the new backend, the exception thrown has changed from [MissingKotlinParameterException] to [InvalidNullException].
-     * The message will be changed accordingly.
-     * Since 2.19, the base class of [MissingKotlinParameterException] has also been changed to [InvalidNullException],
-     * so be careful when catching it.
-     *
      * This is a temporary option for a phased backend migration,
      * which will eventually be merged into [StrictNullChecks].
      * Also, specifying both this and [StrictNullChecks] is not permitted.
      */
+    @Deprecated(
+        level = DeprecationLevel.WARNING,
+        message = "This option will be merged into StrictNullChecks in 2.23.",
+        replaceWith = ReplaceWith("StrictNullChecks")
+    )
     NewStrictNullChecks(enabledByDefault = false);
 
     internal val bitSet: BitSet = (1 shl ordinal).toBitSet()

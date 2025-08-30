@@ -16,7 +16,7 @@ class StrictNullChecksTest {
     val mapper: ObjectMapper = ObjectMapper()
         .registerModule(
             KotlinModule.Builder()
-                .enable(KotlinFeature.NewStrictNullChecks)
+                .enable(KotlinFeature.StrictNullChecks)
                 .build()
         )
 
