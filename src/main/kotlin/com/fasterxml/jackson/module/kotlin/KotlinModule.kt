@@ -43,7 +43,6 @@ class KotlinModule private constructor(
     val nullToEmptyMap: Boolean = NullToEmptyMap.enabledByDefault,
     val nullIsSameAsDefault: Boolean = NullIsSameAsDefault.enabledByDefault,
     val singletonSupport: Boolean = SingletonSupport.enabledByDefault,
-    @Suppress("DEPRECATION_ERROR")
     strictNullChecks: Boolean = StrictNullChecks.enabledByDefault,
     val kotlinPropertyNameAsImplicitName: Boolean = KotlinPropertyNameAsImplicitName.enabledByDefault,
     val useJavaDurationConversion: Boolean = UseJavaDurationConversion.enabledByDefault,
