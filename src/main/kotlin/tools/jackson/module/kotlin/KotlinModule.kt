@@ -34,15 +34,11 @@ class KotlinModule private constructor(
     val nullToEmptyMap: Boolean = NullToEmptyMap.enabledByDefault,
     val nullIsSameAsDefault: Boolean = NullIsSameAsDefault.enabledByDefault,
     val singletonSupport: Boolean = SingletonSupport.enabledByDefault,
-    @Suppress("DEPRECATION_ERROR")
     strictNullChecks: Boolean = StrictNullChecks.enabledByDefault,
     val kotlinPropertyNameAsImplicitName: Boolean = KotlinPropertyNameAsImplicitName.enabledByDefault,
     val useJavaDurationConversion: Boolean = UseJavaDurationConversion.enabledByDefault,
-    private val newStrictNullChecks: Boolean = NewStrictNullChecks.enabledByDefault,
+    newStrictNullChecks: Boolean = NewStrictNullChecks.enabledByDefault,
 ) : SimpleModule(KotlinModule::class.java.name, PackageVersion.VERSION) {
-
-    private val oldStrictNullChecks: Boolean = strictNullChecks
-
     // To reduce the amount of destructive changes, no properties will be added to the public.
     val strictNullChecks: Boolean = if (strictNullChecks) {
         if (newStrictNullChecks) {
@@ -87,7 +83,7 @@ class KotlinModule private constructor(
 
         val cache = ReflectionCache(reflectionCacheSize)
 
-        context.addValueInstantiators(KotlinInstantiators(cache, nullToEmptyCollection, nullToEmptyMap, nullIsSameAsDefault, oldStrictNullChecks))
+        context.addValueInstantiators(KotlinInstantiators(cache, nullToEmptyCollection, nullToEmptyMap, nullIsSameAsDefault))
 
         if (singletonSupport) {
             // [module-kotlin#225]: keep Kotlin singletons as singletons
@@ -102,7 +98,7 @@ class KotlinModule private constructor(
                 nullToEmptyCollection = nullToEmptyCollection,
                 nullToEmptyMap = nullToEmptyMap,
                 nullIsSameAsDefault = nullIsSameAsDefault,
-                strictNullChecks = newStrictNullChecks,
+                strictNullChecks = strictNullChecks,
                 kotlinPropertyNameAsImplicitName = kotlinPropertyNameAsImplicitName
             )
         )

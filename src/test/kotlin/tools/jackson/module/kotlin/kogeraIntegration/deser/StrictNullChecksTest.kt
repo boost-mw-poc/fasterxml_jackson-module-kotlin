@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import tools.jackson.databind.exc.InvalidNullException
 import tools.jackson.databind.json.JsonMapper
-import tools.jackson.module.kotlin.KotlinFeature.NewStrictNullChecks
+import tools.jackson.module.kotlin.KotlinFeature
 import tools.jackson.module.kotlin.kotlinModule
 import tools.jackson.module.kotlin.readValue
 
 class StrictNullChecksTest {
     private val mapper = JsonMapper.builder()
-        .addModule(kotlinModule { enable(NewStrictNullChecks) })
+        .addModule(kotlinModule { enable(KotlinFeature.StrictNullChecks) })
         .build()
 
     class ArrayWrapper(val value: Array<Int>)

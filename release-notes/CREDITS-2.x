@@ -18,6 +18,9 @@ Contributors:
 # 2.21.0 (not yet released)
 
 WrongWrong (@k163377)
+* #1043: Cleanup of deprecated contents
+* #1042: Remove old StrictNullChecks
+* #1041: Remove MissingKotlinParameterException
 * #1039: Update settings for 2.20
 
 # 2.20.0 (28-Aug-2025)
