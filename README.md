@@ -111,10 +111,10 @@ println(arrayNode.toString()) // ["foo",true,1,1.0,"YmFy"]
 Different `kotlin-core` versions are supported by different Jackson Kotlin module minor versions.
 Here is an incomplete list of supported versions:
 
+* Jackson 2.21.x: Kotlin-core 2.1 - 2.2
 * Jackson 2.20.x: Kotlin-core 2.0 - 2.2
 * Jackson 2.19.x: Kotlin-core 1.9 - 2.1
 * Jackson 2.18.x: Kotlin-core 1.8 - 2.1
-* Jackson 2.17.x: Kotlin-core 1.7 - 2.0
 
 Please note that the versions supported by 2.17 are tentative and may change depending on the release date.
 
