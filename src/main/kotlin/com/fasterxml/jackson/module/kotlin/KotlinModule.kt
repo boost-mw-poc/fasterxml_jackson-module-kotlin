@@ -48,24 +48,6 @@ class KotlinModule private constructor(
     val useJavaDurationConversion: Boolean = UseJavaDurationConversion.enabledByDefault,
     newStrictNullChecks: Boolean = NewStrictNullChecks.enabledByDefault,
 ) : SimpleModule(KotlinModule::class.java.name, PackageVersion.VERSION) {
-    /*
-     * Prior to 2.18, an older Enum called SingletonSupport was used to manage feature.
-     * To deprecate it and replace it with singletonSupport: Boolean, the following steps are in progress.
-     *
-     * 1. add enabledSingletonSupport: Boolean property
-     * 2. delete SingletonSupport class and change the property to singletonSupport: Boolean
-     * 3. remove the enabledSingletonSupport property
-     *
-     * Now that 2 is complete, deprecation is in progress for 3.
-     */
-    @Deprecated(
-        level = DeprecationLevel.ERROR,
-        message = "This property is scheduled to be removed in 2.21 or later" +
-                " in order to unify the use of KotlinFeature.",
-        replaceWith = ReplaceWith("singletonSupport")
-    )
-    val enabledSingletonSupport: Boolean get() = singletonSupport
-
     // To reduce the amount of destructive changes, no properties will be added to the public.
     val strictNullChecks: Boolean = if (strictNullChecks) {
         if (newStrictNullChecks) {
