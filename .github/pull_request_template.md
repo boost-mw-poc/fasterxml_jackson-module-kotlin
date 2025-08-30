@@ -2,7 +2,7 @@ Thanks for submitting a pull request! Please ensure that you have based your cod
 
 - The current stable release branch for bugfixes of limited scope
 - The upcoming [minor](https://semver.org) release branch for backwards compatible changes to existing functionality or addition of new functionality
-- `master` for significant changes to existing behavior
+- `3.x` for significant changes to existing behavior
 
 If you're unsure which branch to use, open an [issue](https://github.com/FasterXML/jackson-module-kotlin/issues) and ask, we're happy to talk over proposed changes.
 

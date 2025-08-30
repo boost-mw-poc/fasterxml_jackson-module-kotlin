@@ -190,7 +190,7 @@ when(root){
 # Configuration
 
 The Kotlin module may be given a few configuration parameters at construction time;
-see the [inline documentation](https://github.com/FasterXML/jackson-module-kotlin/blob/master/src/main/kotlin/tools/jackson/module/kotlin/KotlinModule.kt)
+see the [inline documentation](https://github.com/FasterXML/jackson-module-kotlin/blob/3.x/src/main/kotlin/tools/jackson/module/kotlin/KotlinModule.kt)
 for details on what options are available and what they do.
 
 ```kotlin
@@ -247,7 +247,7 @@ across all Jackson components & modules. See the [jackson-databind README](https
 
 We welcome any contributions—reports of issues, ideas for enhancements, and pull requests related to either of those.
 
-See the [main Jackson contribution guidelines](https://github.com/FasterXML/jackson/blob/master/CONTRIBUTING.md) for more details.
+See the [main Jackson contribution guidelines](https://github.com/FasterXML/jackson/blob/3.x/CONTRIBUTING.md) for more details.
 
 ### Branches
 
@@ -259,11 +259,11 @@ If you are going to write code, choose the appropriate base branch:
 
 ### Failing tests
 
-There are a number of tests for functionality that is broken, mostly in the [failing](https://github.com/FasterXML/jackson-module-kotlin/tree/master/src/test/kotlin/com/fasterxml/jackson/module/kotlin/test/github/failing)
+There are a number of tests for functionality that is broken, mostly in the [failing](https://github.com/FasterXML/jackson-module-kotlin/tree/3.x/src/test/kotlin/com/fasterxml/jackson/module/kotlin/test/github/failing)
 package but a few as part of other test suites.  Instead of ignoring these tests (with JUnit's `@Ignore` annotation)
 or excluding them from being run as part of automated testing, the tests are written to demonstrate the failure
 (either making a call that throws an exception or with an assertion that fails) but not fail the build, except if the
 underlying issue is fixed.  This allows us to know when the tested functionality has been incidentally fixed by
 unrelated code changes.
 
-See the [tests readme](https://github.com/FasterXML/jackson-module-kotlin/tree/master/src/test/kotlin/com/fasterxml/jackson/module/kotlin/README.md) for more information.
+See the [tests readme](https://github.com/FasterXML/jackson-module-kotlin/tree/3.x/src/test/kotlin/com/fasterxml/jackson/module/kotlin/README.md) for more information.
