@@ -18,6 +18,8 @@ Co-maintainers:
 
 2.21.0 (not yet released)
 
+#1042: The old StrictNullChecks backend has been removed.
+  This improves the throughput of deserialization slightly.
 #1041: The deprecated MissingKotlinParameterException has been removed.
 #1039: Kotlin has been upgraded to 2.1.x.
 
