@@ -252,6 +252,9 @@
                         <excludes>
                             <!-- public -->
                             <!-- removed -->
+                            <exclude>
+                                com.fasterxml.jackson.module.kotlin.KotlinModule#getEnabledSingletonSupport()
+                            </exclude>
                             <exclude>com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException</exclude>
                             <!-- internal -->
                             <exclude>
