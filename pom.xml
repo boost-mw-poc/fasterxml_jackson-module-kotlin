@@ -252,6 +252,7 @@
                         <excludes>
                             <!-- public -->
                             <!-- removed -->
+                            <exclude>com.fasterxml.jackson.module.kotlin.MissingKotlinParameterException</exclude>
                             <!-- internal -->
                         </excludes>
                     </parameter>
