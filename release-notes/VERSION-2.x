@@ -18,6 +18,7 @@ Co-maintainers:
 
 2.21.0 (not yet released)
 
+#1041: The deprecated MissingKotlinParameterException has been removed.
 #1039: Kotlin has been upgraded to 2.1.x.
 
 2.20.0 (28-Aug-2025)

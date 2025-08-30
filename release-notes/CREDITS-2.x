@@ -18,6 +18,7 @@ Contributors:
 # 2.21.0 (not yet released)
 
 WrongWrong (@k163377)
+* #1041: Remove MissingKotlinParameterException
 * #1039: Update settings for 2.20
 
 # 2.20.0 (28-Aug-2025)
