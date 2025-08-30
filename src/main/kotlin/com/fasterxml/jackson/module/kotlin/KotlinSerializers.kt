@@ -48,11 +48,7 @@ object ULongSerializer : StdSerializer<ULong>(ULong::class.java) {
     }
 }
 
-@Deprecated(
-    message = "This class was published by mistake. It will be removed in `2.22.0` as it is no longer used internally.",
-    level = DeprecationLevel.WARNING
-)
-object ValueClassUnboxSerializer : StdSerializer<Any>(Any::class.java) {
+internal object ValueClassUnboxSerializer : StdSerializer<Any>(Any::class.java) {
     private fun readResolve(): Any = ValueClassUnboxSerializer
 
     override fun serialize(value: Any, gen: JsonGenerator, provider: SerializerProvider) {
