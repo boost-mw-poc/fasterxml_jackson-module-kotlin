@@ -44,8 +44,10 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      * Internally, it will be the same as if [JsonSetter] (contentNulls = FAIL) had been granted.
      *
      * Benchmarks show that it can check for illegal nulls with throughput nearly identical to the default (see [jackson-module-kotlin#719]).
+     *
+     * Since 3.0, this option is enabled by default.
      */
-    StrictNullChecks(enabledByDefault = false),
+    StrictNullChecks(enabledByDefault = true),
 
     /**
      * By enabling this feature, the property name on Kotlin is used as the implicit name for the getter.
@@ -81,8 +83,6 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      * This is a temporary option for a phased backend migration,
      * which will eventually be merged into [StrictNullChecks].
      * Also, specifying both this and [StrictNullChecks] is not permitted.
-     *
-     * Since 3.0, this option is enabled by default.
      */
     @Deprecated(
         level = DeprecationLevel.WARNING,
