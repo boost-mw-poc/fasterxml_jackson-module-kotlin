@@ -13,7 +13,7 @@ import kotlin.test.assertTrue
 import kotlin.test.fail
 
 class TestGithub27 {
-    val mapper = jacksonMapperBuilder { disable(KotlinFeature.NewStrictNullChecks) }
+    val mapper = jacksonMapperBuilder { disable(KotlinFeature.StrictNullChecks) }
         .disable(SerializationFeature.INDENT_OUTPUT)
         .build()
 

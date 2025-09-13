@@ -12,7 +12,7 @@ class GitHub976 {
     @Test
     fun newStrictNullChecksRegression() {
         val om = jacksonObjectMapper {
-            enable(KotlinFeature.NewStrictNullChecks)
+            enable(KotlinFeature.StrictNullChecks)
         }
         assertThrows<InvalidNullException> {
             om.readValue("""{"list": [""] }""".toByteArray(), PrimitiveList::class.java)
