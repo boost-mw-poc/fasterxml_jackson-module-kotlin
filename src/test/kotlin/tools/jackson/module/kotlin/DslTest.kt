@@ -35,7 +35,7 @@ class DslTest {
             enable(NullToEmptyMap)
             enable(NullIsSameAsDefault)
             enable(SingletonSupport)
-            enable(NewStrictNullChecks)
+            enable(KotlinFeature.StrictNullChecks)
         }
 
         assertNotNull(module)
