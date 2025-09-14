@@ -264,6 +264,12 @@
                             <exclude>
                                 com.fasterxml.jackson.module.kotlin.KotlinValueInstantiator#KotlinValueInstantiator(com.fasterxml.jackson.databind.deser.std.StdValueInstantiator,com.fasterxml.jackson.module.kotlin.ReflectionCache,boolean,boolean,boolean,boolean)
                             </exclude>
+                            <exclude>
+                                com.fasterxml.jackson.module.kotlin.InternalCommonsKt#unreflect(java.lang.reflect.Method)
+                            </exclude>
+                            <exclude>
+                                com.fasterxml.jackson.module.kotlin.InternalCommonsKt#unreflectAsType(java.lang.reflect.Method,java.lang.invoke.MethodType)
+                            </exclude>
                         </excludes>
                     </parameter>
                 </configuration>
