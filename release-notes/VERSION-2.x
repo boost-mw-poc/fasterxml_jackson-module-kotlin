@@ -16,6 +16,10 @@ Co-maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
+2.20.1 (not yet released)
+
+#1057: The issue where deserialization of value classes using private constructor failed starting from version 2.20.0 has been fixed.
+
 2.20.0 (28-Aug-2025)
 
 #1025: When a null is entered for a non-null parameter, the KotlinInvalidNullException is now thrown instead of the

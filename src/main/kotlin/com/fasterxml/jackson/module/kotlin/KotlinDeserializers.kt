@@ -109,7 +109,7 @@ internal sealed class NoConversionCreatorBoxDeserializer<S, D : Any>(
 ) : WrapsNullableValueClassDeserializer<D>(converter.boxedClass) {
     protected abstract val inputType: Class<*>
     protected val handle: MethodHandle = MethodHandles
-        .filterReturnValue(unreflect(creator), converter.boxHandle)
+        .filterReturnValue(unreflectWithAccessibilityModification(creator), converter.boxHandle)
 
     // Since the input to handle must be strict, invoke should be implemented in each class
     protected abstract fun invokeExact(value: S): D
@@ -190,7 +190,7 @@ internal class HasConversionCreatorWrapsSpecifiedBoxDeserializer<S, D : Any>(
     private val handle: MethodHandle
 
     init {
-        val unreflect = unreflect(creator).run {
+        val unreflect = unreflectWithAccessibilityModification(creator).run {
             asType(type().changeParameterType(0, Any::class.java))
         }
         handle = MethodHandles.filterReturnValue(unreflect, converter.boxHandle)
@@ -222,7 +222,7 @@ internal class WrapsAnyValueClassBoxDeserializer<S, D : Any>(
     private val handle: MethodHandle
 
     init {
-        val unreflect = unreflectAsType(creator, ANY_TO_ANY_METHOD_TYPE)
+        val unreflect = unreflectAsTypeWithAccessibilityModification(creator, ANY_TO_ANY_METHOD_TYPE)
         handle = MethodHandles.filterReturnValue(unreflect, converter.boxHandle)
     }
 
