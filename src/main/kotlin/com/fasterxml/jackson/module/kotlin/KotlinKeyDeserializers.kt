@@ -112,7 +112,7 @@ internal sealed class ValueClassKeyDeserializer<S, D : Any>(
         // Currently, only the primary constructor can be the creator of a key, so for specified types,
         // the return type of the primary constructor and the input type of the box function are exactly the same.
         // Therefore, performance is improved by omitting the asType call.
-        unreflect(creator),
+        unreflectWithAccessibilityModification(creator),
     )
 
     internal class WrapsInt<D : Any>(
@@ -160,7 +160,7 @@ internal sealed class ValueClassKeyDeserializer<S, D : Any>(
         creator: Method,
     ) : ValueClassKeyDeserializer<S, D>(
         converter,
-        unreflectAsType(creator, ANY_TO_ANY_METHOD_TYPE),
+        unreflectAsTypeWithAccessibilityModification(creator, ANY_TO_ANY_METHOD_TYPE),
     ) {
         override val unboxedClass: Class<*> = creator.returnType
 
