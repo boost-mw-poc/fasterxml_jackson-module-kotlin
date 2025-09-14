@@ -23,6 +23,11 @@ WrongWrong (@k163377)
 * #1041: Remove MissingKotlinParameterException
 * #1039: Update settings for 2.20
 
+# 2.20.1 (not yet released)
+
+WrongWrong (@k163377)
+* #1057: Fixed a regression related to deserializing value classes with private constructor
+
 # 2.20.0 (28-Aug-2025)
 
 WrongWrong (@k163377)

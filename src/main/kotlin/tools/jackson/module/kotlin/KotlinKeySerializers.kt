@@ -38,7 +38,7 @@ internal sealed class ValueClassStaticJsonKeySerializer<T : Any>(
     methodType: MethodType,
 ) : StdSerializer<T>(converter.valueClass) {
     private val keyType: Class<*> = staticJsonValueGetter.returnType
-    private val handle: MethodHandle = unreflectAsType(staticJsonValueGetter, methodType).let {
+    private val handle: MethodHandle = unreflectAsTypeWithAccessibilityModification(staticJsonValueGetter, methodType).let {
         MethodHandles.filterReturnValue(converter.unboxHandle, it)
     }
 
