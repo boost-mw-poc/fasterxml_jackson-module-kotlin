@@ -15,7 +15,12 @@ Authors:
 
 Contributors:
 
-# 2.20.0 (not yet released)
+# 2.20.1 (not yet released)
+
+WrongWrong (@k163377)
+* #1057: Fixed a regression related to deserializing value classes with private constructor
+
+# 2.20.0 (28-Aug-2025)
 
 WrongWrong (@k163377)
 * #1025: Deprecate MissingKotlinParameterException and replace with new exception
