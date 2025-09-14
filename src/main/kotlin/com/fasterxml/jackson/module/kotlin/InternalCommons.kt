@@ -2,6 +2,7 @@ package com.fasterxml.jackson.module.kotlin
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.databind.JsonMappingException
+import com.fasterxml.jackson.databind.util.ClassUtil
 import java.lang.invoke.MethodHandle
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType
@@ -61,5 +62,10 @@ internal val LONG_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.j
 internal val STRING_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.java, String::class.java) }
 internal val JAVA_UUID_TO_ANY_METHOD_TYPE by lazy {MethodType.methodType(Any::class.java, UUID::class.java) }
 
-internal fun unreflect(method: Method): MethodHandle = MethodHandles.lookup().unreflect(method)
-internal fun unreflectAsType(method: Method, type: MethodType): MethodHandle = unreflect(method).asType(type)
+internal fun unreflectWithAccessibilityModification(method: Method): MethodHandle = MethodHandles.lookup().unreflect(
+    method.apply { ClassUtil.checkAndFixAccess(this, false) },
+)
+internal fun unreflectAsTypeWithAccessibilityModification(
+    method: Method,
+    type: MethodType,
+): MethodHandle = unreflectWithAccessibilityModification(method).asType(type)

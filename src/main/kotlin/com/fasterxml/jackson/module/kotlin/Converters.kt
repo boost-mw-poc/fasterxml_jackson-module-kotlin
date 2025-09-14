@@ -165,7 +165,7 @@ internal class IntValueClassUnboxConverter<T : Any>(
     unboxMethod: Method,
 ) : ValueClassUnboxConverter<T, Int>() {
     override val unboxedType: Type get() = Int::class.java
-    override val unboxHandle: MethodHandle = unreflectAsType(unboxMethod, ANY_TO_INT_METHOD_TYPE)
+    override val unboxHandle: MethodHandle = unreflectAsTypeWithAccessibilityModification(unboxMethod, ANY_TO_INT_METHOD_TYPE)
 
     override fun convert(value: T): Int = unboxHandle.invokeExact(value) as Int
 }
@@ -175,7 +175,7 @@ internal class LongValueClassUnboxConverter<T : Any>(
     unboxMethod: Method,
 ) : ValueClassUnboxConverter<T, Long>() {
     override val unboxedType: Type get() = Long::class.java
-    override val unboxHandle: MethodHandle = unreflectAsType(unboxMethod, ANY_TO_LONG_METHOD_TYPE)
+    override val unboxHandle: MethodHandle = unreflectAsTypeWithAccessibilityModification(unboxMethod, ANY_TO_LONG_METHOD_TYPE)
 
     override fun convert(value: T): Long = unboxHandle.invokeExact(value) as Long
 }
@@ -185,7 +185,7 @@ internal class StringValueClassUnboxConverter<T : Any>(
     unboxMethod: Method,
 ) : ValueClassUnboxConverter<T, String?>() {
     override val unboxedType: Type get() = String::class.java
-    override val unboxHandle: MethodHandle = unreflectAsType(unboxMethod, ANY_TO_STRING_METHOD_TYPE)
+    override val unboxHandle: MethodHandle = unreflectAsTypeWithAccessibilityModification(unboxMethod, ANY_TO_STRING_METHOD_TYPE)
 
     override fun convert(value: T): String? = unboxHandle.invokeExact(value) as String?
 }
@@ -195,7 +195,7 @@ internal class JavaUuidValueClassUnboxConverter<T : Any>(
     unboxMethod: Method,
 ) : ValueClassUnboxConverter<T, UUID?>() {
     override val unboxedType: Type get() = UUID::class.java
-    override val unboxHandle: MethodHandle = unreflectAsType(unboxMethod, ANY_TO_JAVA_UUID_METHOD_TYPE)
+    override val unboxHandle: MethodHandle = unreflectAsTypeWithAccessibilityModification(unboxMethod, ANY_TO_JAVA_UUID_METHOD_TYPE)
 
     override fun convert(value: T): UUID? = unboxHandle.invokeExact(value) as UUID?
 }
@@ -205,7 +205,7 @@ internal class GenericValueClassUnboxConverter<T : Any>(
     override val unboxedType: Type,
     unboxMethod: Method,
 ) : ValueClassUnboxConverter<T, Any?>() {
-    override val unboxHandle: MethodHandle = unreflectAsType(unboxMethod, ANY_TO_ANY_METHOD_TYPE)
+    override val unboxHandle: MethodHandle = unreflectAsTypeWithAccessibilityModification(unboxMethod, ANY_TO_ANY_METHOD_TYPE)
 
     override fun convert(value: T): Any? = unboxHandle.invokeExact(value)
 }
