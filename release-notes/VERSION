@@ -22,6 +22,10 @@ Former maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
+3.0.1 (21-Oct-2025)
+
+No changes since 3.0.0
+
 3.0.0 (03-Oct-2025)
 
 #952: The `isRequired` result from `kotlin-module` no longer overrides the result from
