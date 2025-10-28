@@ -59,6 +59,10 @@ No changes since 2.19.0
 #839: Remove useKotlinPropertyNameForGetter and unify with kotlinPropertyNameAsImplicitName.
 #835: Remove old SingletonSupport class and unified with KotlinFeature.SingletonSupport.
 
+2.18.5 (27-Oct-2025)
+
+No changes since 2.18.4
+
 2.18.4 (06-May-2025)
 
 #923: Fixed a problem where the result of processing `hasRequiredMarker ` by a `KotlinModule` would also apply to
