@@ -40,6 +40,7 @@ Co-maintainers:
 #967: Kotlin has been upgraded to 2.0.21.
 - Generate SBOMs [JSTEP-14]
 
+2.19.3 (29-Oct-2025)
 2.19.2 (18-Jul-2025)
 2.19.1 (13-Jun-2025)
 
@@ -82,6 +83,10 @@ No changes since 2.19.0
 #858: Minor performance improvement of findDefaultCreator in edge cases.
 #839: Remove useKotlinPropertyNameForGetter and unify with kotlinPropertyNameAsImplicitName.
 #835: Remove old SingletonSupport class and unified with KotlinFeature.SingletonSupport.
+
+2.18.5 (27-Oct-2025)
+
+No changes since 2.18.4
 
 2.18.4 (06-May-2025)
 
