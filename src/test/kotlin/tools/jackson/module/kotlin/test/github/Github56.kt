@@ -7,19 +7,18 @@ import tools.jackson.module.kotlin.defaultMapper
 import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertEquals
 
-private class TestGithub56 {
-
-    private data class TestGalleryWidget_BAD(
+class TestGithub56 {
+    data class TestGalleryWidget_BAD(
             val widgetReferenceId: String,
             @JsonUnwrapped var gallery: TestGallery
     )
 
-    private data class TestGalleryWidget_GOOD(val widgetReferenceId: String) {
+    data class TestGalleryWidget_GOOD(val widgetReferenceId: String) {
         @JsonUnwrapped lateinit var gallery: TestGallery
     }
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private data class TestGallery(
+    data class TestGallery(
             val id: String? = null,
             val headline: String? = null,
             val intro: String? = null,
@@ -28,7 +27,7 @@ private class TestGithub56 {
     )
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private data class TestImage(
+    data class TestImage(
             val id: String? = null,
             val escenicId: String? = null,
             val caption: String? = null,
