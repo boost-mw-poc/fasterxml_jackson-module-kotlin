@@ -12,8 +12,8 @@ With this module, single constructor classes can be used automatically,
 and those with secondary constructors or static factories are also supported.
 
 # Status
-* release `2.20.0` (for Jackson `2.20.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.20)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.20)
-* release `2.19.3` (for Jackson `2.19.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.19)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.19)
+* release `2.20.1` (for Jackson `2.20.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.20)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.20)
+* release `2.19.4` (for Jackson `2.19.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.19)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.19)
 * release `2.18.5` (for Jackson `2.18.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.18)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.18)
 
 Releases require that you have included Kotlin stdlib and reflect libraries already.
