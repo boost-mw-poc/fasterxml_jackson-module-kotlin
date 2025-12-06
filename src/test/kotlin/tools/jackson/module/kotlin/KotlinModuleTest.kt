@@ -22,6 +22,7 @@ class KotlinModuleTest {
     fun strictNullChecksTests() {
         assertTrue(
             kotlinModule {
+                @Suppress("DEPRECATION_ERROR")
                 disable(NewStrictNullChecks)
                 enable(StrictNullChecks)
             }.strictNullChecks
@@ -31,6 +32,7 @@ class KotlinModuleTest {
         assertThrows<IllegalArgumentException> {
             kotlinModule {
                 enable(StrictNullChecks)
+                @Suppress("DEPRECATION_ERROR")
                 enable(NewStrictNullChecks)
             }
         }
