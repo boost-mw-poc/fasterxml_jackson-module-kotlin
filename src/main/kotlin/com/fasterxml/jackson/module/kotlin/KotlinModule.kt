@@ -76,7 +76,6 @@ class KotlinModule private constructor(
         builder.isEnabled(NullToEmptyMap),
         builder.isEnabled(NullIsSameAsDefault),
         builder.isEnabled(SingletonSupport),
-        @Suppress("DEPRECATION_ERROR")
         builder.isEnabled(StrictNullChecks),
         builder.isEnabled(KotlinPropertyNameAsImplicitName),
         builder.isEnabled(UseJavaDurationConversion),
