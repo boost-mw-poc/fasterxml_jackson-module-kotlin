@@ -17,6 +17,11 @@ Authors:
 
 Contributors:
 
+# 3.1.0 (not yet released)
+
+WrongWrong (@k163377)
+* #1077: Increase deprecation level of NewStrictNullChecks due to version upgrade
+
 # 3.0.0-rc5 (not yet released)
 
 WrongWrong (@k163377)

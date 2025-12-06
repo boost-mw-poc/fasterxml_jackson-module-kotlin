@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import tools.jackson.core.json.JsonReadFeature
 import tools.jackson.core.json.JsonWriteFeature
-import tools.jackson.module.kotlin.KotlinFeature.NewStrictNullChecks
 import tools.jackson.module.kotlin.KotlinFeature.NullIsSameAsDefault
 import tools.jackson.module.kotlin.KotlinFeature.NullToEmptyCollection
 import tools.jackson.module.kotlin.KotlinFeature.NullToEmptyMap

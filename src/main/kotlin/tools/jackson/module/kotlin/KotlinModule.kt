@@ -37,6 +37,7 @@ class KotlinModule private constructor(
     strictNullChecks: Boolean = StrictNullChecks.enabledByDefault,
     val kotlinPropertyNameAsImplicitName: Boolean = KotlinPropertyNameAsImplicitName.enabledByDefault,
     val useJavaDurationConversion: Boolean = UseJavaDurationConversion.enabledByDefault,
+    @Suppress("DEPRECATION_ERROR")
     newStrictNullChecks: Boolean = NewStrictNullChecks.enabledByDefault,
 ) : SimpleModule(KotlinModule::class.java.name, PackageVersion.VERSION) {
     // To reduce the amount of destructive changes, no properties will be added to the public.
@@ -70,6 +71,7 @@ class KotlinModule private constructor(
         builder.isEnabled(StrictNullChecks),
         builder.isEnabled(KotlinPropertyNameAsImplicitName),
         builder.isEnabled(UseJavaDurationConversion),
+        @Suppress("DEPRECATION_ERROR")
         builder.isEnabled(NewStrictNullChecks),
     )
 
