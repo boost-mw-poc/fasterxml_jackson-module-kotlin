@@ -86,7 +86,7 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      */
     @Deprecated(
         level = DeprecationLevel.WARNING,
-        message = "This option will be merged into StrictNullChecks in 2.23.",
+        message = "This option will be merged into StrictNullChecks in 3.2.",
         replaceWith = ReplaceWith("StrictNullChecks")
     )
     NewStrictNullChecks(enabledByDefault = false);
