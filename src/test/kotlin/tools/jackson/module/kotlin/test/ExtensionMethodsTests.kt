@@ -8,6 +8,7 @@ import tools.jackson.databind.ObjectMapper
 import tools.jackson.databind.SerializationFeature
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.databind.node.JsonNodeFactory
+import tools.jackson.dataformat.csv.CsvMapper
 import tools.jackson.module.kotlin.addMixIn
 import tools.jackson.module.kotlin.contains
 import tools.jackson.module.kotlin.convertValue
@@ -102,5 +103,18 @@ private class TestExtensionMethods {
         val serializedPerson: String = mapper.writeValueAsString(Person("test"))
 
         assertEquals("{}", serializedPerson)
+    }
+
+    @Test fun mixInExtensionForGenericMapperBuilderTest() {
+        data class Person(val name: String)
+        abstract class PersonMixIn { @JsonIgnore var name: String = "" }
+
+        // Assigned to a temporary variable to ensure that addMixIn returns a builder with the proper type
+        val mapperBuilder: CsvMapper.Builder = CsvMapper.builder()
+            .addMixIn<_, Person, PersonMixIn>()
+        val mapper: CsvMapper = mapperBuilder.build()
+        val serializedPerson: String = mapper.writeValueAsString(Person("test"))
+
+        assertEquals("", serializedPerson)
     }
 }

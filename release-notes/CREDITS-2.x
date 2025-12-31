@@ -18,6 +18,7 @@ Contributors:
 # 2.21.0 (not yet released)
 
 WrongWrong (@k163377)
+* #1085: Added addMixIn function for generic MapperBuilder
 * #1043: Cleanup of deprecated contents
 * #1042: Remove old StrictNullChecks
 * #1041: Remove MissingKotlinParameterException

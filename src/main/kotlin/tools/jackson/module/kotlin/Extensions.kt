@@ -11,6 +11,7 @@ import tools.jackson.databind.ObjectMapper
 import tools.jackson.databind.ObjectReader
 import tools.jackson.databind.ValueDeserializer
 import tools.jackson.databind.ValueSerializer
+import tools.jackson.databind.cfg.MapperBuilder
 import tools.jackson.databind.cfg.MutableConfigOverride
 import tools.jackson.databind.json.JsonMapper
 import tools.jackson.databind.module.SimpleModule
@@ -174,6 +175,7 @@ inline fun <reified T> ObjectReader.readValuesTyped(jp: JsonParser): Iterator<T>
 inline fun <reified T> ObjectReader.treeToValue(jp: TreeNode): T? = forType(jacksonTypeRef<T>()).readValue(this.treeAsTokens(jp))
 
 inline fun <reified T, reified U> JsonMapper.Builder.addMixIn(): JsonMapper.Builder = this.addMixIn(T::class.java, U::class.java)
+inline fun <M : MapperBuilder<*, M>, reified T, reified U> M.addMixIn(): M = this.addMixIn(T::class.java, U::class.java)
 
 operator fun ArrayNode.plus(element: Boolean) = Unit.apply { add(element) }
 operator fun ArrayNode.plus(element: Short) = Unit.apply { add(element) }
