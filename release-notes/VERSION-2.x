@@ -18,6 +18,7 @@ Co-maintainers:
 
 2.21.0 (not yet released)
 
+#1085: The addMixIn extension function is now available in the generic MapperBuilder.
 #1043: Deprecated content has been cleaned up with the version upgrade.
 #1042: The old StrictNullChecks backend has been removed.
   This improves the throughput of deserialization slightly.
