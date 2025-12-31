@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.Module
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.ObjectReader
 import com.fasterxml.jackson.databind.RuntimeJsonMappingException
+import com.fasterxml.jackson.databind.cfg.MapperBuilder
 import com.fasterxml.jackson.databind.cfg.MutableConfigOverride
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.databind.module.SimpleModule
@@ -181,6 +182,7 @@ inline fun <reified T> ObjectReader.treeToValue(n: TreeNode): T? = readValue(thi
 
 inline fun <reified T, reified U> ObjectMapper.addMixIn(): ObjectMapper = this.addMixIn(T::class.java, U::class.java)
 inline fun <reified T, reified U> JsonMapper.Builder.addMixIn(): JsonMapper.Builder = this.addMixIn(T::class.java, U::class.java)
+inline fun <M : MapperBuilder<*, M>, reified T, reified U> M.addMixIn(): M = this.addMixIn(T::class.java, U::class.java)
 
 operator fun ArrayNode.plus(element: Boolean) = Unit.apply { add(element) }
 operator fun ArrayNode.plus(element: Short) = Unit.apply { add(element) }
