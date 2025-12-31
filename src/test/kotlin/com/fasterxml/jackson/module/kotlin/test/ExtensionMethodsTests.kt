@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.databind.node.JsonNodeFactory
+import com.fasterxml.jackson.dataformat.csv.CsvMapper
 import com.fasterxml.jackson.module.kotlin.addMixIn
 import com.fasterxml.jackson.module.kotlin.contains
 import com.fasterxml.jackson.module.kotlin.convertValue
@@ -94,5 +95,18 @@ private class TestExtensionMethods {
         val serializedPerson: String = mapper.writeValueAsString(Person("test"))
 
         assertEquals("{}", serializedPerson)
+    }
+
+    @Test fun mixInExtensionForGenericMapperBuilderTest() {
+        data class Person(val name: String)
+        abstract class PersonMixIn { @JsonIgnore var name: String = "" }
+
+        // Assigned to a temporary variable to ensure that addMixIn returns a builder with the proper type
+        val mapperBuilder: CsvMapper.Builder = CsvMapper.builder()
+            .addMixIn<_, Person, PersonMixIn>()
+        val mapper: CsvMapper = mapperBuilder.build()
+        val serializedPerson: String = mapper.writeValueAsString(Person("test"))
+
+        assertEquals("", serializedPerson)
     }
 }
