@@ -16,7 +16,7 @@ Co-maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
-2.21.0 (not yet released)
+2.21.0 (18-Jan-2026)
 
 #1085: The addMixIn extension function is now available in the generic MapperBuilder.
 #1043: Deprecated content has been cleaned up with the version upgrade.
