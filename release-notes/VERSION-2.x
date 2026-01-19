@@ -20,6 +20,10 @@ Co-maintainers:
 
 -
 
+2.20.2 (19-Jan-2026)
+
+No changes since 2.20.1
+
 2.20.1 (30-Oct-2025)
 
 #1057: The issue where deserialization of value classes using private constructor failed starting from version 2.20.0 has been fixed.
