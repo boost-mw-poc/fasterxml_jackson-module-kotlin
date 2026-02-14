@@ -19,8 +19,12 @@ class NullableObjectTest {
     @Test
     fun byConstructorTestFailing() {
         // #761(KT-57357) fixed
-        assertThrows(Error::class.java) {
+        if (KotlinVersion.CURRENT >= KotlinVersion(2, 3, 20)) {
             assertEquals(ByConstructor(), defaultMapper.readValue<ByConstructor>("{}"))
+        } else {
+            assertThrows(Error::class.java) {
+                assertEquals(ByConstructor(), defaultMapper.readValue<ByConstructor>("{}"))
+            }
         }
     }
 
@@ -45,8 +49,12 @@ class NullableObjectTest {
     @Test
     fun byFactoryTest() {
         // #761(KT-57357) fixed
-        assertThrows(Error::class.java) {
+        if (KotlinVersion.CURRENT >= KotlinVersion(2, 3, 20)) {
             assertEquals(ByFactory.creator(), defaultMapper.readValue<ByFactory>("{}"))
+        } else {
+            assertThrows(Error::class.java) {
+                assertEquals(ByFactory.creator(), defaultMapper.readValue<ByFactory>("{}"))
+            }
         }
     }
 }
