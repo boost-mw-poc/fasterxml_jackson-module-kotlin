@@ -1,4 +1,4 @@
-package com.fasterxml.jackson.module.kotlin.test.github
+package tools.jackson.module.kotlin.test.github
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
