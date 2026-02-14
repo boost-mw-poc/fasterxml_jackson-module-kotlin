@@ -190,6 +190,9 @@
                             So... turn it off
                       -->
                     <useModulePath>false</useModulePath>
+                    <argLine>
+                        --add-opens tools.jackson.module.kotlin/tools.jackson.module.kotlin.test.github=kotlin.reflect
+                    </argLine>
                 </configuration>
             </plugin>
             <plugin>
