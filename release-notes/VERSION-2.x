@@ -16,6 +16,10 @@ Co-maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
+2.21.1 (22-Feb-2026)
+
+No changes since 2.21.0
+
 2.21.0 (18-Jan-2026)
 
 #1085: The addMixIn extension function is now available in the generic MapperBuilder.
@@ -98,6 +102,7 @@ No changes since 2.19.0
 #839: Remove useKotlinPropertyNameForGetter and unify with kotlinPropertyNameAsImplicitName.
 #835: Remove old SingletonSupport class and unified with KotlinFeature.SingletonSupport.
 
+2.18.6 (22-Feb-2026)
 2.18.5 (27-Oct-2025)
 
 No changes since 2.18.4
