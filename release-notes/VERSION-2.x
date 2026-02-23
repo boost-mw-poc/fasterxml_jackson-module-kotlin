@@ -25,6 +25,10 @@ Co-maintainers:
 #1041: The deprecated MissingKotlinParameterException has been removed.
 #1039: Kotlin has been upgraded to 2.1.x.
 
+2.20.2 (19-Jan-2026)
+
+No changes since 2.20.1
+
 2.20.1 (30-Oct-2025)
 
 #1057: The issue where deserialization of value classes using private constructor failed starting from version 2.20.0 has been fixed.
@@ -94,6 +98,7 @@ No changes since 2.19.0
 #839: Remove useKotlinPropertyNameForGetter and unify with kotlinPropertyNameAsImplicitName.
 #835: Remove old SingletonSupport class and unified with KotlinFeature.SingletonSupport.
 
+2.18.6 (22-Feb-2026)
 2.18.5 (27-Oct-2025)
 
 No changes since 2.18.4
