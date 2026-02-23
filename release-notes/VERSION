@@ -22,10 +22,10 @@ Former maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
-3.1.0-rc1 (27-Jan-2026)
+3.1.0 (23-Feb-2026)
 
-WrongWrong (@k163377)
 #1077: Increase deprecation level of NewStrictNullChecks due to version upgrade
+ (@k163377)
 
 3.0.4 (21-Jan-2026)
 3.0.3 (28-Nov-2025)
