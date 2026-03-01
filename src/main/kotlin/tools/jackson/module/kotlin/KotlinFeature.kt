@@ -37,13 +37,13 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
     /**
      * This feature represents whether to check deserialized collections.
      *
-     * With this disabled, the default, collections which are typed to disallow null members (e.g. `List<String>`)
+     * With this disabled, collections which are typed to disallow null members (e.g. `List<String>`)
      * may contain null values after deserialization.
      * Enabling this will cause an [InvalidNullException] to be thrown if null is entered.
      *
      * Internally, it will be the same as if [JsonSetter] (contentNulls = FAIL) had been granted.
      *
-     * Benchmarks show that it can check for illegal nulls with throughput nearly identical to the default (see [jackson-module-kotlin#719]).
+     * Disabling this option will not significantly improve throughput, so it is recommended to keep it enabled (see [jackson-module-kotlin#719]).
      *
      * Since 3.0, this option is enabled by default.
      */
