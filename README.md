@@ -1,5 +1,5 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.fasterxml.jackson.module/jackson-module-kotlin/badge.svg)](https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin)
-[![Change log](https://img.shields.io/badge/change%20log-%E2%96%A4-yellow.svg)](./release-notes/VERSION-2.x)
+[![Maven Central](https://maven-badges.sml.io/maven-central/tools.jackson.module/jackson-module-kotlin/badge.svg)](https://mvnrepository.com/artifact/tools.jackson.module/jackson-module-kotlin)
+[![Change log](https://img.shields.io/badge/change%20log-%E2%96%A4-yellow.svg)](./release-notes/VERSION)
 [![Tidelift](https://tidelift.com/badges/package/maven/com.fasterxml.jackson.module:jackson-module-kotlin)](https://tidelift.com/subscription/pkg/maven-com-fasterxml-jackson-module-jackson-module-kotlin?utm_source=maven-com-fasterxml-jackson-module-jackson-module-kotlin&utm_medium=referral&utm_campaign=readme)
 [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](https://slack.kotlinlang.org/)
 
@@ -12,15 +12,15 @@ With this module, single constructor classes can be used automatically,
 and those with secondary constructors or static factories are also supported.
 
 # Status
-* release `3.0.3` (for Jackson `3.0.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=3.0)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A3.0)
-* release `2.20.1` (for Jackson `2.20.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.20)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.20)
-* release `2.19.4` (for Jackson `2.19.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.19)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.19)
+* release `3.1.0` (for Jackson `3.1.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=3.1)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A3.1)
+* release `3.0.4` (for Jackson `3.0.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=3.0)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A3.0)
+* release `2.21.1` (for Jackson `2.21.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.21)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.21)
 
 Releases require that you have included Kotlin stdlib and reflect libraries already.
 
 Gradle:
 ```
-implementation "tools.jackson.module:jackson-module-kotlin:3.0.+"
+implementation "tools.jackson.module:jackson-module-kotlin:3.1.+"
 ```
 
 Maven:
@@ -28,7 +28,7 @@ Maven:
 <dependency>
     <groupId>tools.jackson.module</groupId>
     <artifactId>jackson-module-kotlin</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>3.1.0</version>
 </dependency>
 ```
 
@@ -40,7 +40,7 @@ from the parameters using Kotlin runtime type information.
 To use, just register the Kotlin module with your ObjectMapper instance:
 
 ```kotlin
-// With Jackson 2.12 and later
+// With Jackson 3.0 and later
 import tools.jackson.module.kotlin.jacksonObjectMapper
 ...
 val mapper = jacksonObjectMapper()
@@ -111,10 +111,9 @@ println(arrayNode.toString()) // ["foo",true,1,1.0,"YmFy"]
 Different `kotlin-core` versions are supported by different Jackson Kotlin module minor versions.
 Here is an incomplete list of supported versions:
 
-* Jackson 3.0.x: Kotlin-core 2.1 - 2.2
-* Jackson 2.21.x: Kotlin-core 2.1 - 2.2
-* Jackson 2.20.x: Kotlin-core 2.0 - 2.2
-* Jackson 2.19.x: Kotlin-core 1.9 - 2.1
+* Jackson 3.1.x: Kotlin-core 2.1 - 2.3
+* Jackson 3.0.x: Kotlin-core 2.1 - 2.3
+* Jackson 2.21.x: Kotlin-core 2.1 - 2.3
 
 Please note that the versions supported by 2.17 are tentative and may change depending on the release date.
 
@@ -253,9 +252,9 @@ See the [main Jackson contribution guidelines](https://github.com/FasterXML/jack
 
 If you are going to write code, choose the appropriate base branch:
 
-- `2.20` for bugfixes against the current stable version
-- `2.x` for additive functionality & features or [minor](https://semver.org), backwards compatible changes to existing behavior to be included in the next minor version release
-- `3.x` for significant changes to existing behavior, which will be part of Jackson 3.0
+- `3.1` for bugfixes against the current stable version
+- `3.x` for additive functionality & features or [minor](https://semver.org), backwards compatible changes to existing behavior to be included in the next minor version release
+- `2.x`/`2.21` for bugfixes against the LTS version
 
 ### Failing tests
 
