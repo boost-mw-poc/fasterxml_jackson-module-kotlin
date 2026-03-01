@@ -13,7 +13,8 @@ and those with secondary constructors or static factories are also supported.
 
 # Status
 * release `3.0.3` (for Jackson `3.0.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=3.0)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A3.0)
-* release `2.20.1` (for Jackson `2.20.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.20)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.20)
+* release `2.21.1` (for Jackson `2.21.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.21)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.21)
+* release `2.20.2` (for Jackson `2.20.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.20)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.20)
 * release `2.19.4` (for Jackson `2.19.x`) [![GitHub Actions build](https://github.com/FasterXML/jackson-module-kotlin/actions/workflows/main.yml/badge.svg?branch=2.19)](https://github.com/FasterXML/jackson-module-kotlin/actions?query=branch%3A2.19)
 
 Releases require that you have included Kotlin stdlib and reflect libraries already.
@@ -112,7 +113,7 @@ Different `kotlin-core` versions are supported by different Jackson Kotlin modul
 Here is an incomplete list of supported versions:
 
 * Jackson 3.0.x: Kotlin-core 2.1 - 2.2
-* Jackson 2.21.x: Kotlin-core 2.1 - 2.2
+* Jackson 2.21.x: Kotlin-core 2.1 - 2.3
 * Jackson 2.20.x: Kotlin-core 2.0 - 2.2
 * Jackson 2.19.x: Kotlin-core 1.9 - 2.1
 
@@ -253,7 +254,7 @@ See the [main Jackson contribution guidelines](https://github.com/FasterXML/jack
 
 If you are going to write code, choose the appropriate base branch:
 
-- `2.20` for bugfixes against the current stable version
+- `2.21` for bugfixes against the current stable version
 - `2.x` for additive functionality & features or [minor](https://semver.org), backwards compatible changes to existing behavior to be included in the next minor version release
 - `3.x` for significant changes to existing behavior, which will be part of Jackson 3.0
 
