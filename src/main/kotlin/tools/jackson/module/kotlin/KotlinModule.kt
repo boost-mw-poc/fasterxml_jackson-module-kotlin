@@ -34,23 +34,10 @@ class KotlinModule private constructor(
     val nullToEmptyMap: Boolean = NullToEmptyMap.enabledByDefault,
     val nullIsSameAsDefault: Boolean = NullIsSameAsDefault.enabledByDefault,
     val singletonSupport: Boolean = SingletonSupport.enabledByDefault,
-    strictNullChecks: Boolean = StrictNullChecks.enabledByDefault,
+    val strictNullChecks: Boolean = StrictNullChecks.enabledByDefault,
     val kotlinPropertyNameAsImplicitName: Boolean = KotlinPropertyNameAsImplicitName.enabledByDefault,
     val useJavaDurationConversion: Boolean = UseJavaDurationConversion.enabledByDefault,
-    @Suppress("DEPRECATION_ERROR")
-    newStrictNullChecks: Boolean = NewStrictNullChecks.enabledByDefault,
 ) : SimpleModule(KotlinModule::class.java.name, PackageVersion.VERSION) {
-    // To reduce the amount of destructive changes, no properties will be added to the public.
-    val strictNullChecks: Boolean = if (strictNullChecks) {
-        if (newStrictNullChecks) {
-            throw IllegalArgumentException("Enabling both StrictNullChecks and NewStrictNullChecks is not permitted.")
-        }
-
-        true
-    } else {
-        newStrictNullChecks
-    }
-
     companion object {
         // Increment when option is added
         private const val serialVersionUID = 3L
@@ -71,8 +58,6 @@ class KotlinModule private constructor(
         builder.isEnabled(StrictNullChecks),
         builder.isEnabled(KotlinPropertyNameAsImplicitName),
         builder.isEnabled(UseJavaDurationConversion),
-        @Suppress("DEPRECATION_ERROR")
-        builder.isEnabled(NewStrictNullChecks),
     )
 
     override fun setupModule(context: SetupContext) {
