@@ -37,7 +37,7 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
     /**
      * This feature represents whether to check deserialized collections.
      *
-     * With this disabled, the default, collections which are typed to disallow null members (e.g. `List<String>`)
+     * With this disabled, collections which are typed to disallow null members (e.g. `List<String>`)
      * may contain null values after deserialization.
      * Enabling this will cause an [InvalidNullException] to be thrown if null is entered.
      *
