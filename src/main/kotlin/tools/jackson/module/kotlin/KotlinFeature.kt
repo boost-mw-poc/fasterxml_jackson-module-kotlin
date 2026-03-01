@@ -43,7 +43,7 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      *
      * Internally, it will be the same as if [JsonSetter] (contentNulls = FAIL) had been granted.
      *
-     * Benchmarks show that it can check for illegal nulls with throughput nearly identical to the default (see [jackson-module-kotlin#719]).
+     * Disabling this option will not significantly improve throughput, so it is recommended to keep it enabled (see [jackson-module-kotlin#719]).
      *
      * Since 3.0, this option is enabled by default.
      */
