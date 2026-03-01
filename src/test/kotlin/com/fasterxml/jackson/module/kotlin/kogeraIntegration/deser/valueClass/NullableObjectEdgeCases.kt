@@ -61,9 +61,14 @@ class NullableObjectEdgeCases {
     // There is a problem with #51, so it is a failing test.
     @Test
     fun `Nulls_SKIP works`() {
-        assertThrows<KotlinReflectionInternalError>("#761(KT-57357) fixed") {
+        if (KotlinVersion.CURRENT >= KotlinVersion(2, 3, 20)) {
             val result = defaultMapper.readValue<NullsSkip>("""{"nn":null,"n":null}""")
-            assertEquals(NullValue(VC("skip"), VC("skip")), result)
+            assertEquals(NullsSkip(VC("skip"), VC("skip")), result)
+        } else {
+            assertThrows<KotlinReflectionInternalError>("#761(KT-57357) fixed") {
+                val result = defaultMapper.readValue<NullsSkip>("""{"nn":null,"n":null}""")
+                assertEquals(NullsSkip(VC("skip"), VC("skip")), result)
+            }
         }
     }
 }
