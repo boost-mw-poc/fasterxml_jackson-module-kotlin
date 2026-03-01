@@ -73,23 +73,7 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      * `@JsonFormat` annotations need to be declared either on getter using `@get:JsonFormat` or field using `@field:JsonFormat`.
      * See [jackson-module-kotlin#651] for details.
      */
-    UseJavaDurationConversion(enabledByDefault = false),
-
-    /**
-     * New [StrictNullChecks] feature with improved throughput.
-     * Internally, it will be the same as if [JsonSetter] (contentNulls = FAIL) had been granted.
-     * Benchmarks show that it can check for illegal nulls with throughput nearly identical to the default (see [jackson-module-kotlin#719]).
-     *
-     * This is a temporary option for a phased backend migration,
-     * which will eventually be merged into [StrictNullChecks].
-     * Also, specifying both this and [StrictNullChecks] is not permitted.
-     */
-    @Deprecated(
-        level = DeprecationLevel.ERROR,
-        message = "This option will be merged into StrictNullChecks in 3.2.",
-        replaceWith = ReplaceWith("StrictNullChecks")
-    )
-    NewStrictNullChecks(enabledByDefault = false);
+    UseJavaDurationConversion(enabledByDefault = false);
 
     internal val bitSet: BitSet = (1 shl ordinal).toBitSet()
 
