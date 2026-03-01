@@ -230,7 +230,7 @@
                         <dependency>
                             <groupId>tools.jackson.module</groupId>
                             <artifactId>jackson-module-kotlin</artifactId>
-                            <version>3.0.0-rc2</version>
+                            <version>3.0.0</version>
                             <type>jar</type>
                         </dependency>
                     </oldVersion>
