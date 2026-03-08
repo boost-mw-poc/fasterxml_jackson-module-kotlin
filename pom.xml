@@ -142,6 +142,11 @@
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <version>${version.kotlin}</version>
+                <!-- Based on discussion #1129, version 2.21 provides compatibility with Kotlin 1.9. -->
+                <configuration>
+                    <apiVersion>1.9</apiVersion>
+                    <languageVersion>1.9</languageVersion>
+                </configuration>
 
                 <executions>
                     <execution>
