@@ -15,7 +15,12 @@ Authors:
 
 Contributors:
 
-# 2.21.0 (not yet released)
+# 2.21.2 (not yet released)
+
+WrongWrong (@k163377)
+* #1135: Set apiVersion and languageVersion to 1.9
+
+# 2.21.0 (18-Jan-2026)
 
 WrongWrong (@k163377)
 * #1085: Added addMixIn function for generic MapperBuilder
@@ -24,7 +29,7 @@ WrongWrong (@k163377)
 * #1041: Remove MissingKotlinParameterException
 * #1039: Update settings for 2.20
 
-# 2.20.1 (not yet released)
+# 2.20.1 (30-Oct-2025)
 
 WrongWrong (@k163377)
 * #1057: Fixed a regression related to deserializing value classes with private constructor
@@ -38,7 +43,7 @@ WrongWrong (@k163377)
 * #969: Cleanup of deprecated contents
 * #967: Update settings for 2.20
 
-# 2.19.1 (not yet released)
+# 2.19.1 (13-Jun-2025)
 
 WrongWrong (@k163377)
 * #986: Optimize imports
@@ -69,7 +74,7 @@ WrongWrong (@k163377)
 * #839: Remove useKotlinPropertyNameForGetter and unify with kotlinPropertyNameAsImplicitName
 * #835: Remove old SingletonSupport class and unified with KotlinFeature.SingletonSupport
 
-# 2.18.4 (not yet released)
+# 2.18.4 (06-May-2025)
 
 WrongWrong (@k163377)
 * #923: Fixed hasRequiredMarker to only process content defined in Kotlin
