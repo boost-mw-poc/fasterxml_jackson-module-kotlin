@@ -113,6 +113,7 @@ Here is an incomplete list of supported versions:
 
 * Jackson 3.0.x: Kotlin-core 2.1 - 2.3
 * Jackson 2.21.x: Kotlin-core 2.1 - 2.3
+  * Starting with version 2.21.2, compatibility with Kotlin 1.9 is provided(see [#1129](https://github.com/FasterXML/jackson-module-kotlin/issues/1129)).
 * Jackson 2.20.x: Kotlin-core 2.0 - 2.2
 
 Please note that the versions supported by 2.17 are tentative and may change depending on the release date.
