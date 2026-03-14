@@ -1,4 +1,4 @@
-[![Maven Central](https://maven-badges.sml.io/maven-central/tools.jackson.module/jackson-module-kotlin/badge.svg)](https://mvnrepository.com/artifact/tools.jackson.module/jackson-module-kotlin)
+[![Maven Central](https://maven-badges.sml.io/sonatype-central/tools.jackson.module/jackson-module-kotlin/badge.svg)](https://mvnrepository.com/artifact/tools.jackson.module/jackson-module-kotlin)
 [![Change log](https://img.shields.io/badge/change%20log-%E2%96%A4-yellow.svg)](./release-notes/VERSION)
 [![Tidelift](https://tidelift.com/badges/package/maven/com.fasterxml.jackson.module:jackson-module-kotlin)](https://tidelift.com/subscription/pkg/maven-com-fasterxml-jackson-module-jackson-module-kotlin?utm_source=maven-com-fasterxml-jackson-module-jackson-module-kotlin&utm_medium=referral&utm_campaign=readme)
 [![Kotlin Slack](https://img.shields.io/badge/chat-kotlin%20slack-orange.svg)](https://slack.kotlinlang.org/)
@@ -114,6 +114,7 @@ Here is an incomplete list of supported versions:
 * Jackson 3.1.x: Kotlin-core 2.1 - 2.3
 * Jackson 3.0.x: Kotlin-core 2.1 - 2.3
 * Jackson 2.21.x: Kotlin-core 2.1 - 2.3
+  * Starting with version 2.21.2, compatibility with Kotlin 1.9 is provided(see [#1129](https://github.com/FasterXML/jackson-module-kotlin/issues/1129)).
 
 Please note that the versions supported by 2.17 are tentative and may change depending on the release date.
 
