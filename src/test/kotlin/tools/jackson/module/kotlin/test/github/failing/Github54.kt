@@ -19,10 +19,7 @@ class TestGithub54 {
         entity1.entity2 = entity2
 
         val json = defaultMapper.writeValueAsString(entity1)
-        expectFailure<UnresolvedForwardReference>("GitHub #54 has been fixed!") {
-            defaultMapper.readValue<Entity1>(json)
-        }
-
+        defaultMapper.readValue<Entity1>(json)
     }
 }
 

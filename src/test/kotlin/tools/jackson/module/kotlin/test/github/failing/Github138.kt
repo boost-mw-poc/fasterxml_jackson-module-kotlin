@@ -26,8 +26,6 @@ class TestGithub138 {
     fun testDeserProblem() {
         val xml = """<sms Phone="435242423412" Id="43234324">Lorem ipsum</sms>"""
         val xmlMapper = XmlMapper.builder().addModule(kotlinModule()).build()
-        expectFailure<InvalidDefinitionException>("GitHub #138 has been fixed!") {
-            xmlMapper.readValue<Sms>(xml)
-        }
+        xmlMapper.readValue<Sms>(xml)
     }
 }
