@@ -54,15 +54,13 @@ class TestGithub153 {
     @Test
     // Conflict between the annotations that is not current resolvable.
     fun test_data_class() {
-        expectFailure<InvalidDefinitionException>("Problem with conflicting annotations related to #153 has been fixed!") {
-            // I create a pojo from the xml using the data classes
-            val pojoFromXml = mapper.readValue(xml, MyDataPojo::class.java)
+        // I create a pojo from the xml using the data classes
+        val pojoFromXml = mapper.readValue(xml, MyDataPojo::class.java)
 
-            // I create a xml from the pojo
-            val xmlFromPojo = mapper.writeValueAsString(pojoFromXml)
+        // I create a xml from the pojo
+        val xmlFromPojo = mapper.writeValueAsString(pojoFromXml)
 
-            // I compare the original xml with the xml generated from the pojo
-            assertEquals(xml, xmlFromPojo)
-        }
+        // I compare the original xml with the xml generated from the pojo
+        assertEquals(xml, xmlFromPojo)
     }
 }
