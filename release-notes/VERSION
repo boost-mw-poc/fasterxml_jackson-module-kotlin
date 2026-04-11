@@ -26,6 +26,7 @@ Former maintainers:
 
 #1113: The deprecated `NewStrictNullChecks` option has been removed and unified under the `StrictNullChecks` option.
 
+3.1.2 (11-Apr-2026)
 3.1.1 (27-Mar-2026)
 
 No changes since 3.1.0
