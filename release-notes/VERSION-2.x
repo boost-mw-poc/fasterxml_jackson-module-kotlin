@@ -16,6 +16,10 @@ Co-maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
+2.21.3 (28-Apr-2026)
+
+No changes since 2.21.2
+
 2.21.2 (20-Mar-2026)
 
 #1135: Compatibility with Kotlin 1.9 is provided(see #1129).
