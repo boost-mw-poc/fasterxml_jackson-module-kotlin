@@ -16,6 +16,10 @@ Co-maintainers:
 === Releases ===
 ------------------------------------------------------------------------
 
+2.21.3 (28-Apr-2026)
+
+No changes since 2.21.2
+
 2.21.2 (20-Mar-2026)
 
 #1135: Compatibility with Kotlin 1.9 is provided(see #1129).
@@ -106,6 +110,7 @@ No changes since 2.19.0
 #839: Remove useKotlinPropertyNameForGetter and unify with kotlinPropertyNameAsImplicitName.
 #835: Remove old SingletonSupport class and unified with KotlinFeature.SingletonSupport.
 
+2.18.7 (24-Apr-2026)
 2.18.6 (22-Feb-2026)
 2.18.5 (27-Oct-2025)
 
