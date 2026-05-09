@@ -12,17 +12,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java_version: ['17', '21', '25']
+        java_version: ['17', '21', '25', '26']
         # Versions need to align with ones in 'main.yml' workflow
-        kotlin_version: ['2.1.21', '2.2.21', '2.3.20']
+        kotlin_version: ['2.1.21', '2.2.21', '2.3.21', '2.4.0-Beta2']
     env:
       JAVA_OPTS: "-XX:+TieredCompilation -XX:TieredStopAtLevel=1"
     steps:
-    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         ref: 3.x
     - name: Set up JDK
-      uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
+      uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654 # v5.2.0
       with:
         distribution: 'temurin'
         java-version: ${{ matrix.java_version }}
