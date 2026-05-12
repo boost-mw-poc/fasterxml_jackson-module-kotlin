@@ -19,6 +19,8 @@ import java.lang.reflect.Modifier
 import java.util.UUID
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.javaMethod
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant as KotlinInstant
 import kotlin.time.Duration as KotlinDuration
 
 object SequenceDeserializer : StdDeserializer<Sequence<*>>(Sequence::class.java) {
@@ -255,9 +257,11 @@ private fun findValueCreator(type: JavaType, clazz: Class<*>): Method? {
     return clazz.kotlin.primaryConstructor?.javaMethod
 }
 
+@OptIn(ExperimentalTime::class)
 internal class KotlinDeserializers(
     private val cache: ReflectionCache,
     private val useJavaDurationConversion: Boolean,
+    private val useJavaInstantConversion: Boolean,
 ) : Deserializers.Base() {
     override fun findBeanDeserializer(
         type: JavaType,
@@ -275,6 +279,8 @@ internal class KotlinDeserializers(
             rawClass == ULong::class.java -> ULongDeserializer
             rawClass == KotlinDuration::class.java ->
                 JavaToKotlinDurationConverter.takeIf { useJavaDurationConversion }?.delegatingDeserializer
+            rawClass == KotlinInstant::class.java ->
+                JavaToKotlinInstantConverter.takeIf { useJavaInstantConversion }?.delegatingDeserializer
             rawClass.isUnboxableValueClass() -> findValueCreator(type, rawClass)?.let {
                 val unboxedClass = it.returnType
                 val converter = cache.getValueClassBoxConverter(unboxedClass, rawClass)
@@ -305,5 +311,6 @@ internal class KotlinDeserializers(
                 || valueType == UInt::class.java
                 || valueType == ULong::class.java
                 || valueType == KotlinDuration::class.java
+                || valueType == KotlinInstant::class.java
     }
 }

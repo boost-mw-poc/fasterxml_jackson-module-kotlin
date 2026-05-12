@@ -37,6 +37,7 @@ class KotlinModule private constructor(
     val strictNullChecks: Boolean = StrictNullChecks.enabledByDefault,
     val kotlinPropertyNameAsImplicitName: Boolean = KotlinPropertyNameAsImplicitName.enabledByDefault,
     val useJavaDurationConversion: Boolean = UseJavaDurationConversion.enabledByDefault,
+    val useJavaInstantConversion: Boolean = UseJavaInstantConversion.enabledByDefault,
 ) : SimpleModule(KotlinModule::class.java.name, PackageVersion.VERSION) {
     companion object {
         // Increment when option is added
@@ -58,6 +59,7 @@ class KotlinModule private constructor(
         builder.isEnabled(StrictNullChecks),
         builder.isEnabled(KotlinPropertyNameAsImplicitName),
         builder.isEnabled(UseJavaDurationConversion),
+        builder.isEnabled(UseJavaInstantConversion),
     )
 
     override fun setupModule(context: SetupContext) {
@@ -76,7 +78,7 @@ class KotlinModule private constructor(
             context.addDeserializerModifier(KotlinValueDeserializerModifier)
         }
 
-        context.insertAnnotationIntrospector(KotlinAnnotationIntrospector(cache, useJavaDurationConversion))
+        context.insertAnnotationIntrospector(KotlinAnnotationIntrospector(cache, useJavaDurationConversion, useJavaInstantConversion))
         context.appendAnnotationIntrospector(
             KotlinNamesAnnotationIntrospector(
                 context = context,
@@ -89,7 +91,7 @@ class KotlinModule private constructor(
             )
         )
 
-        context.addDeserializers(KotlinDeserializers(cache, useJavaDurationConversion))
+        context.addDeserializers(KotlinDeserializers(cache, useJavaDurationConversion, useJavaInstantConversion))
         context.addKeyDeserializers(KotlinKeyDeserializers(cache))
         context.addSerializers(KotlinSerializers(cache))
         context.addKeySerializers(KotlinKeySerializers(cache))

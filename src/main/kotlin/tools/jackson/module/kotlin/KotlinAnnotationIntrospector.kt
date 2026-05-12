@@ -8,10 +8,13 @@ import tools.jackson.databind.introspect.NopAnnotationIntrospector
 import tools.jackson.databind.jsontype.NamedType
 import tools.jackson.databind.util.Converter
 import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 internal class KotlinAnnotationIntrospector(
     private val cache: ReflectionCache,
     private val useJavaDurationConversion: Boolean,
+    private val useJavaInstantConversion: Boolean,
 ) : NopAnnotationIntrospector() {
 
     override fun findSerializationConverter(config: MapperConfig<*>?, a: Annotated): Converter<*, *>? = when (a) {
@@ -34,9 +37,11 @@ internal class KotlinAnnotationIntrospector(
         else -> null
     }
 
+    @OptIn(ExperimentalTime::class)
     private fun lookupKotlinTypeConverter(a: AnnotatedClass) = when {
         Sequence::class.java.isAssignableFrom(a.rawType) -> SequenceToIteratorConverter(a.type)
         Duration::class.java == a.rawType -> KotlinToJavaDurationConverter.takeIf { useJavaDurationConversion }
+        Instant::class.java == a.rawType -> KotlinToJavaInstantConverter.takeIf { useJavaInstantConversion }
         else -> null
     }
 
