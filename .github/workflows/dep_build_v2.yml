@@ -29,7 +29,11 @@ jobs:
         distribution: 'temurin'
         java-version: ${{ matrix.java_version }}
         cache: 'maven'
-    - name: Build and test
-      run: ./mvnw -B -ff -ntp -Dversion.kotlin=${{ matrix.kotlin_version }} clean verify
+    - name: Build
+      # Note: build separately first using default kotlin-core
+      run: ./mvnw -B -q -ff -ntp -DskipTests clean package
+    - name: Test
+      # Note: actual testing should use matrix kotlin-core version (note: MUST specify test phase)
+      run: ./mvnw -B -q -ff -ntp -Dversion.kotlin=${{ matrix.kotlin_version }} surefire:test
 
 # No recursive rebuild (yet?)
