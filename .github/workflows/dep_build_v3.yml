@@ -2,6 +2,8 @@ name: Re-build on jackson-databind v3 push
 on:
   repository_dispatch:
     types: [jackson-databind-pushed-v3]
+  # just for testing
+  workflow_dispatch:
 
 permissions:
   contents: read
