@@ -9,6 +9,8 @@ on:
     paths-ignore:
     - "README.md"
     - "release-notes/*"
+  # just for testing
+  workflow_dispatch:
 
 permissions:
   contents: read
