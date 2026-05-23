@@ -12,16 +12,16 @@ import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType
 import java.lang.reflect.Method
 import java.lang.reflect.Type
-import java.time.Instant as JavaInstant
 import java.util.UUID
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant as KotlinInstant
 import kotlin.time.toJavaDuration
 import kotlin.time.toJavaInstant
 import kotlin.time.toKotlinDuration
 import kotlin.time.toKotlinInstant
 import java.time.Duration as JavaDuration
+import java.time.Instant as JavaInstant
 import kotlin.time.Duration as KotlinDuration
+import kotlin.time.Instant as KotlinInstant
 
 internal class SequenceToIteratorConverter(private val input: JavaType) : StdConverter<Sequence<*>, Iterator<*>>() {
     override fun convert(value: Sequence<*>): Iterator<*> = value.iterator()
