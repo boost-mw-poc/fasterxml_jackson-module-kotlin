@@ -11,7 +11,8 @@ import tools.jackson.module.kotlin.readValue
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
+import java.time.Instant as JavaInstant
+import kotlin.time.Instant as KotlinInstant
 
 @OptIn(ExperimentalTime::class)
 class InstantTests {
@@ -22,7 +23,7 @@ class InstantTests {
     fun `should serialize Kotlin Instant to ISO 8601 format`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.writeValueAsString(Instant.parse("2023-06-20T14:00:00Z"))
+        val result = mapper.writeValueAsString(KotlinInstant.parse("2023-06-20T14:00:00Z"))
 
         assertEquals("\"2023-06-20T14:00:00Z\"", result)
     }
@@ -33,7 +34,7 @@ class InstantTests {
             .enable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
             .build()
 
-        val result = mapper.writeValueAsString(Instant.parse("2023-06-20T14:00:00.123Z"))
+        val result = mapper.writeValueAsString(KotlinInstant.parse("2023-06-20T14:00:00.123Z"))
 
         assertEquals("1687269600.123000000", result)
     }
@@ -45,7 +46,7 @@ class InstantTests {
             .disable(DateTimeFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
             .build()
 
-        val result = mapper.writeValueAsString(Instant.parse("2023-06-20T14:00:00.123Z"))
+        val result = mapper.writeValueAsString(KotlinInstant.parse("2023-06-20T14:00:00.123Z"))
 
         assertEquals("1687269600123", result)
     }
@@ -54,7 +55,12 @@ class InstantTests {
     fun `should serialize Kotlin Instant inside list`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.writeValueAsString(listOf(Instant.parse("2023-06-20T14:00:00Z"), Instant.parse("2024-06-20T14:00:00Z")))
+        val result = mapper.writeValueAsString(
+            listOf(
+                KotlinInstant.parse("2023-06-20T14:00:00Z"),
+                KotlinInstant.parse("2024-06-20T14:00:00Z")
+            )
+        )
 
         assertEquals("""["2023-06-20T14:00:00Z","2024-06-20T14:00:00Z"]""", result)
     }
@@ -65,8 +71,8 @@ class InstantTests {
 
         val result = mapper.writeValueAsString(
             mapOf(
-                "a" to Instant.parse("2023-06-20T14:00:00Z"),
-                "b" to Instant.parse("2024-06-20T14:00:00Z")
+                "a" to KotlinInstant.parse("2023-06-20T14:00:00Z"),
+                "b" to KotlinInstant.parse("2024-06-20T14:00:00Z")
             )
         )
 
@@ -77,7 +83,7 @@ class InstantTests {
     fun `should serialize Kotlin Instant inside data class`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.writeValueAsString(Pojo(Instant.parse("2023-06-20T14:00:00Z")))
+        val result = mapper.writeValueAsString(Wrapper(KotlinInstant.parse("2023-06-20T14:00:00Z")))
 
         assertEquals("""{"time":"2023-06-20T14:00:00Z"}""", result)
     }
@@ -85,21 +91,31 @@ class InstantTests {
     @Test
     fun `should serialize Kotlin Instant inside data class using mixin`() {
         val mapper = mapperBuilder
-            .addMixIn(Pojo::class.java, PojoMixin::class.java)
+            .addMixIn(Wrapper::class.java, WrapperMixin::class.java)
             .build()
 
-        val result = mapper.writeValueAsString(Pojo(Instant.parse("2023-06-20T14:00:00Z")))
+        val result = mapper.writeValueAsString(Wrapper(KotlinInstant.parse("2023-06-20T14:00:00Z")))
 
         assertEquals("""{"time":"2023-06-20 14:00"}""", result)
+    }
+
+    @Test
+    fun `should serialize Kotlin Instant exactly as Java Instant`() {
+        val mapper = mapperBuilder.build()
+
+        val jdto = JDTO()
+        val kdto = KDTO()
+
+        assertEquals(mapper.writeValueAsString(jdto), mapper.writeValueAsString(kdto))
     }
 
     @Test
     fun `should deserialize Kotlin Instant from ISO 8601 format`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.readValue<Instant>("\"2023-06-20T14:00:00Z\"")
+        val result = mapper.readValue<KotlinInstant>("\"2023-06-20T14:00:00Z\"")
 
-        assertEquals(Instant.parse("2023-06-20T14:00:00Z"), result)
+        assertEquals(KotlinInstant.parse("2023-06-20T14:00:00Z"), result)
     }
 
     @Test
@@ -107,65 +123,87 @@ class InstantTests {
         val mapper = mapperBuilder
             .build()
 
-        val result = mapper.readValue<Instant>("1778576404")
+        val result = mapper.readValue<KotlinInstant>("1778576404")
 
-        assertEquals(Instant.fromEpochSeconds(1778576404), result)
+        assertEquals(KotlinInstant.fromEpochSeconds(1778576404), result)
     }
 
     @Test
     fun `should deserialize Kotlin Instant from epoch seconds with milliseconds`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.readValue<Instant>("1778576404.123")
+        val result = mapper.readValue<KotlinInstant>("1778576404.123")
 
-        assertEquals(Instant.fromEpochMilliseconds(1778576404123), result)
+        assertEquals(KotlinInstant.fromEpochMilliseconds(1778576404123), result)
     }
 
     @Test
     fun `should deserialize Kotlin Instant inside list`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.readValue<List<Instant>>("""["2023-06-20T14:00:00Z","2024-06-20T14:00:00Z"]""")
+        val result = mapper.readValue<List<KotlinInstant>>("""["2023-06-20T14:00:00Z","2024-06-20T14:00:00Z"]""")
 
-        assertContentEquals(listOf(Instant.parse("2023-06-20T14:00:00Z"), Instant.parse("2024-06-20T14:00:00Z")), result)
+        assertContentEquals(
+            listOf(KotlinInstant.parse("2023-06-20T14:00:00Z"), KotlinInstant.parse("2024-06-20T14:00:00Z")),
+            result
+        )
     }
 
     @Test
     fun `should deserialize Kotlin Instant inside map`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.readValue<Map<String, Instant>>("""{"a":"2023-06-20T14:00:00Z","b":"2024-06-20T14:00:00Z"}""")
+        val result = mapper
+            .readValue<Map<String, KotlinInstant>>("""{"a":"2023-06-20T14:00:00Z","b":"2024-06-20T14:00:00Z"}""")
 
-        assertEquals(Instant.parse("2023-06-20T14:00:00Z"), result["a"])
-        assertEquals(Instant.parse("2024-06-20T14:00:00Z"), result["b"])
+        assertEquals(KotlinInstant.parse("2023-06-20T14:00:00Z"), result["a"])
+        assertEquals(KotlinInstant.parse("2024-06-20T14:00:00Z"), result["b"])
     }
 
     @Test
     fun `should deserialize Kotlin Instant inside data class`() {
         val mapper = mapperBuilder.build()
 
-        val result = mapper.readValue<Pojo>("""{"time":"2023-06-20T14:00:00Z"}""")
+        val result = mapper.readValue<Wrapper>("""{"time":"2023-06-20T14:00:00Z"}""")
 
-        assertEquals(Instant.parse("2023-06-20T14:00:00Z"), result.time)
+        assertEquals(KotlinInstant.parse("2023-06-20T14:00:00Z"), result.time)
     }
 
     @Test
     fun `should deserialize Kotlin Instant inside data class using mixin`() {
         val mapper = mapperBuilder
-            .addMixIn(Pojo::class.java, PojoMixin::class.java)
+            .addMixIn(Wrapper::class.java, WrapperMixin::class.java)
             .build()
 
-        val result = mapper.readValue<Pojo>("""{"time":"2023-06-20 14:00"}""")
+        val result = mapper.readValue<Wrapper>("""{"time":"2023-06-20 14:00"}""")
 
-        assertEquals(Instant.parse("2023-06-20T14:00:00Z"), result.time)
+        assertEquals(KotlinInstant.parse("2023-06-20T14:00:00Z"), result.time)
     }
 
-    data class Pojo(
-        val time: Instant
+    data class Wrapper(
+        val time: KotlinInstant
     )
 
-    abstract class PojoMixin(
+    abstract class WrapperMixin(
         @field:JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "UTC")
-        val time: Instant
+        val time: KotlinInstant
+    )
+
+    data class JDTO(
+        val plain: JavaInstant = JavaInstant.parse("2023-06-20T14:00:00Z"),
+        val optPlain: JavaInstant? = JavaInstant.parse("2023-06-20T14:00:00Z"),
+        @field:JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "UTC")
+        val shapeAnnotation: JavaInstant = JavaInstant.parse("2023-06-20T14:00:00Z"),
+        @field:JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "UTC")
+        val optShapeAnnotation: JavaInstant? = JavaInstant.parse("2023-06-20T14:00:00Z"),
+    )
+
+    data class KDTO(
+        val plain: KotlinInstant = KotlinInstant.parse("2023-06-20T14:00:00Z"),
+        val optPlain: KotlinInstant? = KotlinInstant.parse("2023-06-20T14:00:00Z"),
+        @field:JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "UTC")
+        val shapeAnnotation: KotlinInstant = KotlinInstant.parse("2023-06-20T14:00:00Z"),
+        @field:JsonFormat(shape = STRING, pattern = "yyyy-MM-dd HH:mm", timezone = "UTC")
+        val optShapeAnnotation: KotlinInstant? = KotlinInstant.parse("2023-06-20T14:00:00Z"),
     )
 }
