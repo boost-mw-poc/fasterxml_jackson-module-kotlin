@@ -8,6 +8,7 @@ import tools.jackson.module.kotlin.KotlinFeature.NullIsSameAsDefault
 import tools.jackson.module.kotlin.KotlinFeature.NullToEmptyCollection
 import tools.jackson.module.kotlin.KotlinFeature.NullToEmptyMap
 import tools.jackson.module.kotlin.KotlinFeature.SingletonSupport
+import tools.jackson.module.kotlin.KotlinFeature.UseJavaInstantConversion
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -35,6 +36,7 @@ class DslTest {
             enable(NullIsSameAsDefault)
             enable(SingletonSupport)
             enable(KotlinFeature.StrictNullChecks)
+            enable(UseJavaInstantConversion)
         }
 
         assertNotNull(module)
@@ -44,6 +46,7 @@ class DslTest {
         assertTrue(module.nullIsSameAsDefault)
         assertTrue(module.singletonSupport)
         assertTrue(module.strictNullChecks)
+        assertTrue(module.useJavaInstantConversion)
     }
 
     @Test

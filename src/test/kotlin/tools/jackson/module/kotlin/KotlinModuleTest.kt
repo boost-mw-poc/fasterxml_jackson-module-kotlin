@@ -12,6 +12,7 @@ import tools.jackson.module.kotlin.KotlinFeature.NullToEmptyMap
 import tools.jackson.module.kotlin.KotlinFeature.SingletonSupport
 import tools.jackson.module.kotlin.KotlinFeature.StrictNullChecks
 import tools.jackson.module.kotlin.KotlinFeature.UseJavaDurationConversion
+import tools.jackson.module.kotlin.KotlinFeature.UseJavaInstantConversion
 import kotlin.test.assertNotNull
 
 class KotlinModuleTest {
@@ -27,6 +28,7 @@ class KotlinModuleTest {
         assertTrue(module.strictNullChecks)
         assertFalse(module.kotlinPropertyNameAsImplicitName)
         assertFalse(module.useJavaDurationConversion)
+        assertFalse(module.useJavaInstantConversion)
     }
 
     @Test
@@ -40,6 +42,7 @@ class KotlinModuleTest {
             enable(StrictNullChecks)
             enable(KotlinPropertyNameAsImplicitName)
             enable(UseJavaDurationConversion)
+            enable(UseJavaInstantConversion)
         }.build()
 
         assertEquals(123, module.reflectionCacheSize)
@@ -50,6 +53,7 @@ class KotlinModuleTest {
         assertTrue(module.strictNullChecks)
         assertTrue(module.kotlinPropertyNameAsImplicitName)
         assertTrue(module.useJavaDurationConversion)
+        assertTrue(module.useJavaInstantConversion)
     }
 
     @Test
@@ -98,6 +102,15 @@ class KotlinModuleTest {
     }
 
     @Test
+    fun builder_UseJavaInstantConversion() {
+        val module = KotlinModule.Builder().apply {
+            enable(UseJavaInstantConversion)
+        }.build()
+
+        assertTrue(module.useJavaInstantConversion)
+    }
+
+    @Test
     fun jdkSerializabilityTest() {
         val module = KotlinModule.Builder().apply {
             withReflectionCacheSize(123)
@@ -106,6 +119,7 @@ class KotlinModuleTest {
             enable(NullIsSameAsDefault)
             enable(SingletonSupport)
             enable(StrictNullChecks)
+            enable(UseJavaInstantConversion)
         }.build()
 
         val serialized = jdkSerialize(module)
@@ -118,6 +132,7 @@ class KotlinModuleTest {
         assertTrue(deserialized.nullIsSameAsDefault)
         assertTrue(deserialized.singletonSupport)
         assertTrue(deserialized.strictNullChecks)
+        assertTrue(deserialized.useJavaInstantConversion)
     }
 
     @Test
