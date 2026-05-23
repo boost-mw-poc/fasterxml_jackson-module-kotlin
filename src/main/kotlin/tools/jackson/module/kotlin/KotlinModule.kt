@@ -27,6 +27,8 @@ fun Class<*>.isKotlinClass(): Boolean = this.isAnnotationPresent(Metadata::class
  *  See [KotlinFeature.KotlinPropertyNameAsImplicitName] for details.
  * @property useJavaDurationConversion Default: false.  Whether to use [java.time.Duration] as a bridge for [kotlin.time.Duration].
  *  This allows use Kotlin Duration type with [tools.jackson.datatype.jsr310.JavaTimeModule].
+ * @property useJavaInstantConversion Default: false.  Whether to use [java.time.Instant] as a bridge for [kotlin.time.Instant].
+ *  This allows use Kotlin Instant type with [tools.jackson.datatype.jsr310.JavaTimeModule].
  */
 class KotlinModule private constructor(
     val reflectionCacheSize: Int = Builder.DEFAULT_CACHE_SIZE,
