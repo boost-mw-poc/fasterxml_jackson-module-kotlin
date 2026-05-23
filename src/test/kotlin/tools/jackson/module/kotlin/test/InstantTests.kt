@@ -40,6 +40,17 @@ class InstantTests {
     }
 
     @Test
+    fun `should serialize Kotlin Instant to negative epoch seconds with nanoseconds`() {
+        val mapper = mapperBuilder
+            .enable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .build()
+
+        val result = mapper.writeValueAsString(KotlinInstant.parse("1969-12-31T23:59:58.877Z"))
+
+        assertEquals("-1.123000000", result)
+    }
+
+    @Test
     fun `should serialize Kotlin Instant to milliseconds`() {
         val mapper = mapperBuilder
             .enable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
@@ -49,6 +60,18 @@ class InstantTests {
         val result = mapper.writeValueAsString(KotlinInstant.parse("2023-06-20T14:00:00.123Z"))
 
         assertEquals("1687269600123", result)
+    }
+
+    @Test
+    fun `should serialize Kotlin Instant to negative milliseconds`() {
+        val mapper = mapperBuilder
+            .enable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
+            .disable(DateTimeFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
+            .build()
+
+        val result = mapper.writeValueAsString(KotlinInstant.parse("1969-12-31T23:59:58.877Z"))
+
+        assertEquals("-1123", result)
     }
 
     @Test
@@ -129,10 +152,48 @@ class InstantTests {
     }
 
     @Test
+    fun `should deserialize Kotlin Instant from negative epoch seconds`() {
+        val mapper = mapperBuilder
+            .build()
+
+        val result = mapper.readValue<KotlinInstant>("-1")
+
+        assertEquals(KotlinInstant.parse("1969-12-31T23:59:59Z"), result)
+    }
+
+    @Test
+    fun `should deserialize Kotlin Instant from epoch seconds as JSON string`() {
+        val mapper = mapperBuilder
+            .build()
+
+        val result = mapper.readValue<KotlinInstant>("\"1778576404\"")
+
+        assertEquals(KotlinInstant.fromEpochSeconds(1778576404), result)
+    }
+
+    @Test
     fun `should deserialize Kotlin Instant from epoch seconds with milliseconds`() {
         val mapper = mapperBuilder.build()
 
         val result = mapper.readValue<KotlinInstant>("1778576404.123")
+
+        assertEquals(KotlinInstant.fromEpochMilliseconds(1778576404123), result)
+    }
+
+    @Test
+    fun `should deserialize Kotlin Instant from negative epoch seconds with milliseconds`() {
+        val mapper = mapperBuilder.build()
+
+        val result = mapper.readValue<KotlinInstant>("-1.123")
+
+        assertEquals(KotlinInstant.parse("1969-12-31T23:59:58.877Z"), result)
+    }
+
+    @Test
+    fun `should deserialize Kotlin Instant from epoch seconds with milliseconds as JSON string`() {
+        val mapper = mapperBuilder.build()
+
+        val result = mapper.readValue<KotlinInstant>("\"1778576404.123\"")
 
         assertEquals(KotlinInstant.fromEpochMilliseconds(1778576404123), result)
     }
