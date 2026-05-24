@@ -19,6 +19,9 @@ Contributors:
 
 # 3.2.0 (not yet released)
 
+Dmitry Sulman (@dmitrysulman)
+* #1164: Add support for kotlin.time.Instant serialization/deserialization
+
 WrongWrong (@k163377)
 * #1113: Remove NewStrictNullChecks option
 

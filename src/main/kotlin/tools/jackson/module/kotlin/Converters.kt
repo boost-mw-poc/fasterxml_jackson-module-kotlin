@@ -13,10 +13,15 @@ import java.lang.invoke.MethodType
 import java.lang.reflect.Method
 import java.lang.reflect.Type
 import java.util.UUID
+import kotlin.time.ExperimentalTime
 import kotlin.time.toJavaDuration
+import kotlin.time.toJavaInstant
 import kotlin.time.toKotlinDuration
+import kotlin.time.toKotlinInstant
 import java.time.Duration as JavaDuration
+import java.time.Instant as JavaInstant
 import kotlin.time.Duration as KotlinDuration
+import kotlin.time.Instant as KotlinInstant
 
 internal class SequenceToIteratorConverter(private val input: JavaType) : StdConverter<Sequence<*>, Iterator<*>>() {
     override fun convert(value: Sequence<*>): Iterator<*> = value.iterator()
@@ -47,6 +52,20 @@ internal object JavaToKotlinDurationConverter : StdConverter<JavaDuration, Kotli
     override fun convert(value: JavaDuration) = value.toKotlinDuration()
 
     val delegatingDeserializer: StdConvertingDeserializer<KotlinDuration> by lazy {
+        StdConvertingDeserializer(this)
+    }
+}
+
+@OptIn(ExperimentalTime::class)
+internal object KotlinToJavaInstantConverter : StdConverter<KotlinInstant, JavaInstant>() {
+    override fun convert(value: KotlinInstant) = value.toJavaInstant()
+}
+
+@OptIn(ExperimentalTime::class)
+internal object JavaToKotlinInstantConverter : StdConverter<JavaInstant, KotlinInstant>() {
+    override fun convert(value: JavaInstant) = value.toKotlinInstant()
+
+    val delegatingDeserializer: StdConvertingDeserializer<KotlinInstant> by lazy {
         StdConvertingDeserializer(this)
     }
 }

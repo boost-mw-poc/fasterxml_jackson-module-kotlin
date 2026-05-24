@@ -73,7 +73,12 @@ enum class KotlinFeature(internal val enabledByDefault: Boolean) {
      * `@JsonFormat` annotations need to be declared either on getter using `@get:JsonFormat` or field using `@field:JsonFormat`.
      * See [jackson-module-kotlin#651] for details.
      */
-    UseJavaDurationConversion(enabledByDefault = false);
+    UseJavaDurationConversion(enabledByDefault = false),
+
+    /**
+     * This feature represents whether to handle [kotlin.time.Instant] using [java.time.Instant] as conversion bridge.
+     */
+    UseJavaInstantConversion(enabledByDefault = false);
 
     internal val bitSet: BitSet = (1 shl ordinal).toBitSet()
 
