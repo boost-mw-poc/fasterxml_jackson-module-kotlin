@@ -15,7 +15,7 @@ Authors:
 
 Contributors:
 
-# 2.21.2 (not yet released)
+# 2.21.2 (20-Mar-2026)
 
 WrongWrong (@k163377)
 * #1135: Set apiVersion and languageVersion to 1.9
