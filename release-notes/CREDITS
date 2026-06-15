@@ -18,7 +18,7 @@ Authors:
 
 Contributors:
 
-# 3.2.0 (not yet released)
+# 3.2.0 (08-Jun-2026)
 
 Dmitry Sulman (@dmitrysulman)
 * #1164: Add support for kotlin.time.Instant serialization/deserialization
